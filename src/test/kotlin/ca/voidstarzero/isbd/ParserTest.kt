@@ -1,6 +1,5 @@
 package ca.voidstarzero.isbd
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ParserTest {
@@ -9,7 +8,7 @@ class ParserTest {
 
     @Test
     fun t0() {
-        val title = "nothing [hello] : other = rien! / by Anon"
+        val title = "nothing = hello [ok] : what's going on / by Anon"
         val result = g.parse(title)
         println(result)
     }
@@ -33,9 +32,9 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Jean-Louis Livi présente"),
-                SOR("produit par Jean-Louis Livi"),
-                SOR("un film de Alain Corneau")
+                StatementOfResponsibility("Jean-Louis Livi présente"),
+                StatementOfResponsibility("produit par Jean-Louis Livi"),
+                StatementOfResponsibility("un film de Alain Corneau")
             )
         )
 
@@ -67,7 +66,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("het Brabants Volksorkest \"Crispijn.\"")
+                StatementOfResponsibility("het Brabants Volksorkest \"Crispijn.\"")
             )
         )
 
@@ -93,8 +92,8 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("by Honore de Balzac"),
-                SOR("translated by Robert Cornthwaite")
+                StatementOfResponsibility("by Honore de Balzac"),
+                StatementOfResponsibility("translated by Robert Cornthwaite")
             )
         )
 
@@ -140,8 +139,8 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("executive editor: Fumio Tamamura"),
-                SOR("executive contributor: Kakuko Shoji")
+                StatementOfResponsibility("executive editor: Fumio Tamamura"),
+                StatementOfResponsibility("executive contributor: Kakuko Shoji")
             )
         )
 
@@ -174,7 +173,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Xiang Wang, artist")
+                StatementOfResponsibility("Xiang Wang, artist")
             )
         )
 
@@ -201,8 +200,8 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Villa-Lobos"),
-                SOR("arr. for 2 pianos, 4 hands by Arthur Whittemore and Jack Lowe")
+                StatementOfResponsibility("Villa-Lobos"),
+                StatementOfResponsibility("arr. for 2 pianos, 4 hands by Arthur Whittemore and Jack Lowe")
             )
         )
 
@@ -227,7 +226,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Jacques Offenbach")
+                StatementOfResponsibility("Jacques Offenbach")
             )
         )
 
@@ -257,8 +256,8 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Jean Baptiste (John) Loeillet"),
-                SOR("hrsg. von Hugo Ruf")
+                StatementOfResponsibility("Jean Baptiste (John) Loeillet"),
+                StatementOfResponsibility("hrsg. von Hugo Ruf")
             )
         )
 
@@ -294,7 +293,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Franz Schubert")
+                StatementOfResponsibility("Franz Schubert")
             )
         )
 
@@ -318,7 +317,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("edited by Gleb Struve")
+                StatementOfResponsibility("edited by Gleb Struve")
             )
         )
 
@@ -345,7 +344,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Pedro Treto Cisneros")
+                StatementOfResponsibility("Pedro Treto Cisneros")
             )
         )
 
@@ -369,7 +368,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("by A. M. Nagler")
+                StatementOfResponsibility("by A. M. Nagler")
             )
         )
 
@@ -397,9 +396,9 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("written by Carmen Tafolla & Sharyll Teneyuca"),
-                SOR("illustrated by Terry Ybáñez"),
-                SOR("Spanish translation by Carmen Tafolla")
+                StatementOfResponsibility("written by Carmen Tafolla & Sharyll Teneyuca"),
+                StatementOfResponsibility("illustrated by Terry Ybáñez"),
+                StatementOfResponsibility("Spanish translation by Carmen Tafolla")
             )
         )
 
@@ -450,9 +449,9 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("[Ying]"),
-                SOR("Jian·Huojing (Jane Hawking) zhu"),
-                SOR("Zhang Jing, Wang Hanmin yi")
+                StatementOfResponsibility("[Ying]"),
+                StatementOfResponsibility("Jian·Huojing (Jane Hawking) zhu"),
+                StatementOfResponsibility("Zhang Jing, Wang Hanmin yi")
             )
         )
 
@@ -476,8 +475,8 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Dav Pilkey"),
-                SOR("traducido por Carlos E. Calvo")
+                StatementOfResponsibility("Dav Pilkey"),
+                StatementOfResponsibility("traducido por Carlos E. Calvo")
             )
         )
 
@@ -506,7 +505,7 @@ class ParserTest {
                 )
             ),
             statementsOfResp = listOf(
-                SOR("Raziel Garcia Arroyo")
+                StatementOfResponsibility("Raziel Garcia Arroyo")
             )
         )
 

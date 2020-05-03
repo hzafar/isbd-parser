@@ -2,7 +2,7 @@ package ca.voidstarzero.isbd
 
 data class ISBDParseResult(
     val titles: List<TitleInfo>,
-    val statementsOfResp: List<SOR> = emptyList()
+    val statementsOfResp: List<StatementOfResponsibility> = emptyList()
 )
 
 sealed class TitleInfo(
@@ -32,7 +32,7 @@ class DependentTitle(
     val designation: String?
 ) : TitleInfo(title, otherInfo = emptyList(), parallelTitles = emptyList())
 
-data class SOR(
+data class StatementOfResponsibility(
     val statement: String,
     val parallelStatement: String? = null
 )
