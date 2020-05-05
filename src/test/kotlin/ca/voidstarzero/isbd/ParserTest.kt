@@ -8,7 +8,7 @@ class ParserTest {
 
     @Test
     fun t0() {
-        val title = "nothing = hello [ok] : what's going on / by Anon"
+        val title = "nothing [ok] = hello : what's going on / by Anon"
         val result = g.parse(title)
         println(result)
     }

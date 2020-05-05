@@ -1,12 +1,15 @@
 package ca.voidstarzero.isbd
 
 import ca.voidstarzero.isbd.ast.*
-import norswap.autumn.Autumn
-import norswap.autumn.DSL
-import norswap.autumn.ParseOptions
+import norswap.autumn.*
+import norswap.autumn.parsers.AbstractForwarding
 import norswap.autumn.parsers.CharPredicate
+import java.util.*
 
 class Grammar : DSL() {
+
+    val store: ParseState<ParseContext> = ParseState(Grammar::class, ::ParseContext)
+
     private val openBracket: rule = str("[")
     private val closeBracket: rule = str("]")
     private val equalSign: rule = str("_=_")
@@ -16,56 +19,175 @@ class Grammar : DSL() {
     private val point: rule = str("._")
     private val comma: rule = str(",_")
     private val char = rule(CharPredicate("char") {
-        it !in listOf('\u0000', '_', '[', ']', ' ', '\t', '\n', '\r').map(Char::toInt)
+        it !in listOf('\u0000', '_', '[', ']', ' ', '\t', '\n', '\r').map(Char::toInt) // FIXME (i.e, '_')
     })
 
-    private val data: rule = char.at_least(1).sep(0, usual_whitespace)
-        .push(with_string { parse, items, match -> match })
+    private val data = rule(
+        object : AbstractForwarding(
+            "data",
+            char.at_least(1).sep(0, usual_whitespace)
+                .collect().action_with_string { parse, _, match ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        parse.stack.push(match)
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val materialDesignation: rule =
-        seq(usual_whitespace.maybe(), openBracket, data, closeBracket, usual_whitespace.maybe())
-            .push(with_string { _, items, _ -> MaterialDesignation(items[0] as String) })
+    private val materialDesignation = rule(
+        object : AbstractForwarding(
+            "material_designation",
+            seq(
+                usual_whitespace.maybe(),
+                openBracket,
+                data,
+                closeBracket,
+                usual_whitespace.maybe()
+            ).collect().action_with_string { parse, items, _ ->
+                parse.log.apply {
+                    val context = store.data(parse)
+                    // context.parsedOtherInfo = true
+                    parse.stack.push(MaterialDesignation(items[0] as String))
+                    return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                }
+            }.get()
+        ) {}
+    )
 
-    val otherInfo: rule = seq(colon, data)
-        .push(with_string { _, items, _ -> OtherTitleInfo(items[0] as String) })
+    private val otherInfo = rule(
+        object : AbstractForwarding(
+            "other_title_info",
+            seq(colon, data)
+                .collect().action_with_string { parse, items, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        parse.stack.push(OtherTitleInfo(items[0] as String))
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val title: rule = seq(data, materialDesignation.maybe(), otherInfo.maybe())
-        .push(with_string { _, items, _ ->
-            Title(
-                items[0] as String,
-                items[1] as MaterialDesignation?,
-                items[2] as OtherTitleInfo?
-            )
-        })
+    private val title = rule(
+        object : AbstractForwarding(
+            "title",
+            seq(
+                data,
+                materialDesignation.maybe(),
+                otherInfo.maybe()
+            ).collect().action_with_string { parse, items, _ ->
+                parse.log.apply {
+                    val context = store.data(parse)
+                    // context.parsedOtherInfo = true
+                    parse.stack.push(
+                        Title(
+                            items[0] as String,
+                            items[1] as MaterialDesignation?,
+                            items[2] as OtherTitleInfo?
+                        )
+                    )
+                    return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                }
+            }.get()
+        ) {}
+    )
 
-    val parallelTitle: rule = seq(equalSign, title)
-        .push(with_string { _, items, _ -> ParallelTitle(items[0] as Title) })
+    private val parallelTitle = rule(
+        object : AbstractForwarding(
+            "parallel_title",
+            seq(equalSign, title)
+                .collect().action_with_string { parse, items, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        parse.stack.push(
+                            ParallelTitle(items[0] as Title)
+                        )
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val parallelTitleList: rule = parallelTitle.at_least(1)
-        .push(with_string { _, items, _ ->
-            ParallelTitleList(items.filterNotNull().map { it as ParallelTitle })
-        })
+    private val parallelTitleList = rule(
+        object : AbstractForwarding(
+            "parallel_title_list",
+            parallelTitle.at_least(1)
+                .collect().action_with_string { parse, items, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        parse.stack.push(
+                            ParallelTitleList(
+                                items.filterNotNull().map { it as ca.voidstarzero.isbd.ast.ParallelTitle }
+                            )
+                        )
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val sorList: rule = seq(semicolon, data).at_least(1)
+    private val additionalSor = rule(
+        object : AbstractForwarding(
+            "additional_sor",
+            seq(semicolon, data).at_least(1)
+                .collect().action_with_string { parse, _, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val sor: rule = seq(slash, data, sorList.maybe())
-        .push(with_string { _, items, _ ->
-            SOR(items.filterNotNull().map { it as String })
-        })
+    private val sor = rule(
+        object : AbstractForwarding(
+            "sor",
+            seq(slash, data, additionalSor.maybe())
+                .collect().action_with_string { parse, items, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        // context.parsedOtherInfo = true
+                        parse.stack.push(
+                            SOR(items.filterNotNull().map { it as kotlin.String })
+                        )
+                        return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                    }
+                }.get()
+        ) {}
+    )
 
-    val titleStatement: rule = seq(
-        title,
-        parallelTitleList.maybe(),
-        sor.maybe()
-    ).push(with_string { _, items, _ ->
-        TitleStatement(
-            items[0] as Title,
-            items[1] as ParallelTitleList?,
-            items[2] as SOR?
-        )
-    })
+    private val titleStatement = rule(
+        object : AbstractForwarding(
+            "title_statement",
+            seq(
+                title,
+                parallelTitleList.maybe(),
+                sor.maybe()
+            ).collect().action_with_string { parse, items, _ ->
+                parse.log.apply {
+                    val context = store.data(parse)
+                    // context.parsedOtherInfo = true
+                    parse.stack.push(
+                        TitleStatement(
+                            items[0] as Title,
+                            items[1] as ParallelTitleList?,
+                            items[2] as SOR?
+                        )
+                    )
+                    return@apply Runnable { /*context.parsedOtherInfo = false*/ }
+                }
+            }.get()
+        ) {}
+    )
 
-    val root: rule = titleStatement
+    private val root: rule = titleStatement
 
     init {
         ws = usual_whitespace
@@ -78,8 +200,8 @@ class Grammar : DSL() {
             .replace(" : ", "_:_")
             .replace(" / ", "_/_")
             .replace(" ; ", "_;_")
-            //.replace(". ", "._")
-            //.replace(", ", ",_")
+        //.replace(". ", "._")
+        //.replace(", ", ",_")
     }
 
     fun parse(input: String): TitleStatement? {
