@@ -1,23 +1,32 @@
 package ca.voidstarzero.isbd.ast
 
-data class MaterialDesignation(val value: String)
+sealed class Node(val value: String) {
+    override fun toString(): String {
+        return value
+    }
 
-data class OtherTitleInfo(val value: String)
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is Node -> value == other.value
+            else -> false
+        }
+    }
+}
 
-data class Title(
-    val value: String,
-    val designation: MaterialDesignation? = null,
-    val otherInfo: OtherTitleInfo? = null
-)
+class Title(value: String) : Node(value)
+class OtherInfo(value: String) : Node(value)
+class SOR(value: String) : Node(value)
+class ParallelTitle(value: String) : Node(value)
+class ParallelOtherInfo(value: String) : Node(value)
+class ParallelSOR(value: String) : Node(value)
 
-data class ParallelTitle(val value: Title)
-
-data class ParallelTitleList(val value: List<ParallelTitle>)
-
-data class SOR(val value: List<String>)
+class NodeList(val values: List<Node>)
 
 data class TitleStatement(
-    val title: Title,
-    val parallelTitles: ParallelTitleList? = null,
-    val sor: SOR? = null
+    val titles: List<Title> = listOf(),
+    val otherInfos: List<OtherInfo> = listOf(),
+    val sors: List<SOR> = listOf(),
+    val parallelTitles: List<ParallelTitle> = listOf(),
+    val parallelOtherInfos: List<ParallelOtherInfo> = listOf(),
+    val parallelSORs: List<ParallelSOR> = listOf()
 )

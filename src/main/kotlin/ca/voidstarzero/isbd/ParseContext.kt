@@ -1,9 +1,17 @@
 package ca.voidstarzero.isbd
 
 data class ParseContext(
-    var parsedTitleProper: Boolean,
-    var parsedOtherInfo: Boolean,
-    var parsedParallelTitle: Boolean
+    var inState: State,
+    var parallel: Boolean
 ) {
-    constructor(): this(false, false, false)
+    constructor() : this(
+        State.START,
+        false
+    )
+
+    enum class State {
+        START,
+        OTHER_INFO,
+        SOR
+    }
 }
