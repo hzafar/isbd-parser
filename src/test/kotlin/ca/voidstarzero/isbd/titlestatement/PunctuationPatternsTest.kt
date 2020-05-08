@@ -1,13 +1,14 @@
-package ca.voidstarzero.isbd
+package ca.voidstarzero.isbd.titlestatement
 
-import ca.voidstarzero.isbd.ast.*
+import ca.voidstarzero.isbd.titlestatement.ast.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
-class ParserPunctuationPatternsTest {
+class PunctuationPatternsTest {
 
-    private val g: Grammar = Grammar()
+    private val t: TitleStatement =
+        TitleStatement()
 
     @Test
     fun p1() {
@@ -19,7 +20,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -36,7 +37,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -53,7 +54,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -71,7 +72,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -93,7 +94,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -114,7 +115,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -131,7 +132,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -150,7 +151,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -172,7 +173,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -194,7 +195,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -215,7 +216,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -237,7 +238,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -260,7 +261,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -282,7 +283,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -302,7 +303,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -327,7 +328,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -352,7 +353,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = t.parse(pattern)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -372,7 +373,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[1]
+        val result = t.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -393,7 +394,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[1]
+        val result = t.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -413,7 +414,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[1]
+        val result = t.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -438,7 +439,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[3]
+        val result = t.parseAll(pattern)[3]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -459,7 +460,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[1]
+        val result = t.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -482,7 +483,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[1]
+        val result = t.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -517,7 +518,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parseAll(pattern)[3]
+        val result = t.parseAll(pattern)[3]
 
         assertNotNull(result)
         assertEquals(expected, result)

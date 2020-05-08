@@ -1,4 +1,4 @@
-package ca.voidstarzero.isbd.ast
+package ca.voidstarzero.isbd.titlestatement.ast
 
 sealed class SimpleNode(val value: String) {
     override fun toString(): String {

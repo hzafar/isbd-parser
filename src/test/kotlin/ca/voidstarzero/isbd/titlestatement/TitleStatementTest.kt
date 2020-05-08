@@ -1,13 +1,14 @@
-package ca.voidstarzero.isbd
+package ca.voidstarzero.isbd.titlestatement
 
-import ca.voidstarzero.isbd.ast.*
+import ca.voidstarzero.isbd.titlestatement.ast.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
-class ParserTest {
+class TitleStatementTest {
 
-    private val g: Grammar = Grammar()
+    private val t: TitleStatement =
+        TitleStatement()
 
     @Test
     fun t1() {
@@ -27,7 +28,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -56,7 +57,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -79,7 +80,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -96,7 +97,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -118,7 +119,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -143,7 +144,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -161,7 +162,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -188,7 +189,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -206,7 +207,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -229,7 +230,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -257,7 +258,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -276,7 +277,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -298,7 +299,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -321,7 +322,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -343,7 +344,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -366,7 +367,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -397,7 +398,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -437,7 +438,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -466,7 +467,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -484,7 +485,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -502,7 +503,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -519,7 +520,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -537,7 +538,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -555,7 +556,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -582,7 +583,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -609,7 +610,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -628,7 +629,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -652,7 +653,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -677,7 +678,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -701,7 +702,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -719,7 +720,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -743,7 +744,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -769,7 +770,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -793,7 +794,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -822,7 +823,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -855,7 +856,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -877,7 +878,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -902,7 +903,7 @@ class ParserTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)

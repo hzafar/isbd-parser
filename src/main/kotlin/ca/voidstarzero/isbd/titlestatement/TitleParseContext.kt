@@ -1,6 +1,6 @@
-package ca.voidstarzero.isbd
+package ca.voidstarzero.isbd.titlestatement
 
-data class ParseContext(
+data class TitleParseContext(
     var currentState: State
 ) {
     constructor() : this(

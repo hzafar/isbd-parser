@@ -1,12 +1,13 @@
-package ca.voidstarzero.isbd
+package ca.voidstarzero.isbd.titlestatement
 
-import ca.voidstarzero.isbd.ast.*
+import ca.voidstarzero.isbd.titlestatement.ast.*
 import org.junit.Assert
 import org.junit.Test
 
-class ParserPeriodsTest {
+class PeriodsTest {
 
-    private val g: Grammar = Grammar()
+    private val t: TitleStatement =
+        TitleStatement()
 
     @Test
     fun t1() {
@@ -25,7 +26,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -55,7 +56,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -73,7 +74,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -94,7 +95,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -113,7 +114,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -132,7 +133,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -154,7 +155,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -180,7 +181,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -222,7 +223,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -245,7 +246,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -270,7 +271,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -299,7 +300,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -325,7 +326,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -343,7 +344,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -373,7 +374,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parseAll(title)[1]
+        val result = t.parseAll(title)[1]
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -396,7 +397,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -418,7 +419,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)
@@ -441,7 +442,7 @@ class ParserPeriodsTest {
             )
         )
 
-        val result = g.parse(title)
+        val result = t.parse(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)

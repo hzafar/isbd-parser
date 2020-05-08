@@ -25,7 +25,12 @@ fun periodCombinations(positions: List<Int>): List<List<Int>> {
     return when (positions) {
         emptyList<Int>() -> listOf(emptyList())
         else -> {
-            val rest = periodCombinations(positions.subList(1, positions.size))
+            val rest = periodCombinations(
+                positions.subList(
+                    1,
+                    positions.size
+                )
+            )
             rest.map { it.plus(positions[0]) }
                 .plus(rest)
         }
@@ -33,7 +38,11 @@ fun periodCombinations(positions: List<Int>): List<List<Int>> {
 }
 
 fun droppedPeriods(input: String): List<String> {
-    return periodCombinations(findPeriods(input)).map { combination ->
+    return periodCombinations(
+        findPeriods(
+            input
+        )
+    ).map { combination ->
         input.filterIndexed { i, _ -> i !in combination }
     }
 }

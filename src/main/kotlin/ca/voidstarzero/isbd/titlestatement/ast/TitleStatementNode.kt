@@ -1,4 +1,4 @@
-package ca.voidstarzero.isbd.ast
+package ca.voidstarzero.isbd.titlestatement.ast
 
 data class TitleStatementNode(
     val titles: List<Title> = listOf(),

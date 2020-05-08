@@ -1,6 +1,7 @@
-package ca.voidstarzero.isbd
+package ca.voidstarzero.isbd.titlestatement
 
-import ca.voidstarzero.isbd.ast.*
+import ca.voidstarzero.isbd.prepare
+import ca.voidstarzero.isbd.titlestatement.ast.*
 import norswap.autumn.Autumn
 import norswap.autumn.DSL
 import norswap.autumn.ParseOptions
@@ -8,9 +9,9 @@ import norswap.autumn.ParseState
 import norswap.autumn.parsers.AbstractForwarding
 import norswap.autumn.parsers.CharPredicate
 
-class Grammar : DSL() {
+class TitleStatement : DSL() {
 
-    val store: ParseState<ParseContext> = ParseState(Grammar::class, ::ParseContext)
+    val store: ParseState<TitleParseContext> = ParseState(TitleStatement::class, ::TitleParseContext)
 
     private val colon = rule(
         object : AbstractForwarding(
@@ -20,7 +21,7 @@ class Grammar : DSL() {
                     parse.log.apply {
                         val context = store.data(parse)
                         val oldState = context.currentState
-                        context.currentState = ParseContext.State.OTHER_INFO
+                        context.currentState = TitleParseContext.State.OTHER_INFO
                         return@apply Runnable {
                             context.currentState = oldState
                         }
@@ -36,7 +37,7 @@ class Grammar : DSL() {
                     parse.log.apply {
                         val context = store.data(parse)
                         val oldState = context.currentState
-                        context.currentState = ParseContext.State.SOR
+                        context.currentState = TitleParseContext.State.SOR
                         return@apply Runnable {
                             context.currentState = oldState
                         }
@@ -90,8 +91,8 @@ class Grammar : DSL() {
                 .collect().action_with_string { parse, items, _ ->
                     val context = store.data(parse)
                     val toPush: Any? = when (context.currentState) {
-                        ParseContext.State.OTHER_INFO -> ParallelOtherInfo(items[0] as String)
-                        ParseContext.State.SOR -> ParallelSOR(items[0] as String)
+                        TitleParseContext.State.OTHER_INFO -> ParallelOtherInfo(items[0] as String)
+                        TitleParseContext.State.SOR -> ParallelSOR(items[0] as String)
                         else -> null
                     }
                     parse.stack.push(toPush)
