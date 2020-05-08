@@ -1,12 +1,10 @@
 package ca.voidstarzero.isbd
 
 data class ParseContext(
-    var inState: State,
-    var parallel: Boolean
+    var currentState: State
 ) {
     constructor() : this(
-        State.START,
-        false
+        State.START
     )
 
     enum class State {

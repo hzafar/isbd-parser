@@ -14,7 +14,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title proper"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper"))
             )
         )
@@ -30,7 +30,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title proper : other title information"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(OtherInfo("other title information"))
             )
@@ -47,7 +47,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title proper = Parallel title"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 parallelTitles = listOf(ParallelTitle("Parallel title"))
             )
@@ -64,7 +64,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title proper = Parallel title : other title information"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(OtherInfo("other title information")),
                 parallelTitles = listOf(ParallelTitle("Parallel title"))
@@ -83,7 +83,7 @@ class ParserPunctuationPatternsTest {
                 " = Parallel title : parallel other title information"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(OtherInfo("other title information")),
                 parallelTitles = listOf(ParallelTitle("Parallel title")),
@@ -105,7 +105,7 @@ class ParserPunctuationPatternsTest {
                 " = parallel other title information"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(OtherInfo("other title information")),
                 parallelOtherInfos = listOf(
@@ -125,7 +125,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title proper / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 sors = listOf(SOR("statement of responsibility"))
             )
@@ -143,7 +143,7 @@ class ParserPunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 parallelTitles = listOf(ParallelTitle("Parallel title")),
                 sors = listOf(SOR("statement of responsibility"))
@@ -162,7 +162,7 @@ class ParserPunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 parallelTitles = listOf(
                     ParallelTitle("Parallel title 1"),
@@ -184,7 +184,7 @@ class ParserPunctuationPatternsTest {
                 " : other title information 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(
                     OtherInfo("other title information 1"),
@@ -206,7 +206,7 @@ class ParserPunctuationPatternsTest {
                 " = parallel statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 sors = listOf(SOR("statement of responsibility")),
                 parallelSORs = listOf(
@@ -227,7 +227,7 @@ class ParserPunctuationPatternsTest {
                 " = Parallel title / parallel statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 sors = listOf(SOR("statement of responsibility")),
                 parallelTitles = listOf(ParallelTitle("Parallel title")),
@@ -250,7 +250,7 @@ class ParserPunctuationPatternsTest {
                 " ; third statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 sors = listOf(
                     SOR("statement of responsibility"),
@@ -272,11 +272,11 @@ class ParserPunctuationPatternsTest {
                 " / statement of responsibility 2"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title 1")),
                 sors = listOf(SOR("statement of responsibility 1"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Title 2")),
                 sors = listOf(SOR("statement of responsibility 2"))
             )
@@ -293,7 +293,7 @@ class ParserPunctuationPatternsTest {
         val pattern = "Title 1 ; Title 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Title 1"),
                     Title("Title 2")
@@ -314,7 +314,7 @@ class ParserPunctuationPatternsTest {
                 " : other title information 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Title 1"),
                     Title("Title 2")
@@ -339,7 +339,7 @@ class ParserPunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Title 1"),
                     Title("Title 2")
@@ -359,58 +359,61 @@ class ParserPunctuationPatternsTest {
     }
 
     @Test
+    // FIXME
     fun p18() {
         val pattern = "Common title. Dependent title"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
     }
 
     @Test
+    // FIXME
     fun p19() {
         val pattern = "Common title. Dependent title designation" +
                 ", Dependent title"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title designation, Dependent title"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
     }
 
     @Test
+    // FIXME
     fun p20() {
         val pattern = "Common title. Dependent title designation"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title designation"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -423,61 +426,63 @@ class ParserPunctuationPatternsTest {
                 ". Parallel dependent title"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title")),
                 parallelTitles = listOf(ParallelTitle("Parallel common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Parallel dependent title"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[3]
 
         assertNotNull(result)
         assertEquals(expected, result)
     }
 
     @Test
+    // FIXME
     fun p22() {
         val pattern = "Common title. Dependent title / statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title")),
                 sors = listOf(SOR("statement of responsibility"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
     }
 
     @Test
+    // FIXME
     fun p23() {
         val pattern = "Common title : other title information. Dependent title" +
                 " : other title information"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title")),
                 otherInfos = listOf(OtherInfo("other title information"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title")),
                 otherInfos = listOf(OtherInfo("other title information"))
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[1]
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -492,16 +497,16 @@ class ParserPunctuationPatternsTest {
                 " / parallel statement of responsibility"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Dependent title")),
                 otherInfos = listOf(OtherInfo("other title information")),
                 sors = listOf(SOR("statement of responsibility")),
                 parallelSORs = listOf(ParallelSOR("Parallel common title"))
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Parallel dependent title")),
                 otherInfos = listOf(
                     OtherInfo("parallel other title information")
@@ -512,7 +517,7 @@ class ParserPunctuationPatternsTest {
             )
         )
 
-        val result = g.parse(pattern)
+        val result = g.parseAll(pattern)[3]
 
         assertNotNull(result)
         assertEquals(expected, result)

@@ -16,7 +16,7 @@ class ParserTest {
                 " ; produit par Jean-Louis Livi ; un film de Alain Corneau."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Tous les matins du monde [videorecording]")),
                 parallelTitles = listOf(ParallelTitle("All the mornings of the world")),
                 sors = listOf(
@@ -40,7 +40,7 @@ class ParserTest {
                 "het Brabants Volksorkest \"Crispijn\"."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Belgique [sound recording]")),
                 otherInfos = listOf(OtherInfo("musique flamande")),
                 sors = listOf(SOR("het Brabants Volksorkest \"Crispijn\"")),
@@ -68,7 +68,7 @@ class ParserTest {
                 "by Honore de Balzac ; translated by Robert Cornthwaite."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Mercadet")),
                 otherInfos = listOf(OtherInfo("a comedy in three acts")),
                 sors = listOf(
@@ -90,7 +90,7 @@ class ParserTest {
         val title = "Hiberniae delineatio = atlas of Ireland."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Hiberniae delineatio")),
                 parallelTitles = listOf(ParallelTitle("atlas of Ireland"))
             )
@@ -108,7 +108,7 @@ class ParserTest {
                 "executive editor: Fumio Tamamura ; executive contributor: Kakuko Shoji."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("The modern English-Nihongo dictionary")),
                 sors = listOf(
                     SOR("executive editor: Fumio Tamamura"),
@@ -132,7 +132,7 @@ class ParserTest {
                 "Xiang Wang, artist."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Das grosse lehrbuch der gemüse- & früchte-schnitzerei")),
                 sors = listOf(SOR("Xiang Wang, artist")),
                 parallelTitles = listOf(
@@ -151,33 +151,10 @@ class ParserTest {
 
     @Test
     fun t7() {
-        val title = "Moreninha = The little paper doll : from A Prole do Bebe, no 1 / " +
-                "Villa-Lobos ; arr for 2 pianos, 4 hands by Arthur Whittemore and Jack Lowe."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Moreninha")),
-                otherInfos = listOf(OtherInfo("from A Prole do Bebe, no 1")),
-                sors = listOf(
-                    SOR("Villa-Lobos"),
-                    SOR("arr for 2 pianos, 4 hands by Arthur Whittemore and Jack Lowe")
-                ),
-                parallelTitles = listOf(ParallelTitle("The little paper doll"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t8() {
         val title = "Overtüren = Overtures [sound recording] / Jacques Offenbach."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Overtüren")),
                 sors = listOf(SOR("Jacques Offenbach")),
                 parallelTitles = listOf(ParallelTitle("Overtures [sound recording]"))
@@ -190,43 +167,14 @@ class ParserTest {
         assertEquals(expected, result)
     }
 
-    @Test
-    fun t9() {
-        val title = "Sonate d-moll : fur Altblockflote (Querflote) und Basso continuo = " +
-                "Sonata D minor : for treble recorder (flute) and basso continuo, opus III, " +
-                "no 6 / Jean Baptiste (John) Loeillet ; hrsg von Hugo Ruf."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Sonate d-moll")),
-                otherInfos = listOf(OtherInfo("fur Altblockflote (Querflote) und Basso continuo")),
-                sors = listOf(
-                    SOR("Jean Baptiste (John) Loeillet"),
-                    SOR("hrsg von Hugo Ruf")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("Sonata D minor")
-                ),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("for treble recorder (flute) and basso " +
-                            "continuo, opus III, no 6")
-                )
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
 
     @Test
-    fun t10() {
+    fun t8() {
         val title = "Die Klaviersonaten [sound recording] ; Tänze = The piano sonatas ; " +
                 "Dances : complete recording / Franz Schubert."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Die Klaviersonaten [sound recording]"),
                     Title("Tänze"),
@@ -247,11 +195,11 @@ class ParserTest {
     }
 
     @Test
-    fun t11() {
+    fun t9() {
         val title = "Russian stories = Russkie rasskazy / edited by Gleb Struve."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Russian stories")),
                 sors = listOf(SOR("edited by Gleb Struve")),
                 parallelTitles = listOf(ParallelTitle("Russkie rasskazy"))
@@ -265,12 +213,12 @@ class ParserTest {
     }
 
     @Test
-    fun t12() {
+    fun t10() {
         val title = "The Mexican league : comprehensive player statistics, 1937-2001 = La liga " +
                 "Mexicana : estadísticas comprensivas de los jugadores, 1937-2001 / Pedro Treto Cisneros."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("The Mexican league")),
                 otherInfos = listOf(OtherInfo("comprehensive player statistics, 1937-2001")),
                 sors = listOf(SOR("Pedro Treto Cisneros")),
@@ -288,31 +236,13 @@ class ParserTest {
     }
 
     @Test
-    fun t13() {
-        val title = "A source book in theatrical history = Sources of theatrical history / by A M Nagler."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("A source book in theatrical history")),
-                sors = listOf(SOR("by A M Nagler")),
-                parallelTitles = listOf(ParallelTitle("Sources of theatrical history"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t14() {
+    fun t11() {
         val title = "That's not fair! : Emma Tenayuca's struggle for justice = No es justo! : " +
                 "la lucha de Emma Tenayuca por la justicia / written by Carmen Tafolla & Sharyll " +
                 "Teneyuca ; illustrated by Terry Ybáñez ; Spanish translation by Carmen Tafolla."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("That's not fair!")),
                 otherInfos = listOf(OtherInfo("Emma Tenayuca's struggle for justice")),
                 sors = listOf(
@@ -334,11 +264,11 @@ class ParserTest {
     }
 
     @Test
-    fun t15() {
+    fun t12() {
         val title = "Chine [sound recording] : le soleil et la lune = China : the sun and the moon."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Chine [sound recording]")),
                 otherInfos = listOf(OtherInfo("le soleil et la lune")),
                 parallelTitles = listOf(ParallelTitle("China")),
@@ -353,12 +283,12 @@ class ParserTest {
     }
 
     @Test
-    fun t16() {
+    fun t13() {
         val title = "Wo he Huojin de sheng huo = Travelling to infinity / [Ying] " +
                 "Jian·Huojing (Jane Hawking) zhu ; Zhang Jing, Wang Hanmin yi."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Wo he Huojin de sheng huo")),
                 sors = listOf(
                     SOR("[Ying] Jian·Huojing (Jane Hawking) zhu"),
@@ -375,33 +305,12 @@ class ParserTest {
     }
 
     @Test
-    fun t17() {
-        val title = "Perrazo y Perrito = Big Dog and Little Dog / Dav Pilkey ; traducido por Carlos E Calvo."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Perrazo y Perrito")),
-                sors = listOf(
-                    SOR("Dav Pilkey"),
-                    SOR("traducido por Carlos E Calvo")
-                ),
-                parallelTitles = listOf(ParallelTitle("Big Dog and Little Dog"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t18() {
+    fun t14() {
         val title = "Macuilli tlachtli = Cinco deportes mexicanos = Five Mexican sports" +
                 " = Cinq sports mexicains / Raziel Garcia Arroyo."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Macuilli tlachtli")),
                 sors = listOf(SOR("Raziel Garcia Arroyo")),
                 parallelTitles = listOf(
@@ -419,12 +328,12 @@ class ParserTest {
     }
 
     @Test
-    fun t19() {
+    fun t15() {
         val title = "Hands are not for hitting = Las manos no son para pegar / Martine " +
                 "Agassi ; illustrado por Marieka Heinlen."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Hands are not for hitting")),
                 sors = listOf(
                     SOR("Martine Agassi"),
@@ -441,12 +350,12 @@ class ParserTest {
     }
 
     @Test
-    fun t20() {
+    fun t16() {
         val title = "Hulk Hogan : wrestling pro = campeon de lucha libre / Heather " +
                 "Feldman ; traduccion al espanol Mauricio Velazquez de Leon."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Hulk Hogan")),
                 otherInfos = listOf(OtherInfo("wrestling pro")),
                 sors = listOf(
@@ -464,14 +373,14 @@ class ParserTest {
     }
 
     @Test
-    fun t21() {
+    fun t17() {
         val title = "The missing chancleta and other top-secret cases / by Alidis Vincente" +
                 " ; cover and inside illustrations by Leonardo Mora = La chancleta perdida y " +
                 "ostros casos secretos / por Alidis Vincente ; traduccion al español de Gabriela " +
                 "Baeza Ventura ; ilustraciones de Leonardo Mora."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("The missing chancleta and other top-secret cases")),
                 sors = listOf(
                     SOR("by Alidis Vincente"),
@@ -495,7 +404,7 @@ class ParserTest {
     }
 
     @Test
-    fun t22() {
+    fun t18() {
         val title = "Bilder einer Ausstellang [sound recording] = Pictures " +
                 "at an exhibition = Tableaux d'une exposition ; Eine Nacht auf " +
                 "dem kahlen Berge = Night on Bald Mountain = Une nuit sur le mont " +
@@ -503,7 +412,7 @@ class ParserTest {
                 "Ravel."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Bilder einer Ausstellang [sound recording]"),
                     Title("Eine Nacht auf dem kahlen Berge")
@@ -518,7 +427,7 @@ class ParserTest {
                     ParallelTitle("Une nuit sur le mont chauve")
                 )
             ),
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(
                     Title("Valses nobles et sentimentales")
                 ),
@@ -535,14 +444,14 @@ class ParserTest {
     }
 
     @Test
-    fun t23() {
+    fun t19() {
         val title = "This can lick a lollipop : body riddles for kids = Esto gozo " +
                 "chupando un caramelo : les partes del cuerpo en adivinanzas infantiles" +
                 " / English words by Joel Rothman ; Spanish words by Argentica Palacios" +
                 " ; photographs by Patricia Ruben."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("This can lick a lollipop")),
                 otherInfos = listOf(OtherInfo("body riddles for kids")),
                 sors = listOf(
@@ -564,11 +473,11 @@ class ParserTest {
     }
 
     @Test
-    fun t24() {
+    fun t20() {
         val title = "To life [sound recording] = Le chaim! : Jewish party."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("To life [sound recording]")),
                 otherInfos = listOf(OtherInfo("Jewish party")),
                 parallelTitles = listOf(ParallelTitle("Le chaim!"))
@@ -582,11 +491,11 @@ class ParserTest {
     }
 
     @Test
-    fun t25() {
+    fun t21() {
         val title = "Long nian dang an = Dragon year file / Ke Yunlu Zhu."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Long nian dang an")),
                 sors = listOf(SOR("Ke Yunlu Zhu")),
                 parallelTitles = listOf(ParallelTitle("Dragon year file"))
@@ -600,11 +509,11 @@ class ParserTest {
     }
 
     @Test
-    fun t26() {
+    fun t22() {
         val title = "Le Quai Des Brumes = Port of Shadows"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Le Quai Des Brumes")),
                 parallelTitles = listOf(ParallelTitle("Port of Shadows"))
             )
@@ -617,11 +526,11 @@ class ParserTest {
     }
 
     @Test
-    fun t27() {
+    fun t23() {
         val title = "Hui dao can zhuo, hui dao sheng huo = Life / Cai Yingqing zhu."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Hui dao can zhuo, hui dao sheng huo")),
                 sors = listOf(SOR("Cai Yingqing zhu")),
                 parallelTitles = listOf(ParallelTitle("Life"))
@@ -635,71 +544,11 @@ class ParserTest {
     }
 
     @Test
-    fun t28() {
-        val title = "Das Kantatenwerk Vol 34 [sound recording] = Complete canatas" +
-                " / Johann Sebastian Bach."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Das Kantatenwerk Vol 34 [sound recording]")),
-                sors = listOf(SOR("Johann Sebastian Bach")),
-                parallelTitles = listOf(ParallelTitle("Complete canatas"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t29() {
-        val title = "The new churches of Europe = Las neuvas iglesias de Europa" +
-                " / [by] G E Kidder Smith."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("The new churches of Europe")),
-                sors = listOf(SOR("[by] G E Kidder Smith")),
-                parallelTitles = listOf(ParallelTitle("Las neuvas iglesias de Europa"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t30() {
-        val title = "Good night, Mr Panda = Buenas noches, Sr Panda" +
-                " / Steven Antony ; translated by JP Lombana."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Good night, Mr Panda")),
-                sors = listOf(
-                    SOR("Steven Antony"),
-                    SOR("translated by JP Lombana")
-                ),
-                parallelTitles = listOf(ParallelTitle("Buenas noches, Sr Panda"))
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t31() {
+    fun t24() {
         val title = "Spennigens land = The land of suspense / Knut Nystedt."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Spennigens land")),
                 sors = listOf(SOR("Knut Nystedt")),
                 parallelTitles = listOf(ParallelTitle("The land of suspense"))
@@ -713,40 +562,14 @@ class ParserTest {
     }
 
     @Test
-    fun t32() {
-        val title = "Brown bear, brown bear, what do you see? = Oso pardo, " +
-                "oso pardo, ¿qué ves ahí? / Bill Martin, Jr ; pictures by/illustraciones " +
-                "de Eric Carle ; translation by/traducción de Teresa Mlawer."
-
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Brown bear, brown bear, what do you see?")),
-                sors = listOf(
-                    SOR("Bill Martin, Jr"),
-                    SOR("pictures by/illustraciones de Eric Carle"),
-                    SOR("translation by/traducción de Teresa Mlawer")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("Oso pardo, oso pardo, ¿qué ves ahí?")
-                )
-            )
-        )
-
-        val result = g.parse(title)
-
-        assertNotNull(result)
-        assertEquals(expected, result)
-    }
-
-    @Test
-    fun t33() {
+    fun t25() {
         val title = "Atlas the gioi khu'ng long = The Usborne Internet-linked " +
                 "world atlas of dinosaurs / Thiet ke: Susanna Davidson, Stephanie Turnbull, " +
                 "va Rachel Firth ; Minh hoa: Todd Marshall, Barry Croucher, Nelupa " +
                 "Hussain va Glen Bird ; Nguoi dich: Viet Hoang - Viet Chung."
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Atlas the gioi khu'ng long")),
                 sors = listOf(
                     SOR("Thiet ke: Susanna Davidson, Stephanie Turnbull, va Rachel Firth"),
@@ -766,13 +589,13 @@ class ParserTest {
     }
 
     @Test
-    fun t34() {
+    fun t26() {
         val title = "Arc-en-ciel : le plus beau poisson des océans = The rainbow fish" +
                 " : the most beautiful fish in the ocean / Marcus Pfister" +
                 " ; [English translation by Rosemary Lanning]"
 
         val expected = listOf(
-            TitleStatement(
+            TitleStatementNode(
                 titles = listOf(Title("Arc-en-ciel")),
                 otherInfos = listOf(OtherInfo("le plus beau poisson des océans")),
                 sors = listOf(
@@ -793,37 +616,288 @@ class ParserTest {
     }
 
     @Test
-    fun t35() {
-        val title = "Crosscurrents of modernism : four Latin American pioneers" +
-                " : Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta" +
-                " = Intercambios del modernismo : cuatro precursores latinoamericanos" +
-                " : Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta" +
-                " / Valerie Fletcher with essays by Olivier Debroise [et al]" +
-                " ; [English translations by James Oles, Margaret Sayers Peden, " +
-                "and Eliot Weinberger ; Spanish translations by Carlos Banales and " +
-                "Carlos Tripoldi]."
+    fun t27() {
+        val title = "Animals = Animales : English-Spanish / [designed by Hakan Şan Borteçin]."
 
         val expected = listOf(
-            TitleStatement(
-                titles = listOf(Title("Crosscurrents of modernism")),
-                otherInfos = listOf(
-                    OtherInfo("four Latin American pioneers"),
-                    OtherInfo("Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta")
-                ),
+            TitleStatementNode(
+                titles = listOf(Title("Animals")),
+                otherInfos = listOf(OtherInfo("English-Spanish")),
+                sors = listOf(SOR("[designed by Hakan Şan Borteçin]")),
+                parallelTitles = listOf(ParallelTitle("Animales"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t28() {
+        val title = "aal-Ghurāb al-miskīn = The Poor crow / ci'dād Sālim Shams al-Dīn" +
+                " ; al-tarjamah ilá al-Inklīzīyah Shirīn al-Shammā', rusūm al-fannān " +
+                "Nabīl Qaddūh."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("aal-Ghurāb al-miskīn")),
                 sors = listOf(
-                    SOR("Valerie Fletcher with essays by Olivier Debroise [et al]"),
-                    SOR(
-                        "[English translations by James Oles, Margaret Sayers " +
-                                "Peden, and Eliot Weinberger"
-                    ),
-                    SOR("Spanish translations by Carlos Banales and Carlos Tripoldi]")
+                    SOR("ci'dād Sālim Shams al-Dīn"),
+                    SOR("al-tarjamah ilá al-Inklīzīyah Shirīn al-Shammā', " +
+                            "rusūm al-fannān Nabīl Qaddūh")
+                ),
+                parallelTitles = listOf(ParallelTitle("The Poor crow"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t29() {
+        val title = "Xiao xiao xiao xiao de huo / [Mei] Wu Qishi zhu" +
+                " ; Sun Lu yi = Little fires everywhere / Celeste Ng."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("Xiao xiao xiao xiao de huo")),
+                sors = listOf(
+                    SOR("[Mei] Wu Qishi zhu"),
+                    SOR("Sun Lu yi")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle("Intercambios del modernismo")
+                    ParallelTitle("Little fires everywhere")
                 ),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("cuatro precursores latinoamericanos"),
-                    ParallelOtherInfo("Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta")
+                parallelSORs = listOf(ParallelSOR("Celeste Ng"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t30() {
+        val title = "A collection of Latin American folksongs = Collección de " +
+                "cancionces folklóricas Latinoamericanas / [edited] by Raquel " +
+                "González Paraíso and Francisco López."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("A collection of Latin American folksongs")),
+                sors = listOf(
+                    SOR("[edited] by Raquel González Paraíso and Francisco López")
+                ),
+                parallelTitles = listOf(
+                    ParallelTitle("Collección de cancionces folklóricas Latinoamericanas")
+                )
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t31() {
+        val title = "Opposites = Zheng fan, English-Chinese / [designed by Hakan Şan Borteçin]."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("Opposites")),
+                sors = listOf(SOR("[designed by Hakan Şan Borteçin]")),
+                parallelTitles = listOf(ParallelTitle("Zheng fan, English-Chinese"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t32() {
+        val title = "¿Qué hay en el cielo, querido dragón? = What's in the sky, dear dragon?" +
+                " / por/by Margaret Hillert ; illustrado por/illustrated by David Schimmell" +
+                " ; traducio por Queta Fernandez."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("¿Qué hay en el cielo, querido dragón?")),
+                sors = listOf(
+                    SOR("por/by Margaret Hillert"),
+                    SOR("illustrado por/illustrated by David Schimmell"),
+                    SOR("traducio por Queta Fernandez")
+                ),
+                parallelTitles = listOf(ParallelTitle("What's in the sky, dear dragon?"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t33() {
+        val title = "¿Qué hay en el bosque, querido dragón? = What's in the woods, " +
+                "dear dragon? / por/by Margaret Hillert ; illustrado por/illustrated " +
+                "by David Schimmel ; traducido par Queta Fernandez."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("¿Qué hay en el bosque, querido dragón?")),
+                sors = listOf(
+                    SOR("por/by Margaret Hillert"),
+                    SOR("illustrado por/illustrated by David Schimmel"),
+                    SOR("traducido par Queta Fernandez")
+                ),
+                parallelTitles = listOf(
+                    ParallelTitle("What's in the woods, dear dragon?")
+                )
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t34() {
+        val title = "How will we get to the beach? = Cómo iremos a la playa?" +
+                " / Brigitte Luciani ; illustrated by Eve Tharlet ; [Spanish " +
+                "translation by André Antreasyan]."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("How will we get to the beach?")),
+                sors = listOf(
+                    SOR("Brigitte Luciani"),
+                    SOR("illustrated by Eve Tharlet"),
+                    SOR("[Spanish translation by André Antreasyan]")
+                ),
+                parallelTitles = listOf(ParallelTitle("Cómo iremos a la playa?"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t35() {
+        val title = "The world's most beautiful libraries = Die schönsten Bibliotheken " +
+                "der Welt = Les plus belles bibliothèques du monde / Massimo Listri" +
+                " ; text by Georg Ruppelt & Elisabeth Sladek ; English translation, Karen " +
+                "Williams ; French translation, Aude Fondard."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("The world's most beautiful libraries")),
+                sors = listOf(
+                    SOR("Massimo Listri"),
+                    SOR("text by Georg Ruppelt & Elisabeth Sladek"),
+                    SOR("English translation, Karen Williams"),
+                    SOR("French translation, Aude Fondard")
+                ),
+                parallelTitles = listOf(
+                    ParallelTitle("Die schönsten Bibliotheken der Welt"),
+                    ParallelTitle("Les plus belles bibliothèques du monde")
+                )
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t36() {
+        val title = "Mia madre = My mother / Nanni Moretti, Domenico Procacci, " +
+                "RAI Cinema presentano ; una coproduzione italo-francese Sacher Film, " +
+                "Fandango con RAI Cinema, Le Pacte, Arte France Cinéma ; un film de " +
+                "Nanni Moretti ; sogetto, Gaia Manzini, Nanni Moretti, Valia Santella, " +
+                "Chiara Valerio ; sceneggiatura, Nanni Moretti, Francesco Piccolo, Valia " +
+                "Santanella ; regia, Nanni Moretti ; prodotto da Nanni Moretti e " +
+                "Domenico Procacci."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("Mia madre")),
+                sors = listOf(
+                    SOR("Nanni Moretti, Domenico Procacci, RAI Cinema presentano"),
+                    SOR("una coproduzione italo-francese Sacher Film, " +
+                            "Fandango con RAI Cinema, Le Pacte, Arte France Cinéma"),
+                    SOR("un film de Nanni Moretti"),
+                    SOR("sogetto, Gaia Manzini, Nanni Moretti, Valia Santella, Chiara Valerio"),
+                    SOR("sceneggiatura, Nanni Moretti, Francesco Piccolo, Valia Santanella"),
+                    SOR("regia, Nanni Moretti"),
+                    SOR("prodotto da Nanni Moretti e Domenico Procacci")
+                ),
+                parallelTitles = listOf(ParallelTitle("My mother"))
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t37() {
+        val title = "Howdy, honey, howdy : illustrated with photos / by Leigh " +
+                "Richmond Miner ; decorations by Will Jenkins."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("Howdy, honey, howdy")),
+                otherInfos = listOf(OtherInfo("illustrated with photos")),
+                sors = listOf(
+                    SOR("by Leigh Richmond Miner"),
+                    SOR("decorations by Will Jenkins")
+                )
+            )
+        )
+
+        val result = g.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t38() {
+        val title = "The Penkovskiy papers / by Oleg Penkovsky" +
+                " ; introduction and commentary by Frank Gibney" +
+                " ; foreword by Edward Crankshaw" +
+                " ; translated by Peter Deriabin."
+
+        val expected = listOf(
+            TitleStatementNode(
+                titles = listOf(Title("The Penkovskiy papers")),
+                sors = listOf(
+                    SOR("by Oleg Penkovsky"),
+                    SOR("introduction and commentary by Frank Gibney"),
+                    SOR("foreword by Edward Crankshaw"),
+                    SOR("translated by Peter Deriabin")
                 )
             )
         )

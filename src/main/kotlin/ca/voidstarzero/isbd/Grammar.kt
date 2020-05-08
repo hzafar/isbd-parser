@@ -12,8 +12,6 @@ class Grammar : DSL() {
 
     val store: ParseState<ParseContext> = ParseState(Grammar::class, ::ParseContext)
 
-    private val equalSign: rule = str("_=_")
-
     private val colon = rule(
         object : AbstractForwarding(
             "colon",
@@ -21,10 +19,10 @@ class Grammar : DSL() {
                 .collect().action_with_string { parse, _, _ ->
                     parse.log.apply {
                         val context = store.data(parse)
-                        val oldState = context.inState
-                        context.inState = ParseContext.State.OTHER_INFO
+                        val oldState = context.currentState
+                        context.currentState = ParseContext.State.OTHER_INFO
                         return@apply Runnable {
-                            context.inState = oldState
+                            context.currentState = oldState
                         }
                     }
                 }.get()
@@ -37,51 +35,53 @@ class Grammar : DSL() {
                 .collect().action_with_string { parse, _, _ ->
                     parse.log.apply {
                         val context = store.data(parse)
-                        val oldState = context.inState
-                        context.inState = ParseContext.State.SOR
+                        val oldState = context.currentState
+                        context.currentState = ParseContext.State.SOR
                         return@apply Runnable {
-                            context.inState = oldState
+                            context.currentState = oldState
                         }
                     }
                 }.get()
         ) {}
     )
 
+    private val equalSign: rule = str("_=_")
     private val semicolon: rule = str("_;_")
-
     private val period: rule = str(". ")
 
     private val char = rule(CharPredicate("char") {
-        it !in listOf('\u0000', '_', ' ', '.', '\t', '\n', '\r').map(Char::toInt) // FIXME
+        it !in listOf('\u0000', '_', ' ', '.', '\t', '\n', '\r').map(Char::toInt)
     })
 
     private val data: rule = char.at_least(1).sep(0, usual_whitespace)
-        .push(with_string { parse, _, match -> match })
+        .push(with_string { _, _, match -> match })
 
-    private val otherTitleInfo: rule = seq(colon, data)
-        .push(with_string { _, items, _ ->
-            OtherInfo(items[0] as String)
-        })
+    private val otherInfo: rule = seq(colon, data)
+        .push { items -> OtherInfo(items[0] as String) }
 
-    private val otherTitleInfoList: rule = otherTitleInfo.at_least(1)
-        .push(with_string { _, items, _ ->
-            NodeList(items.filterNotNull().mapNotNull { it as OtherInfo })
-        })
+    private val otherInfoList: rule = otherInfo.at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { it as OtherInfo })
+        }
 
     private val sor: rule = seq(slash, data)
-        .push(with_string { _, items, _ ->
-            SOR(items[0] as String)
-        })
+        .push { items -> SOR(items[0] as String) }
 
-    private val additionalSor: rule = seq(semicolon, data).at_least(1)
-        .push(with_string { _, items, _ ->
-            NodeList(items.filterNotNull().mapNotNull { SOR(it as String) })
-        })
+    private val additionalSOR: rule = seq(semicolon, data).at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { SOR(it as String) })
+        }
+
+    private val sorList: rule = seq(sor, additionalSOR.maybe())
+        .push { items ->
+            NodeList(
+                listOf(items[0] as SOR)
+                    .plus((items[1] as? NodeList)?.values ?: emptyList())
+            )
+        }
 
     private val title: rule = data
-        .push(with_string { _, items, _ ->
-            Title(items[0] as String)
-        })
+        .push { items -> Title(items[0] as String) }
 
     private val parallelData = rule(
         object : AbstractForwarding(
@@ -89,7 +89,7 @@ class Grammar : DSL() {
             seq(equalSign, data)
                 .collect().action_with_string { parse, items, _ ->
                     val context = store.data(parse)
-                    val toPush: Any? = when (context.inState) {
+                    val toPush: Any? = when (context.currentState) {
                         ParseContext.State.OTHER_INFO -> ParallelOtherInfo(items[0] as String)
                         ParseContext.State.SOR -> ParallelSOR(items[0] as String)
                         else -> null
@@ -99,59 +99,75 @@ class Grammar : DSL() {
         ) {}
     )
 
-    private val parallelOtherTitleInfo: rule = seq(colon, data)
-        .push(with_string { _, items, _ -> ParallelOtherInfo(items[0] as String) })
+    private val parallelOtherInfo: rule = seq(colon, data)
+        .push { items -> ParallelOtherInfo(items[0] as String) }
 
-    private val parallelOtherTitleInfoList: rule = parallelOtherTitleInfo.at_least(1)
-        .push(with_string { _, items, _ ->
-            NodeList(items.filterNotNull().mapNotNull { it as ParallelOtherInfo })
-        })
+    private val parallelOtherInfoList: rule = parallelOtherInfo.at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { it as ParallelOtherInfo })
+        }
 
     private val parallelSOR: rule = seq(slash, data)
-        .push(with_string { _, items, _ ->
+        .push { items ->
             ParallelSOR(items[0] as String)
-        })
+        }
 
-    private val parallelAdditionalSor: rule = seq(semicolon, data).at_least(1)
-        .push(with_string { _, items, _ ->
-            NodeList(items.filterNotNull().mapNotNull { ParallelSOR(it as String) })
-        })
+    private val parallelAdditionalSOR: rule = seq(semicolon, data).at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { ParallelSOR(it as String) })
+        }
+
+    private val parallelSORList: rule = seq(parallelSOR, parallelAdditionalSOR.maybe())
+        .push { items ->
+            NodeList(
+                listOf(items[0] as ParallelSOR)
+                    .plus((items[1] as? NodeList)?.values ?: emptyList())
+            )
+        }
 
     private val parallelTitle: rule = seq(equalSign, data)
-        .push(with_string { _, items, _ -> ParallelTitle(items[0] as String) })
+        .push { items -> ParallelTitle(items[0] as String) }
 
     private val parallelTitleList: rule = parallelTitle.at_least(1)
-        .push(with_string { _, items, _ ->
-            NodeList(items.filterNotNull().mapNotNull { it as ParallelTitle })
-        })
+        .push { items ->
+            NodeList(items.filterNotNull().map { it as ParallelTitle })
+        }
 
-    private val parallelTitleAndOtherInfo: rule = seq(parallelTitle, parallelOtherTitleInfoList)
-        .push { items -> items }
+    private val parallelTitleAndOtherInfo: rule = seq(parallelTitle, parallelOtherInfoList)
+        .push { items ->
+            NodeList(
+                listOf(items[0] as ParallelTitle)
+                    .plus((items[1] as? NodeList)?.values ?: emptyList())
+            )
+        }
 
     private val parallelTitleAndOtherInfoList: rule = parallelTitleAndOtherInfo.at_least(1)
         .push { items ->
-            items.flatMap {
-                when (it) {
-                    is Array<*> -> it.toList()
-                    else -> listOf(it)
-                }
-            }.toTypedArray()
+            NodeList(
+                items.flatMap { (it as? NodeList)?.values ?: emptyList() }
+            )
         }
 
     private val parallelTitleFull: rule = seq(
         parallelTitle,
-        parallelOtherTitleInfoList.maybe(),
-        seq(parallelSOR, parallelAdditionalSor.maybe()).maybe()
-    ).push { items -> items }
+        parallelOtherInfoList.maybe(),
+        parallelSORList.maybe()
+    ).push { items ->
+        NodeList(
+            listOf(items[0] as ParallelTitle)
+                .plus((items[1] as? NodeList?)?.values ?: emptyList())
+                .plus((items[2] as? NodeList?)?.values ?: emptyList())
+        )
+    }
 
     private val titleSection: rule = seq(
         title,
         parallelTitleList.maybe(),
         longest(
-            otherTitleInfoList,
-            seq(otherTitleInfoList, parallelData),
-            seq(otherTitleInfoList, parallelTitleAndOtherInfo),
-            seq(otherTitleInfoList, parallelTitleAndOtherInfoList)
+            otherInfoList,
+            seq(otherInfoList, parallelData),
+            seq(otherInfoList, parallelTitleAndOtherInfo),
+            seq(otherInfoList, parallelTitleAndOtherInfoList)
         ).maybe()
     )
 
@@ -160,11 +176,11 @@ class Grammar : DSL() {
     private val titleStatement: rule = seq(
         titleList,
         longest(
-            seq(sor, additionalSor.maybe()),
-            seq(sor, additionalSor.maybe(), parallelData),
-            seq(sor, additionalSor.maybe(), parallelTitleFull)
+            sorList,
+            seq(sorList, parallelData),
+            seq(sorList, parallelTitleFull)
         ).maybe()
-    ).push(with_string { _, items, _ ->
+    ).push { items ->
         val titles = mutableListOf<Title>()
         val otherInfos = mutableListOf<OtherInfo>()
         val sors = mutableListOf<SOR>()
@@ -173,12 +189,6 @@ class Grammar : DSL() {
         val parallelSORs = mutableListOf<ParallelSOR>()
         items.flatMap {
             when (it) {
-                is Array<*> -> it.toList().flatMap { it3 ->
-                    when (it3) {
-                        is NodeList -> it3.values
-                        else -> listOf(it3)
-                    }
-                }
                 is NodeList -> it.values
                 else -> listOf(it)
             }
@@ -193,11 +203,11 @@ class Grammar : DSL() {
             }
         }
 
-        return@with_string TitleStatement(
+        return@push TitleStatementNode(
             titles, otherInfos, sors,
             parallelTitles, parallelOtherInfos, parallelSORs
         )
-    })
+    }
 
     private val titleStatementList: rule = seq(titleStatement).sep(2, period)
 
@@ -211,24 +221,22 @@ class Grammar : DSL() {
         make_rule_names()
     }
 
-    private fun prepare(input: String): String {
-        return input
-            .replace(" = ", "_=_")
-            .replace(" : ", "_:_")
-            .replace(" / ", "_/_")
-            .replace(" ; ", "_;_")
-            .removeSuffix(".")
-            .trim()
+    fun parse(input: String): List<TitleStatementNode> {
+        return prepare(input)
+            .map { Autumn.parse(root, it, ParseOptions.get()) }
+            .firstOrNull { it.full_match }
+            ?.let { result ->
+                result.value_stack.mapNotNull { it as TitleStatementNode }
+            }
+            ?: emptyList()
     }
 
-    fun parse(input: String): List<TitleStatement> {
-        val titleString = prepare(input)
-        val result = Autumn.parse(root, titleString, ParseOptions.get())
-
-        return if (result.full_match) {
-            result.value_stack.mapNotNull { it as TitleStatement }
-        } else {
-            emptyList()
-        }
+    fun parseAll(input: String): List<List<TitleStatementNode>> {
+        return prepare(input)
+            .map { Autumn.parse(root, it, ParseOptions.get()) }
+            .filter { it.full_match }
+            .map { result ->
+                result.value_stack.mapNotNull { it as TitleStatementNode }
+            }
     }
 }
