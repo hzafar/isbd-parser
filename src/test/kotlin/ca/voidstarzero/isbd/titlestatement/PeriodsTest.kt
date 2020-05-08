@@ -374,7 +374,7 @@ class PeriodsTest {
             )
         )
 
-        val result = t.parseAll(title)[1]
+        val result = t.parseHeuristically(title)
 
         Assert.assertNotNull(result)
         Assert.assertEquals(expected, result)

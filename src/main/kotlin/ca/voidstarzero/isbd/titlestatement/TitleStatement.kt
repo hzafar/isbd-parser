@@ -232,6 +232,10 @@ class TitleStatement : DSL() {
             ?: emptyList()
     }
 
+    fun parseHeuristically(input: String): List<TitleStatementNode> {
+        return parseAll(input).firstOrNull { goodParse(it) } ?: emptyList()
+    }
+
     fun parseAll(input: String): List<List<TitleStatementNode>> {
         return prepare(input)
             .map { Autumn.parse(root, it, ParseOptions.get()) }
