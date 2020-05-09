@@ -1,12 +1,88 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.60'
+    id 'maven-publish'
+    id 'java-library'
+    id 'signing'
+    id 'org.jetbrains.dokka' version '0.10.1'
 }
 
-group 'ca.voidstarzero'
-version '1.0-SNAPSHOT'
+group = 'ca.voidstarzero'
+version = '0.1.0'
+
+java {
+    withSourcesJar()
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/dokka"
+}
+
+task javadocJar(type: Jar) {
+    archiveClassifier = 'javadoc'
+    dependsOn dokka
+    from("$buildDir/dokka")
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'isbd-parser'
+            from components.java
+            artifact javadocJar
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'ISBD Parser'
+                description = 'A context-sensitive ISBD parsing library.'
+                url = 'https://github.com/hzafar/isbd-parser'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'hzafar'
+                        name = 'Huma Zafar'
+                        email = 'zafar.huma@gmail.com'
+                        organizationUrl = 'voidstarzero.ca'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/hzafar/isbd-parser.git'
+                    developerConnection = 'scm:git:ssh://github.com:hzafar/isbd-parser.git'
+                    url = 'http://github.com/hzafar/isbd-parser/tree/master/'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username project.nexusUsername
+                password project.nexusPassword
+            }
+            url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
 
 repositories {
     mavenCentral()
+    jcenter()
     maven { url 'https://jitpack.io' }
 }
 
