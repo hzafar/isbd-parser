@@ -67,15 +67,21 @@ publishing {
     repositories {
         maven {
             credentials {
-                username project.nexusUsername
-                password project.nexusPassword
+                username project.NEXUSUSERNAME
+                password project.NEXUSPASSWORD
             }
             url = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
         }
     }
 }
 
+allprojects {
+    ext."signing.gnupg.keyName" = project.SIGNINGKEYID
+    ext."signing.gnupg.passphrase" = project.SIGNINGPASSWORD
+}
+
 signing {
+    useGpgCmd()
     sign publishing.publications.mavenJava
 }
 
