@@ -55,8 +55,8 @@ abstract class TitleStatementGrammar : DSL() {
     private val data: rule = char.at_least(1).sep(0, usual_whitespace)
         .push(with_string { _, _, match -> match })
 
-    private val title: rule = data
-        .push { items -> Title(items[0] as String) }
+    private val titleProper: rule = data
+        .push { items -> TitleProper(items[0] as String) }
 
     private val otherInfo: rule = seq(colon, data)
         .push { items -> OtherInfo(items[0] as String) }
@@ -157,8 +157,8 @@ abstract class TitleStatementGrammar : DSL() {
         ParallelTitle(title.title, otherInfos, sors)
     }
 
-    private val titleSection: rule = seq(
-        title,
+    private val title: rule = seq(
+        titleProper,
         parallelTitleList.maybe(),
         longest(
             otherInfoList,
@@ -166,9 +166,29 @@ abstract class TitleStatementGrammar : DSL() {
             seq(otherInfoList, parallelTitleAndOtherInfo),
             seq(otherInfoList, parallelTitleAndOtherInfoList)
         ).maybe()
-    )
+    ).push { items ->
+        val titleProper = items[0] as TitleProper
+        val otherInfos = mutableListOf<OtherInfo>()
+        val parallelOtherInfos = mutableListOf<ParallelOtherInfo>()
+        val parallelTitles = mutableListOf<ParallelTitle>()
 
-    private val titleList: rule = seq(titleSection).sep(1, semicolon)
+        items.flatMap {
+            when (it) {
+                is NodeList -> it.values
+                else -> listOf(it)
+            }
+        }.forEach {
+            when (it) {
+                is OtherInfo -> otherInfos.add(it)
+                is ParallelOtherInfo -> parallelOtherInfos.add(it)
+                is ParallelTitle -> parallelTitles.add(it)
+            }
+        }
+
+        Title(titleProper, otherInfos, parallelOtherInfos, parallelTitles)
+    }
+
+    private val titleList: rule = seq(title).sep(1, semicolon)
 
     private val titleStatement: rule = seq(
         titleList,
@@ -179,10 +199,7 @@ abstract class TitleStatementGrammar : DSL() {
         ).maybe()
     ).push { items ->
         val titles = mutableListOf<Title>()
-        val otherInfos = mutableListOf<OtherInfo>()
         val sors = mutableListOf<SOR>()
-        val parallelTitles = mutableListOf<ParallelTitle>()
-        val parallelOtherInfos = mutableListOf<ParallelOtherInfo>()
         val parallelSORs = mutableListOf<ParallelSOR>()
         items.flatMap {
             when (it) {
@@ -192,18 +209,12 @@ abstract class TitleStatementGrammar : DSL() {
         }.forEach {
             when (it) {
                 is Title -> titles.add(it)
-                is OtherInfo -> otherInfos.add(it)
                 is SOR -> sors.add(it)
-                is ParallelTitle -> parallelTitles.add(it)
-                is ParallelOtherInfo -> parallelOtherInfos.add(it)
                 is ParallelSOR -> parallelSORs.add(it)
             }
         }
 
-        return@push TitleStatementNode(
-            titles, otherInfos, sors,
-            parallelTitles, parallelOtherInfos, parallelSORs
-        )
+        TitleStatementNode(titles, sors, parallelSORs)
     }
 
     private val titleStatementList: rule = seq(titleStatement).sep(2, period)

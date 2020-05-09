@@ -1,10 +1,11 @@
 package ca.voidstarzero.isbd.titlestatement.ast
 
-class ParallelTitle(
+data class ParallelTitle(
     val title: String,
     val otherInfos: List<ParallelOtherInfo> = emptyList(),
     val sors: List<ParallelSOR> = emptyList()
 ) : Node() {
+
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is ParallelTitle ->

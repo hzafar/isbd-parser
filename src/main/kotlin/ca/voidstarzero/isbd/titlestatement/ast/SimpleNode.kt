@@ -17,7 +17,7 @@ open class SimpleNode(val value: String) : Node() {
     }
 }
 
-class Title(value: String) : SimpleNode(value)
+class TitleProper(value: String) : SimpleNode(value)
 class OtherInfo(value: String) : SimpleNode(value)
 class SOR(value: String) : SimpleNode(value)
 class ParallelOtherInfo(value: String) : SimpleNode(value)
