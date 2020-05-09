@@ -2,7 +2,7 @@ package ca.voidstarzero.isbd.titlestatement.ast
 
 data class ParallelTitle(
     val title: String,
-    val otherInfos: List<ParallelOtherInfo> = emptyList(),
+    val otherInfo: List<ParallelOtherInfo> = emptyList(),
     val sors: List<ParallelSOR> = emptyList()
 ) : Node() {
 
@@ -10,7 +10,7 @@ data class ParallelTitle(
         return when (other) {
             is ParallelTitle ->
                 title == other.title
-                        && otherInfos == other.otherInfos
+                        && otherInfo == other.otherInfo
                         && sors == other.sors
             else -> false
         }
@@ -18,7 +18,7 @@ data class ParallelTitle(
 
     override fun hashCode(): Int {
         var result = title.hashCode()
-        result = 31 * result + otherInfos.hashCode()
+        result = 31 * result + otherInfo.hashCode()
         result = 31 * result + sors.hashCode()
         return result
     }

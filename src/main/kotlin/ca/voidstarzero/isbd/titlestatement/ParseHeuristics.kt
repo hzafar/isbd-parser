@@ -8,8 +8,7 @@ fun likelyTitle(titleProper: TitleProper): Boolean {
 }
 
 fun goodParse(parse: List<TitleStatementNode>): Boolean {
-    /*return parse.all { node ->
-        node.titlePropers.all { likelyTitle(it) }
-    }*/
-    return false // FIXME
+    return parse.all { node ->
+        node.titles.all { likelyTitle(it.titleProper) }
+    }
 }

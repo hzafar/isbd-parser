@@ -200,6 +200,7 @@ abstract class TitleStatementGrammar : DSL() {
     ).push { items ->
         val titles = mutableListOf<Title>()
         val sors = mutableListOf<SOR>()
+        val parallelTitles = mutableListOf<ParallelTitle>()
         val parallelSORs = mutableListOf<ParallelSOR>()
         items.flatMap {
             when (it) {
@@ -210,11 +211,12 @@ abstract class TitleStatementGrammar : DSL() {
             when (it) {
                 is Title -> titles.add(it)
                 is SOR -> sors.add(it)
+                is ParallelTitle -> parallelTitles.add(it)
                 is ParallelSOR -> parallelSORs.add(it)
             }
         }
 
-        TitleStatementNode(titles, sors, parallelSORs)
+        TitleStatementNode(titles, sors, parallelTitles, parallelSORs)
     }
 
     private val titleStatementList: rule = seq(titleStatement).sep(2, period)
