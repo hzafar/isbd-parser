@@ -87,9 +87,13 @@ class PunctuationPatternsTest {
             TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 otherInfos = listOf(OtherInfo("other title information")),
-                parallelTitles = listOf(ParallelTitle("Parallel title")),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("parallel other title information")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "Parallel title",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("parallel other title information")
+                        )
+                    )
                 )
             )
         )
@@ -231,9 +235,13 @@ class PunctuationPatternsTest {
             TitleStatementNode(
                 titles = listOf(Title("Title proper")),
                 sors = listOf(SOR("statement of responsibility")),
-                parallelTitles = listOf(ParallelTitle("Parallel title")),
-                parallelSORs = listOf(
-                    ParallelSOR("parallel statement of responsibility")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "Parallel title",
+                        sors = listOf(
+                            ParallelSOR("parallel statement of responsibility")
+                        )
+                    )
                 )
             )
         )

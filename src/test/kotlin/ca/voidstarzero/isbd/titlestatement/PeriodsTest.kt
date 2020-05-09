@@ -47,11 +47,13 @@ class PeriodsTest {
                     SOR("hrsg von Hugo Ruf")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle("Sonata D minor")
-                ),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("for treble recorder (flute) and basso " +
-                            "continuo, opus III, no 6")
+                    ParallelTitle(
+                        title = "Sonata D minor",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("for treble recorder (flute) and basso " +
+                                    "continuo, opus III, no 6")
+                        )
+                    )
                 )
             )
         )
@@ -214,11 +216,13 @@ class PeriodsTest {
                     SOR("Spanish translations by Carlos Banales and Carlos Tripoldi]")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle("Intercambios del modernismo")
-                ),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("cuatro precursores latinoamericanos"),
-                    ParallelOtherInfo("Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta")
+                    ParallelTitle(
+                        title = "Intercambios del modernismo",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("cuatro precursores latinoamericanos"),
+                            ParallelOtherInfo("Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta")
+                        )
+                    )
                 )
             )
         )

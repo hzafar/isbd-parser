@@ -26,6 +26,7 @@ abstract class TitleStatementGrammar : DSL() {
                 }.get()
         ) {}
     )
+
     private val slash = rule(
         object : AbstractForwarding(
             "slash",
@@ -54,6 +55,9 @@ abstract class TitleStatementGrammar : DSL() {
     private val data: rule = char.at_least(1).sep(0, usual_whitespace)
         .push(with_string { _, _, match -> match })
 
+    private val title: rule = data
+        .push { items -> Title(items[0] as String) }
+
     private val otherInfo: rule = seq(colon, data)
         .push { items -> OtherInfo(items[0] as String) }
 
@@ -77,9 +81,6 @@ abstract class TitleStatementGrammar : DSL() {
                     .plus((items[1] as? NodeList)?.values ?: emptyList())
             )
         }
-
-    private val title: rule = data
-        .push { items -> Title(items[0] as String) }
 
     private val parallelData = rule(
         object : AbstractForwarding(
@@ -133,16 +134,15 @@ abstract class TitleStatementGrammar : DSL() {
 
     private val parallelTitleAndOtherInfo: rule = seq(parallelTitle, parallelOtherInfoList)
         .push { items ->
-            NodeList(
-                listOf(items[0] as ParallelTitle)
-                    .plus((items[1] as? NodeList)?.values ?: emptyList())
-            )
+            val title = items[0] as ParallelTitle
+            val otherInfos = (items[1] as NodeList).values.map { it as ParallelOtherInfo }
+            ParallelTitle(title.title, otherInfos)
         }
 
     private val parallelTitleAndOtherInfoList: rule = parallelTitleAndOtherInfo.at_least(1)
         .push { items ->
             NodeList(
-                items.flatMap { (it as? NodeList)?.values ?: emptyList() }
+                items.filterNotNull().map { it as ParallelTitle }
             )
         }
 
@@ -151,11 +151,10 @@ abstract class TitleStatementGrammar : DSL() {
         parallelOtherInfoList.maybe(),
         parallelSORList.maybe()
     ).push { items ->
-        NodeList(
-            listOf(items[0] as ParallelTitle)
-                .plus((items[1] as? NodeList?)?.values ?: emptyList())
-                .plus((items[2] as? NodeList?)?.values ?: emptyList())
-        )
+        val title = items[0] as ParallelTitle
+        val otherInfos = (items[1] as? NodeList)?.values?.map { it as ParallelOtherInfo } ?: emptyList()
+        val sors = (items[2] as? NodeList)?.values?.map { it as ParallelSOR } ?: emptyList()
+        ParallelTitle(title.title, otherInfos, sors)
     }
 
     private val titleSection: rule = seq(

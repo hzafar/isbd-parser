@@ -46,14 +46,19 @@ class TitleStatementTest {
                 otherInfos = listOf(OtherInfo("musique flamande")),
                 sors = listOf(SOR("het Brabants Volksorkest \"Crispijn\"")),
                 parallelTitles = listOf(
-                    ParallelTitle("België"),
-                    ParallelTitle("Belgium")
-                ),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("Vlaamse volksmuziek"),
-                    ParallelOtherInfo("Flemish folk music")
-                ),
-                parallelSORs = listOf()
+                    ParallelTitle(
+                        title = "België",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("Vlaamse volksmuziek")
+                        )
+                    ),
+                    ParallelTitle(
+                        title = "Belgium",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("Flemish folk music")
+                        )
+                    )
+                )
             )
         )
 
@@ -223,9 +228,13 @@ class TitleStatementTest {
                 titles = listOf(Title("The Mexican league")),
                 otherInfos = listOf(OtherInfo("comprehensive player statistics, 1937-2001")),
                 sors = listOf(SOR("Pedro Treto Cisneros")),
-                parallelTitles = listOf(ParallelTitle("La liga Mexicana")),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("estadísticas comprensivas de los jugadores, 1937-2001")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "La liga Mexicana",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("estadísticas comprensivas de los jugadores, 1937-2001")
+                        )
+                    )
                 )
             )
         )
@@ -251,9 +260,13 @@ class TitleStatementTest {
                     SOR("illustrated by Terry Ybáñez"),
                     SOR("Spanish translation by Carmen Tafolla")
                 ),
-                parallelTitles = listOf(ParallelTitle("No es justo!")),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("la lucha de Emma Tenayuca por la justicia")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "No es justo!",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("la lucha de Emma Tenayuca por la justicia")
+                        )
+                    )
                 )
             )
         )
@@ -272,8 +285,14 @@ class TitleStatementTest {
             TitleStatementNode(
                 titles = listOf(Title("Chine [sound recording]")),
                 otherInfos = listOf(OtherInfo("le soleil et la lune")),
-                parallelTitles = listOf(ParallelTitle("China")),
-                parallelOtherInfos = listOf(ParallelOtherInfo("the sun and the moon"))
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "China",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("the sun and the moon")
+                        )
+                    )
+                )
             )
         )
 
@@ -388,12 +407,14 @@ class TitleStatementTest {
                     SOR("cover and inside illustrations by Leonardo Mora")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle("La chancleta perdida y ostros casos secretos")
-                ),
-                parallelSORs = listOf(
-                    ParallelSOR("por Alidis Vincente"),
-                    ParallelSOR("traduccion al español de Gabriela Baeza Ventura"),
-                    ParallelSOR("ilustraciones de Leonardo Mora")
+                    ParallelTitle(
+                        title = "La chancleta perdida y ostros casos secretos",
+                        sors = listOf(
+                            ParallelSOR("por Alidis Vincente"),
+                            ParallelSOR("traduccion al español de Gabriela Baeza Ventura"),
+                            ParallelSOR("ilustraciones de Leonardo Mora")
+                        )
+                    )
                 )
             )
         )
@@ -460,9 +481,13 @@ class TitleStatementTest {
                     SOR("Spanish words by Argentica Palacios"),
                     SOR("photographs by Patricia Ruben")
                 ),
-                parallelTitles = listOf(ParallelTitle("Esto gozo chupando un caramelo")),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("les partes del cuerpo en adivinanzas infantiles")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "Esto gozo chupando un caramelo",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("les partes del cuerpo en adivinanzas infantiles")
+                        )
+                    )
                 )
             )
         )
@@ -603,9 +628,13 @@ class TitleStatementTest {
                     SOR("Marcus Pfister"),
                     SOR("[English translation by Rosemary Lanning]")
                 ),
-                parallelTitles = listOf(ParallelTitle("The rainbow fish")),
-                parallelOtherInfos = listOf(
-                    ParallelOtherInfo("the most beautiful fish in the ocean")
+                parallelTitles = listOf(
+                    ParallelTitle(
+                        title = "The rainbow fish",
+                        otherInfos = listOf(
+                            ParallelOtherInfo("the most beautiful fish in the ocean")
+                        )
+                    )
                 )
             )
         )
@@ -646,8 +675,10 @@ class TitleStatementTest {
                 titles = listOf(Title("aal-Ghurāb al-miskīn")),
                 sors = listOf(
                     SOR("ci'dād Sālim Shams al-Dīn"),
-                    SOR("al-tarjamah ilá al-Inklīzīyah Shirīn al-Shammā', " +
-                            "rusūm al-fannān Nabīl Qaddūh")
+                    SOR(
+                        "al-tarjamah ilá al-Inklīzīyah Shirīn al-Shammā', " +
+                                "rusūm al-fannān Nabīl Qaddūh"
+                    )
                 ),
                 parallelTitles = listOf(ParallelTitle("The Poor crow"))
             )
@@ -672,9 +703,11 @@ class TitleStatementTest {
                     SOR("Sun Lu yi")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle("Little fires everywhere")
-                ),
-                parallelSORs = listOf(ParallelSOR("Celeste Ng"))
+                    ParallelTitle(
+                        title = "Little fires everywhere",
+                        sors = listOf(ParallelSOR("Celeste Ng"))
+                    )
+                )
             )
         )
 
@@ -844,8 +877,10 @@ class TitleStatementTest {
                 titles = listOf(Title("Mia madre")),
                 sors = listOf(
                     SOR("Nanni Moretti, Domenico Procacci, RAI Cinema presentano"),
-                    SOR("una coproduzione italo-francese Sacher Film, " +
-                            "Fandango con RAI Cinema, Le Pacte, Arte France Cinéma"),
+                    SOR(
+                        "una coproduzione italo-francese Sacher Film, " +
+                                "Fandango con RAI Cinema, Le Pacte, Arte France Cinéma"
+                    ),
                     SOR("un film de Nanni Moretti"),
                     SOR("sogetto, Gaia Manzini, Nanni Moretti, Valia Santella, Chiara Valerio"),
                     SOR("sceneggiatura, Nanni Moretti, Francesco Piccolo, Valia Santanella"),
