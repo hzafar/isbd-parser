@@ -7,8 +7,7 @@ import org.junit.Test
 
 class TitleStatementTest {
 
-    private val t: TitleStatement =
-        TitleStatement()
+    private val t: TitleStatement = TitleStatement()
 
     @Test
     fun t1() {
@@ -18,8 +17,14 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Tous les matins du monde [videorecording]")),
-                parallelTitles = listOf(ParallelTitle("All the mornings of the world")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Tous les matins du monde [videorecording]"),
+                        parallelTitles = listOf(
+                            ParallelTitle("All the mornings of the world")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("Jean-Louis Livi présente"),
                     SOR("produit par Jean-Louis Livi"),
@@ -42,23 +47,27 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Belgique [sound recording]")),
-                otherInfos = listOf(OtherInfo("musique flamande")),
-                sors = listOf(SOR("het Brabants Volksorkest \"Crispijn\"")),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "België",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("Vlaamse volksmuziek")
-                        )
-                    ),
-                    ParallelTitle(
-                        title = "Belgium",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("Flemish folk music")
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Belgique [sound recording]"),
+                        otherInfo = listOf(OtherInfo("musique flamande")),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "België",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("Vlaamse volksmuziek")
+                                )
+                            ),
+                            ParallelTitle(
+                                title = "Belgium",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("Flemish folk music")
+                                )
+                            )
                         )
                     )
-                )
+                ),
+                sors = listOf(SOR("het Brabants Volksorkest \"Crispijn\""))
             )
         )
 
@@ -75,13 +84,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Mercadet")),
-                otherInfos = listOf(OtherInfo("a comedy in three acts")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Mercadet"),
+                        otherInfo = listOf(OtherInfo("a comedy in three acts")),
+                        parallelTitles = listOf(ParallelTitle("The Napoleon of finance"))
+                    )
+                ),
                 sors = listOf(
                     SOR("by Honore de Balzac"),
                     SOR("translated by Robert Cornthwaite")
-                ),
-                parallelTitles = listOf(ParallelTitle("The Napoleon of finance"))
+                )
             )
         )
 
@@ -97,8 +110,12 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Hiberniae delineatio")),
-                parallelTitles = listOf(ParallelTitle("atlas of Ireland"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Hiberniae delineatio"),
+                        parallelTitles = listOf(ParallelTitle("atlas of Ireland"))
+                    )
+                )
             )
         )
 
@@ -115,12 +132,18 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("The modern English-Nihongo dictionary")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The modern English-Nihongo dictionary"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Nihongo gakushu Ei-Nichi jiten")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("executive editor: Fumio Tamamura"),
                     SOR("executive contributor: Kakuko Shoji")
-                ),
-                parallelTitles = listOf(ParallelTitle("Nihongo gakushu Ei-Nichi jiten"))
+                )
             )
         )
 
@@ -139,13 +162,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Das grosse lehrbuch der gemüse- & früchte-schnitzerei")),
-                sors = listOf(SOR("Xiang Wang, artist")),
-                parallelTitles = listOf(
-                    ParallelTitle("The complete manual to vegetable & fruit carving"),
-                    ParallelTitle("Le grand manuel de la sculpture des légumes & des fruit"),
-                    ParallelTitle("Il grande manuale dell' intaglio di verdura & frutta")
-                )
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Das grosse lehrbuch der gemüse- & früchte-schnitzerei"),
+                        parallelTitles = listOf(
+                            ParallelTitle("The complete manual to vegetable & fruit carving"),
+                            ParallelTitle("Le grand manuel de la sculpture des légumes & des fruit"),
+                            ParallelTitle("Il grande manuale dell' intaglio di verdura & frutta")
+                        )
+                    )
+                ),
+                sors = listOf(SOR("Xiang Wang, artist"))
             )
         )
 
@@ -161,9 +188,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Overtüren")),
-                sors = listOf(SOR("Jacques Offenbach")),
-                parallelTitles = listOf(ParallelTitle("Overtures [sound recording]"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Overtüren"),
+                        parallelTitles = listOf(ParallelTitle("Overtures [sound recording]"))
+                    )
+                ),
+                sors = listOf(SOR("Jacques Offenbach"))
             )
         )
 
@@ -182,15 +213,19 @@ class TitleStatementTest {
         val expected = listOf(
             TitleStatementNode(
                 titles = listOf(
-                    Title("Die Klaviersonaten [sound recording]"),
-                    Title("Tänze"),
-                    Title("Dances")
+                    Title(
+                        titleProper = TitleProper("Die Klaviersonaten [sound recording]")
+                    ),
+                    Title(
+                        titleProper = TitleProper("Tänze"),
+                        parallelTitles = listOf(ParallelTitle("The piano sonatas"))
+                    ),
+                    Title(
+                        titleProper = TitleProper("Dances"),
+                        otherInfo = listOf(OtherInfo("complete recording"))
+                    )
                 ),
-                otherInfos = listOf(OtherInfo("complete recording")),
-                sors = listOf(SOR("Franz Schubert")),
-                parallelTitles = listOf(
-                    ParallelTitle("The piano sonatas")
-                )
+                sors = listOf(SOR("Franz Schubert"))
             )
         )
 
@@ -206,9 +241,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Russian stories")),
-                sors = listOf(SOR("edited by Gleb Struve")),
-                parallelTitles = listOf(ParallelTitle("Russkie rasskazy"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Russian stories"),
+                        parallelTitles = listOf(ParallelTitle("Russkie rasskazy"))
+                    )
+                ),
+                sors = listOf(SOR("edited by Gleb Struve"))
             )
         )
 
@@ -225,17 +264,21 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("The Mexican league")),
-                otherInfos = listOf(OtherInfo("comprehensive player statistics, 1937-2001")),
-                sors = listOf(SOR("Pedro Treto Cisneros")),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "La liga Mexicana",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("estadísticas comprensivas de los jugadores, 1937-2001")
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The Mexican league"),
+                        otherInfo = listOf(OtherInfo("comprehensive player statistics, 1937-2001")),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "La liga Mexicana",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("estadísticas comprensivas de los jugadores, 1937-2001")
+                                )
+                            )
                         )
                     )
-                )
+                ),
+                sors = listOf(SOR("Pedro Treto Cisneros"))
             )
         )
 
@@ -253,20 +296,26 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("That's not fair!")),
-                otherInfos = listOf(OtherInfo("Emma Tenayuca's struggle for justice")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("That's not fair!"),
+                        otherInfo = listOf(
+                            OtherInfo("Emma Tenayuca's struggle for justice")
+                        ),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "No es justo!",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("la lucha de Emma Tenayuca por la justicia")
+                                )
+                            )
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("written by Carmen Tafolla & Sharyll Teneyuca"),
                     SOR("illustrated by Terry Ybáñez"),
                     SOR("Spanish translation by Carmen Tafolla")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "No es justo!",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("la lucha de Emma Tenayuca por la justicia")
-                        )
-                    )
                 )
             )
         )
@@ -283,13 +332,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Chine [sound recording]")),
-                otherInfos = listOf(OtherInfo("le soleil et la lune")),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "China",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("the sun and the moon")
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Chine [sound recording]"),
+                        otherInfo = listOf(OtherInfo("le soleil et la lune")),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "China",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("the sun and the moon")
+                                )
+                            )
                         )
                     )
                 )
@@ -309,12 +362,16 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Wo he Huojin de sheng huo")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Wo he Huojin de sheng huo"),
+                        parallelTitles = listOf(ParallelTitle("Travelling to infinity"))
+                    )
+                ),
                 sors = listOf(
                     SOR("[Ying] Jian·Huojing (Jane Hawking) zhu"),
                     SOR("Zhang Jing, Wang Hanmin yi")
-                ),
-                parallelTitles = listOf(ParallelTitle("Travelling to infinity"))
+                )
             )
         )
 
@@ -331,13 +388,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Macuilli tlachtli")),
-                sors = listOf(SOR("Raziel Garcia Arroyo")),
-                parallelTitles = listOf(
-                    ParallelTitle("Cinco deportes mexicanos"),
-                    ParallelTitle("Five Mexican sports"),
-                    ParallelTitle("Cinq sports mexicains")
-                )
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Macuilli tlachtli"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Cinco deportes mexicanos"),
+                            ParallelTitle("Five Mexican sports"),
+                            ParallelTitle("Cinq sports mexicains")
+                        )
+                    )
+                ),
+                sors = listOf(SOR("Raziel Garcia Arroyo"))
             )
         )
 
@@ -354,12 +415,16 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Hands are not for hitting")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Hands are not for hitting"),
+                        parallelTitles = listOf(ParallelTitle("Las manos no son para pegar"))
+                    )
+                ),
                 sors = listOf(
                     SOR("Martine Agassi"),
                     SOR("illustrado por Marieka Heinlen")
-                ),
-                parallelTitles = listOf(ParallelTitle("Las manos no son para pegar"))
+                )
             )
         )
 
@@ -376,13 +441,19 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Hulk Hogan")),
-                otherInfos = listOf(OtherInfo("wrestling pro")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Hulk Hogan"),
+                        otherInfo = listOf(OtherInfo("wrestling pro")),
+                        parallelOtherInfo = listOf(
+                            ParallelOtherInfo("campeon de lucha libre")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("Heather Feldman"),
                     SOR("traduccion al espanol Mauricio Velazquez de Leon")
-                ),
-                parallelOtherInfos = listOf(ParallelOtherInfo("campeon de lucha libre"))
+                )
             )
         )
 
@@ -401,7 +472,11 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("The missing chancleta and other top-secret cases")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The missing chancleta and other top-secret cases")
+                    )
+                ),
                 sors = listOf(
                     SOR("by Alidis Vincente"),
                     SOR("cover and inside illustrations by Leonardo Mora")
@@ -436,22 +511,30 @@ class TitleStatementTest {
         val expected = listOf(
             TitleStatementNode(
                 titles = listOf(
-                    Title("Bilder einer Ausstellang [sound recording]"),
-                    Title("Eine Nacht auf dem kahlen Berge")
+                    Title(
+                        titleProper = TitleProper("Bilder einer Ausstellang [sound recording]"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Pictures at an exhibition"),
+                            ParallelTitle("Tableaux d'une exposition")
+                        )
+                    ),
+                    Title(
+                        titleProper = TitleProper("Eine Nacht auf dem kahlen Berge"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Night on Bald Mountain"),
+                            ParallelTitle("Une nuit sur le mont chauve")
+                        )
+                    )
                 ),
                 sors = listOf(
                     SOR("Modest Mussorgsky")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("Pictures at an exhibition"),
-                    ParallelTitle("Tableaux d'une exposition"),
-                    ParallelTitle("Night on Bald Mountain"),
-                    ParallelTitle("Une nuit sur le mont chauve")
                 )
             ),
             TitleStatementNode(
                 titles = listOf(
-                    Title("Valses nobles et sentimentales")
+                    Title(
+                        titleProper = TitleProper("Valses nobles et sentimentales")
+                    )
                 ),
                 sors = listOf(
                     SOR("Maurice Ravel")
@@ -474,20 +557,24 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("This can lick a lollipop")),
-                otherInfos = listOf(OtherInfo("body riddles for kids")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("This can lick a lollipop"),
+                        otherInfo = listOf(OtherInfo("body riddles for kids")),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "Esto gozo chupando un caramelo",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("les partes del cuerpo en adivinanzas infantiles")
+                                )
+                            )
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("English words by Joel Rothman"),
                     SOR("Spanish words by Argentica Palacios"),
                     SOR("photographs by Patricia Ruben")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "Esto gozo chupando un caramelo",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("les partes del cuerpo en adivinanzas infantiles")
-                        )
-                    )
                 )
             )
         )
@@ -504,9 +591,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("To life [sound recording]")),
-                otherInfos = listOf(OtherInfo("Jewish party")),
-                parallelTitles = listOf(ParallelTitle("Le chaim!"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("To life [sound recording]"),
+                        otherInfo = listOf(OtherInfo("Jewish party")),
+                        parallelTitles = listOf(ParallelTitle("Le chaim!"))
+                    )
+                )
             )
         )
 
@@ -522,9 +613,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Long nian dang an")),
-                sors = listOf(SOR("Ke Yunlu Zhu")),
-                parallelTitles = listOf(ParallelTitle("Dragon year file"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Long nian dang an"),
+                        parallelTitles = listOf(ParallelTitle("Dragon year file"))
+                    )
+                ),
+                sors = listOf(SOR("Ke Yunlu Zhu"))
             )
         )
 
@@ -540,8 +635,12 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Le Quai Des Brumes")),
-                parallelTitles = listOf(ParallelTitle("Port of Shadows"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Le Quai Des Brumes"),
+                        parallelTitles = listOf(ParallelTitle("Port of Shadows"))
+                    )
+                )
             )
         )
 
@@ -557,9 +656,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Hui dao can zhuo, hui dao sheng huo")),
-                sors = listOf(SOR("Cai Yingqing zhu")),
-                parallelTitles = listOf(ParallelTitle("Life"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Hui dao can zhuo, hui dao sheng huo"),
+                        parallelTitles = listOf(ParallelTitle("Life"))
+                    )
+                ),
+                sors = listOf(SOR("Cai Yingqing zhu"))
             )
         )
 
@@ -575,9 +678,14 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Spennigens land")),
-                sors = listOf(SOR("Knut Nystedt")),
-                parallelTitles = listOf(ParallelTitle("The land of suspense"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Spennigens land"),
+                        parallelTitles = listOf(ParallelTitle("The land of suspense"))
+                    )
+                ),
+                sors = listOf(SOR("Knut Nystedt"))
+
             )
         )
 
@@ -596,14 +704,18 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Atlas the gioi khu'ng long")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Atlas the gioi khu'ng long"),
+                        parallelTitles = listOf(
+                            ParallelTitle("The Usborne Internet-linked world atlas of dinosaurs")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("Thiet ke: Susanna Davidson, Stephanie Turnbull, va Rachel Firth"),
                     SOR("Minh hoa: Todd Marshall, Barry Croucher, Nelupa Hussain va Glen Bird"),
                     SOR("Nguoi dich: Viet Hoang - Viet Chung")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("The Usborne Internet-linked world atlas of dinosaurs")
                 )
             )
         )
@@ -622,19 +734,23 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Arc-en-ciel")),
-                otherInfos = listOf(OtherInfo("le plus beau poisson des océans")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Arc-en-ciel"),
+                        otherInfo = listOf(OtherInfo("le plus beau poisson des océans")),
+                        parallelTitles = listOf(
+                            ParallelTitle(
+                                title = "The rainbow fish",
+                                otherInfo = listOf(
+                                    ParallelOtherInfo("the most beautiful fish in the ocean")
+                                )
+                            )
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("Marcus Pfister"),
                     SOR("[English translation by Rosemary Lanning]")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle(
-                        title = "The rainbow fish",
-                        otherInfos = listOf(
-                            ParallelOtherInfo("the most beautiful fish in the ocean")
-                        )
-                    )
                 )
             )
         )
@@ -651,10 +767,14 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Animals")),
-                otherInfos = listOf(OtherInfo("English-Spanish")),
-                sors = listOf(SOR("[designed by Hakan Şan Borteçin]")),
-                parallelTitles = listOf(ParallelTitle("Animales"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Animals"),
+                        otherInfo = listOf(OtherInfo("English-Spanish")),
+                        parallelTitles = listOf(ParallelTitle("Animales"))
+                    )
+                ),
+                sors = listOf(SOR("[designed by Hakan Şan Borteçin]"))
             )
         )
 
@@ -672,15 +792,19 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("aal-Ghurāb al-miskīn")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("aal-Ghurāb al-miskīn"),
+                        parallelTitles = listOf(ParallelTitle("The Poor crow"))
+                    )
+                ),
                 sors = listOf(
                     SOR("ci'dād Sālim Shams al-Dīn"),
                     SOR(
                         "al-tarjamah ilá al-Inklīzīyah Shirīn al-Shammā', " +
                                 "rusūm al-fannān Nabīl Qaddūh"
                     )
-                ),
-                parallelTitles = listOf(ParallelTitle("The Poor crow"))
+                )
             )
         )
 
@@ -697,7 +821,11 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Xiao xiao xiao xiao de huo")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Xiao xiao xiao xiao de huo")
+                    )
+                ),
                 sors = listOf(
                     SOR("[Mei] Wu Qishi zhu"),
                     SOR("Sun Lu yi")
@@ -725,12 +853,16 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("A collection of Latin American folksongs")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("A collection of Latin American folksongs"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Collección de cancionces folklóricas Latinoamericanas")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("[edited] by Raquel González Paraíso and Francisco López")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("Collección de cancionces folklóricas Latinoamericanas")
                 )
             )
         )
@@ -747,9 +879,13 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Opposites")),
-                sors = listOf(SOR("[designed by Hakan Şan Borteçin]")),
-                parallelTitles = listOf(ParallelTitle("Zheng fan, English-Chinese"))
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Opposites"),
+                        parallelTitles = listOf(ParallelTitle("Zheng fan, English-Chinese"))
+                    )
+                ),
+                sors = listOf(SOR("[designed by Hakan Şan Borteçin]"))
             )
         )
 
@@ -767,13 +903,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("¿Qué hay en el cielo, querido dragón?")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("¿Qué hay en el cielo, querido dragón?"),
+                        parallelTitles = listOf(ParallelTitle("What's in the sky, dear dragon?"))
+                    )
+                ),
                 sors = listOf(
                     SOR("por/by Margaret Hillert"),
                     SOR("illustrado por/illustrated by David Schimmell"),
                     SOR("traducio por Queta Fernandez")
-                ),
-                parallelTitles = listOf(ParallelTitle("What's in the sky, dear dragon?"))
+                )
             )
         )
 
@@ -791,14 +931,18 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("¿Qué hay en el bosque, querido dragón?")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("¿Qué hay en el bosque, querido dragón?"),
+                        parallelTitles = listOf(
+                            ParallelTitle("What's in the woods, dear dragon?")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("por/by Margaret Hillert"),
                     SOR("illustrado por/illustrated by David Schimmel"),
                     SOR("traducido par Queta Fernandez")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("What's in the woods, dear dragon?")
                 )
             )
         )
@@ -817,13 +961,17 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("How will we get to the beach?")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("How will we get to the beach?"),
+                        parallelTitles = listOf(ParallelTitle("Cómo iremos a la playa?"))
+                    )
+                ),
                 sors = listOf(
                     SOR("Brigitte Luciani"),
                     SOR("illustrated by Eve Tharlet"),
                     SOR("[Spanish translation by André Antreasyan]")
-                ),
-                parallelTitles = listOf(ParallelTitle("Cómo iremos a la playa?"))
+                )
             )
         )
 
@@ -842,16 +990,20 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("The world's most beautiful libraries")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The world's most beautiful libraries"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Die schönsten Bibliotheken der Welt"),
+                            ParallelTitle("Les plus belles bibliothèques du monde")
+                        )
+                    )
+                ),
                 sors = listOf(
                     SOR("Massimo Listri"),
                     SOR("text by Georg Ruppelt & Elisabeth Sladek"),
                     SOR("English translation, Karen Williams"),
                     SOR("French translation, Aude Fondard")
-                ),
-                parallelTitles = listOf(
-                    ParallelTitle("Die schönsten Bibliotheken der Welt"),
-                    ParallelTitle("Les plus belles bibliothèques du monde")
                 )
             )
         )
@@ -874,7 +1026,12 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Mia madre")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Mia madre"),
+                        parallelTitles = listOf(ParallelTitle("My mother"))
+                    )
+                ),
                 sors = listOf(
                     SOR("Nanni Moretti, Domenico Procacci, RAI Cinema presentano"),
                     SOR(
@@ -886,8 +1043,7 @@ class TitleStatementTest {
                     SOR("sceneggiatura, Nanni Moretti, Francesco Piccolo, Valia Santanella"),
                     SOR("regia, Nanni Moretti"),
                     SOR("prodotto da Nanni Moretti e Domenico Procacci")
-                ),
-                parallelTitles = listOf(ParallelTitle("My mother"))
+                )
             )
         )
 
@@ -904,8 +1060,12 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("Howdy, honey, howdy")),
-                otherInfos = listOf(OtherInfo("illustrated with photos")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Howdy, honey, howdy"),
+                        otherInfo = listOf(OtherInfo("illustrated with photos"))
+                    )
+                ),
                 sors = listOf(
                     SOR("by Leigh Richmond Miner"),
                     SOR("decorations by Will Jenkins")
@@ -928,7 +1088,11 @@ class TitleStatementTest {
 
         val expected = listOf(
             TitleStatementNode(
-                titles = listOf(Title("The Penkovskiy papers")),
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The Penkovskiy papers")
+                    )
+                ),
                 sors = listOf(
                     SOR("by Oleg Penkovsky"),
                     SOR("introduction and commentary by Frank Gibney"),
