@@ -7,7 +7,9 @@
 isbd-parser is a Kotlin library for working with ISBD-punctutated data, using the [Autumn](https://github.com/norswap/autumn)
 context-sensitive parsing library.
 
-Documentation available here (wip): https://javadoc.io/doc/ca.voidstarzero/isbd-parser.
+See the [wiki](https://github.com/hzafar/isbd-parser/wiki) for information on getting started.
+
+Documentation available [here](https://javadoc.io/doc/ca.voidstarzero/isbd-parser).
 
 ## Maven
 
