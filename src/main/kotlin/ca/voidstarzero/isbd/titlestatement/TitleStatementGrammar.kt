@@ -216,7 +216,7 @@ abstract class TitleStatementGrammar : DSL() {
             }
         }
 
-        TitleStatementNode(titles, sors, parallelTitles, parallelSORs)
+        TitleStatement(titles, sors, parallelTitles, parallelSORs)
     }
 
     private val titleStatementList: rule = seq(titleStatement).sep(2, period)

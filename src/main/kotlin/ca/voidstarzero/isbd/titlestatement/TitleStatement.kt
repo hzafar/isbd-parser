@@ -1,7 +1,7 @@
 package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.prepare
-import ca.voidstarzero.isbd.titlestatement.ast.*
+import ca.voidstarzero.isbd.titlestatement.ast.TitleStatement
 import norswap.autumn.Autumn
 import norswap.autumn.ParseOptions
 
@@ -11,27 +11,27 @@ import norswap.autumn.ParseOptions
 class TitleStatement : TitleStatementGrammar() {
 
     /**
-     * Parses the [input] title statement string into a list of [TitleStatementNode]s.
+     * Parses the [input] title statement string into a list of [TitleStatement]s.
      *
      * @return the first parse that consumes the entire input.
      */
-    fun parse(input: String): List<TitleStatementNode> {
+    fun parse(input: String): List<TitleStatement> {
         return prepare(input)
             .map { Autumn.parse(root, it, ParseOptions.get()) }
             .firstOrNull { it.full_match }
             ?.let { result ->
-                result.value_stack.mapNotNull { it as TitleStatementNode }
+                result.value_stack.mapNotNull { it as TitleStatement }
             }
             ?: emptyList()
     }
 
     /**
-     * Parses the [input] title statement string into a list of [TitleStatementNode]s.
+     * Parses the [input] title statement string into a list of [TitleStatement]s.
      *
      * @return the first parse that consumes the entire input and is likely to
      * be a correct parse. See [goodParse] for details.
      */
-    fun parseHeuristically(input: String): List<TitleStatementNode> {
+    fun parseHeuristically(input: String): List<TitleStatement> {
         return parseAll(input).firstOrNull { goodParse(it) } ?: emptyList()
     }
 
@@ -39,12 +39,12 @@ class TitleStatement : TitleStatementGrammar() {
      *
      * @return all parses that consume the entire input.
      */
-    fun parseAll(input: String): List<List<TitleStatementNode>> {
+    fun parseAll(input: String): List<List<TitleStatement>> {
         return prepare(input)
             .map { Autumn.parse(root, it, ParseOptions.get()) }
             .filter { it.full_match }
             .map { result ->
-                result.value_stack.mapNotNull { it as TitleStatementNode }
+                result.value_stack.mapNotNull { it as TitleStatement }
             }
     }
 }
