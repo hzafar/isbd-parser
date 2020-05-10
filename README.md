@@ -25,7 +25,7 @@ Documentation available [here](https://javadoc.io/doc/ca.voidstarzero/isbd-parse
 <dependency>
   <groupId>ca.voidstarzero</groupId>
   <artifactId>isbd-parser</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    implementation "ca.voidstarzero:isbd-parser:0.1.0"
+    implementation "ca.voidstarzero:isbd-parser:1.0.0"
 }
 ```
 
