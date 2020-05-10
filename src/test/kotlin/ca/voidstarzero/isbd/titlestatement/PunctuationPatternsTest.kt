@@ -16,7 +16,7 @@ class PunctuationPatternsTest {
         val pattern = "Title proper"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper")
@@ -36,7 +36,7 @@ class PunctuationPatternsTest {
         val pattern = "Title proper : other title information"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -57,7 +57,7 @@ class PunctuationPatternsTest {
         val pattern = "Title proper = Parallel title"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -78,7 +78,7 @@ class PunctuationPatternsTest {
         val pattern = "Title proper = Parallel title : other title information"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -101,7 +101,7 @@ class PunctuationPatternsTest {
                 " = Parallel title : parallel other title information"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -131,7 +131,7 @@ class PunctuationPatternsTest {
                 " = parallel other title information"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -155,7 +155,7 @@ class PunctuationPatternsTest {
         val pattern = "Title proper / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper")
@@ -177,7 +177,7 @@ class PunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -200,7 +200,7 @@ class PunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -226,7 +226,7 @@ class PunctuationPatternsTest {
                 " : other title information 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper"),
@@ -252,7 +252,7 @@ class PunctuationPatternsTest {
                 " = parallel statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper")
@@ -277,7 +277,7 @@ class PunctuationPatternsTest {
                 " = Parallel title / parallel statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper")
@@ -308,7 +308,7 @@ class PunctuationPatternsTest {
                 " ; third statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title proper")
@@ -334,7 +334,7 @@ class PunctuationPatternsTest {
                 " / statement of responsibility 2"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title 1")
@@ -342,7 +342,7 @@ class PunctuationPatternsTest {
                 ),
                 sors = listOf(SOR("statement of responsibility 1"))
             ),
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title 2")
@@ -363,7 +363,7 @@ class PunctuationPatternsTest {
         val pattern = "Title 1 ; Title 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title 1")
@@ -388,7 +388,7 @@ class PunctuationPatternsTest {
                 " : other title information 2 / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title 1"),
@@ -416,7 +416,7 @@ class PunctuationPatternsTest {
                 " / statement of responsibility"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Title 1"),

@@ -1,7 +1,7 @@
 package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.titlestatement.ast.*
-import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Test
 
 class PeriodsTest {
@@ -15,7 +15,7 @@ class PeriodsTest {
                 "Villa-Lobos ; arr. for 2 pianos, 4 hands by Arthur Whittemore and Jack Lowe."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Moreninha"),
@@ -32,8 +32,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -43,7 +43,7 @@ class PeriodsTest {
                 "no. 6 / Jean Baptiste (John) Loeillet ; hrsg. von Hugo Ruf."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Sonate d-moll"),
@@ -54,8 +54,10 @@ class PeriodsTest {
                             ParallelTitle(
                                 title = "Sonata D minor",
                                 otherInfo = listOf(
-                                    ParallelOtherInfo("for treble recorder (flute) and basso " +
-                                            "continuo, opus III, no 6")
+                                    ParallelOtherInfo(
+                                        "for treble recorder (flute) and basso " +
+                                                "continuo, opus III, no 6"
+                                    )
                                 )
                             )
                         )
@@ -70,8 +72,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -79,7 +81,7 @@ class PeriodsTest {
         val title = "A source book in theatrical history = Sources of theatrical history / by A. M. Nagler."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("A source book in theatrical history"),
@@ -92,8 +94,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -101,7 +103,7 @@ class PeriodsTest {
         val title = "Perrazo y Perrito = Big Dog and Little Dog / Dav Pilkey ; traducido por Carlos E. Calvo."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Perrazo y Perrito"),
@@ -117,8 +119,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -127,7 +129,7 @@ class PeriodsTest {
                 " / Johann Sebastian Bach."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Das Kantatenwerk Vol 34 [sound recording]"),
@@ -140,8 +142,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -150,7 +152,7 @@ class PeriodsTest {
                 " / [by] G. E. Kidder Smith."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The new churches of Europe"),
@@ -163,8 +165,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -173,7 +175,7 @@ class PeriodsTest {
                 " / Steven Antony ; translated by J.P. Lombana."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Good night, Mr Panda"),
@@ -189,8 +191,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -200,7 +202,7 @@ class PeriodsTest {
                 "de Eric Carle ; translation by/traducción de Teresa Mlawer."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Brown bear, brown bear, what do you see?"),
@@ -219,8 +221,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -235,7 +237,7 @@ class PeriodsTest {
                 "Carlos Tripoldi]."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Crosscurrents of modernism"),
@@ -248,8 +250,10 @@ class PeriodsTest {
                                 title = "Intercambios del modernismo",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("cuatro precursores latinoamericanos"),
-                                    ParallelOtherInfo("Diego Rivera, Joaquin Torres-Garcia, " +
-                                            "Wifredo Lam, Matta")
+                                    ParallelOtherInfo(
+                                        "Diego Rivera, Joaquin Torres-Garcia, " +
+                                                "Wifredo Lam, Matta"
+                                    )
                                 )
                             )
                         )
@@ -268,8 +272,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -278,7 +282,7 @@ class PeriodsTest {
                 "introduction by Bernard M. Dulsey ; foreword by J. Cary Davis."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Huasipungo"),
@@ -295,8 +299,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -305,13 +309,15 @@ class PeriodsTest {
                 "tselnoshchupikovych / S. G. Lepneva ; translated from Russian."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Larvae and pupae of Integripalpia"),
                         parallelTitles = listOf(
-                            ParallelTitle("Lichinki i kukolki podotryada " +
-                                    "tselnoshchupikovych")
+                            ParallelTitle(
+                                "Lichinki i kukolki podotryada " +
+                                        "tselnoshchupikovych"
+                            )
                         )
                     )
                 ),
@@ -324,8 +330,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -335,14 +341,16 @@ class PeriodsTest {
                 "of the fingers : op. 7 / Otakar Sevcik ; edited by Louis Svencenski."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Preparatory trill studies"),
                         otherInfo = listOf(
                             OtherInfo("for the violin"),
-                            OtherInfo("for developing the touch and strength " +
-                                    "and surety of the fingers"),
+                            OtherInfo(
+                                "for developing the touch and strength " +
+                                        "and surety of the fingers"
+                            ),
                             OtherInfo("op 7")
                         ),
                         parallelTitles = listOf(ParallelTitle("Estudios preparatorios de trinos"))
@@ -357,8 +365,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -368,7 +376,7 @@ class PeriodsTest {
                 "Winternitz]."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Folk songs"),
@@ -387,8 +395,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -396,7 +404,7 @@ class PeriodsTest {
         val title = "Thank you, Mr. Panda = Gracias, Sr. Panda / Steve Antony."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Thank you, Mr Panda"),
@@ -409,8 +417,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -420,7 +428,7 @@ class PeriodsTest {
                 "Ariane / Roussel."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("La mer [sound recording]")
@@ -428,7 +436,7 @@ class PeriodsTest {
                 ),
                 sors = listOf(SOR("Debussy"))
             ),
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Valses nobles et sentimentales")
@@ -439,7 +447,7 @@ class PeriodsTest {
                 ),
                 sors = listOf(SOR("Ravel"))
             ),
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Suite no 2 from Bacchus et Ariane")
@@ -449,11 +457,10 @@ class PeriodsTest {
             )
         )
 
-        //val result = t.parseHeuristically(title)
+        val result = t.parseHeuristically(title)
 
-        //Assert.assertNotNull(result)
-        //Assert.assertEquals(expected, result)
-        println(t.parseAll(title))
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -463,7 +470,7 @@ class PeriodsTest {
                 "and edited by A. Eaglefield-Hull."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Beethoven's letters")
@@ -479,8 +486,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -489,7 +496,7 @@ class PeriodsTest {
                 "by Even King [pseud.] ; sketches by Cyrus LeRoy Baldridge."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Rickshaw boy")
@@ -505,8 +512,8 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 
     @Test
@@ -516,7 +523,7 @@ class PeriodsTest {
                 "Cohn and Maude D. Petre."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Joyful wisdom")
@@ -532,7 +539,442 @@ class PeriodsTest {
 
         val result = t.parse(title)
 
-        Assert.assertNotNull(result)
-        Assert.assertEquals(expected, result)
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t19() {
+        val title = "New encyclopedia of philosophy / J. Grooten & G. Jo Steenbergen" +
+                " ; with the cooperation of K. L. Bellon [and others] ; Translated from " +
+                "the Dutch, edited & rev. by Edmond van den Bossche."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("New encyclopedia of philosophy")
+                    )
+                ),
+                sors = listOf(
+                    SOR("J Grooten & G Jo Steenbergen"),
+                    SOR("with the cooperation of K L Bellon [and others]"),
+                    SOR(
+                        "Translated from the Dutch, edited & rev by Edmond " +
+                                "van den Bossche"
+                    )
+                )
+            )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t20() {
+        val title = "Redes / Revueltas. Concerto grosso for string quartet and orchestra" +
+                " / Orbon. Sense maya / Revueltas. Pampeana no. 3 / Ginastera [sound recording]."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Redes")
+                    )
+                ),
+                sors = listOf(SOR("Revueltas"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Concerto grosso for string quartet and orchestra")
+                    )
+                ),
+                sors = listOf(SOR("Orbon"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Sense maya")
+                    )
+                ),
+                sors = listOf(SOR("Revueltas"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Pampeana no 3")
+                    )
+                ),
+                sors = listOf(
+                    SOR("Ginastera [sound recording]")
+                )
+            )
+        )
+
+        val result = t.parseHeuristically(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t21() {
+        val title = "Violin concerto [sound recording] / Sibelius. Violin concerto no. 2" +
+                " / Prokofiev. Violin concerto / Glazunov."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Violin concerto [sound recording]")
+                    )
+                ),
+                sors = listOf(SOR("Sibelius"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Violin concerto no 2")
+                    )
+                ),
+                sors = listOf(SOR("Prokofiev"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Violin concerto")
+                    )
+                ),
+                sors = listOf(SOR("Glazunov"))
+            )
+        )
+
+        val result = t.parseHeuristically(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t22() {
+        val title = "Trio for violin, cello, and piano, in D minor, op. 11 (posth.)" +
+                " / Fanny Mendelssohn. Tarantella, op. 6 / Saint-Saens. Paganiniana" +
+                " / Arr. [by] Elayakim Taussig [sound recording]."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Trio for violin, cello, and " +
+                                "piano, in D minor, op 11 (posth)")
+                    )
+                ),
+                sors = listOf(SOR("Fanny Mendelssohn"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Tarantella, op 6")
+                    )
+                ),
+                sors = listOf(SOR("Saint-Saens"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Paganiniana")
+                    )
+                ),
+                sors = listOf(SOR("Arr [by] Elayakim Taussig [sound recording]"))
+            )
+        )
+
+        val result = t.parseHeuristically(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t23() {
+        val title = "The Johannine epistles : a commentary on the Johannine epistles" +
+                " / by Rudolph Bultmann ; translated by R. Philip O'Hara with Lane C. " +
+                "McGaughy and Robert Funk ; edited by Robert W. Funk."
+        
+          val expected = listOf(
+              TitleStatement(
+                  titles = listOf(
+                      Title(
+                          titleProper = TitleProper("The Johannine epistles"),
+                          otherInfo = listOf(
+                              OtherInfo("a commentary on the Johannine epistles")
+                          )
+                      )
+                  ),
+                  sors = listOf(
+                      SOR("by Rudolph Bultmann"),
+                      SOR("translated by R Philip O'Hara with Lane C " +
+                              "McGaughy and Robert Funk"),
+                      SOR("edited by Robert W Funk")
+                  )
+              )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t24() {
+        val title = "Rhapsody in blue [sound recording] ; An American in Paris / Gershwin." +
+                " Grand Canyon suite / Grofé. Prelude, fugue and riffs / Leonard Bernstein."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Rhapsody in blue [sound recording]")
+                    ),
+                    Title(
+                        titleProper = TitleProper("An American in Paris")
+                    )
+                ),
+                sors = listOf(SOR("Gershwin"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Grand Canyon suite")
+                    )
+                ),
+                sors = listOf(SOR("Grofé"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Prelude, fugue and riffs")
+                    )
+                ),
+                sors = listOf(SOR("Leonard Bernstein"))
+            )
+        )
+
+        val result = t.parse(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t25() {
+        val title = "Russian-German settlements in the United States / Richard Sallet" +
+                " ; translated by LaVern J. Rippley and Armand Bauer. Place names of " +
+                "German colonies in Russia and the Dobrudja / by Armand Bauer. Prairie " +
+                "architecture of the Russian-German settlers / by William C. Sherman."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Russian-German settlements in the United States")
+                    )
+                ),
+                sors = listOf(
+                    SOR("Richard Sallet"),
+                    SOR("translated by LaVern J Rippley and Armand Bauer")
+                )
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Place names of German " +
+                                "colonies in Russia and the Dobrudja")
+                    )
+                ),
+                sors = listOf(SOR("by Armand Bauer"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Prairie architecture of " +
+                                "the Russian-German settlers")
+                    )
+                ),
+                sors = listOf(SOR("by William C Sherman"))
+            )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t26() {
+        val title = "Guernica, Pablo Picasso / text by Juan Larrea ; Tr. by Alexander H. " +
+                "Krappe and ed. by Walter Pach ; Introd. by Alfred H. Barr, Jr."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Guernica, Pablo Picasso")
+                    )
+                ),
+                sors = listOf(
+                    SOR("text by Juan Larrea"),
+                    SOR("Tr by Alexander H Krappe and ed by Walter Pach"),
+                    SOR("Introd by Alfred H Barr, Jr")
+                )
+            )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t27() {
+        val title = "String quartet op. 10 [sound recording] / Claude Debussy. String " +
+                "Quartet / Maurice Ravel."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("String quartet op 10 [sound recording]")
+                    )
+                ),
+                sors = listOf(SOR("Claude Debussy"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("String Quartet")
+                    )
+                ),
+                sors = listOf(SOR("Maurice Ravel"))
+            )
+        )
+
+        val result = t.parseHeuristically(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t28() {
+        val title = "Agents of S.H.I.E.L.D. The complete first season / an ABC Studios " +
+                "production ; producers, Lauren LeFranc, Rafe Judkins ; executive producer, " +
+                "Jeffrey Bell ; executive producers, Maurissa Tancharoen, Jed Whedon ; executive " +
+                "producer, Joss Whedon ; produced by Garry A. Brown ; created by Joss Whedon, " +
+                "Jed Whedon, Maurissa Tancharoen ; producer, Samantha Thomas ; Mutant Enemy, Inc."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Agents of SHIELD The complete first season")
+                    )
+                ),
+                sors = listOf(
+                    SOR("an ABC Studios production"),
+                    SOR("producers, Lauren LeFranc, Rafe Judkins"),
+                    SOR("executive producer, Jeffrey Bell"),
+                    SOR("executive producers, Maurissa Tancharoen, Jed Whedon"),
+                    SOR("executive producer, Joss Whedon"),
+                    SOR("produced by Garry A Brown"),
+                    SOR("created by Joss Whedon, Jed Whedon, Maurissa Tancharoen"),
+                    SOR("producer, Samantha Thomas"),
+                    SOR("Mutant Enemy, Inc")
+                )
+            )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t29() {
+        val title = "Adventure time. [12], Thunder road / created by Pendleton Ward ; written " +
+                "by Jeremy Sorese ; illustrated by Zachary Sterling ; colors by Laura Langston" +
+                " ; letters by Mike Fiorentino."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Adventure time [12], Thunder road")
+                    )
+                ),
+                sors = listOf(
+                    SOR("created by Pendleton Ward"),
+                    SOR("written by Jeremy Sorese"),
+                    SOR("illustrated by Zachary Sterling"),
+                    SOR("colors by Laura Langston"),
+                    SOR("letters by Mike Fiorentino")
+                )
+            )
+        )
+
+        val result = t.parseAll(title)
+
+        assertTrue(result.isNotEmpty())
+        assertTrue(result.contains(expected))
+    }
+
+    @Test
+    fun t30() {
+        val title = "Three Irish plays : The moon in the Yellow River / [by] Denis " +
+                "Johnston. The iron harp / Joseph O'Conor. Step-in-the-hollow / Donagh " +
+                "MacDonagh."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Three Irish plays"),
+                        otherInfo = listOf(
+                            OtherInfo("The moon in the Yellow River")
+                        )
+                    )
+                ),
+                sors = listOf(SOR("[by] Denis Johnston"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("The iron harp")
+                    )
+                ),
+                sors = listOf(SOR("Joseph O'Conor"))
+            ),
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Step-in-the-hollow")
+                    )
+                ),
+                sors = listOf(SOR("Donagh MacDonagh"))
+            )
+        )
+
+        val result = t.parse(title)
+
+        assertTrue(result.isNotEmpty())
+        assertEquals(expected, result)
     }
 }

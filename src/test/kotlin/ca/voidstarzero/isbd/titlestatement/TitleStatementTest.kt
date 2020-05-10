@@ -16,7 +16,7 @@ class TitleStatementTest {
                 " ; produit par Jean-Louis Livi ; un film de Alain Corneau."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Tous les matins du monde [videorecording]"),
@@ -46,7 +46,7 @@ class TitleStatementTest {
                 "het Brabants Volksorkest \"Crispijn\"."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Belgique [sound recording]"),
@@ -83,7 +83,7 @@ class TitleStatementTest {
                 "by Honore de Balzac ; translated by Robert Cornthwaite."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Mercadet"),
@@ -109,7 +109,7 @@ class TitleStatementTest {
         val title = "Hiberniae delineatio = atlas of Ireland."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Hiberniae delineatio"),
@@ -131,7 +131,7 @@ class TitleStatementTest {
                 "executive editor: Fumio Tamamura ; executive contributor: Kakuko Shoji."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The modern English-Nihongo dictionary"),
@@ -161,7 +161,7 @@ class TitleStatementTest {
                 "Xiang Wang, artist."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Das grosse lehrbuch der gemüse- & früchte-schnitzerei"),
@@ -187,7 +187,7 @@ class TitleStatementTest {
         val title = "Overtüren = Overtures [sound recording] / Jacques Offenbach."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Overtüren"),
@@ -211,7 +211,7 @@ class TitleStatementTest {
                 "Dances : complete recording / Franz Schubert."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Die Klaviersonaten [sound recording]")
@@ -240,7 +240,7 @@ class TitleStatementTest {
         val title = "Russian stories = Russkie rasskazy / edited by Gleb Struve."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Russian stories"),
@@ -263,7 +263,7 @@ class TitleStatementTest {
                 "Mexicana : estadísticas comprensivas de los jugadores, 1937-2001 / Pedro Treto Cisneros."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The Mexican league"),
@@ -295,7 +295,7 @@ class TitleStatementTest {
                 "Teneyuca ; illustrated by Terry Ybáñez ; Spanish translation by Carmen Tafolla."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("That's not fair!"),
@@ -331,7 +331,7 @@ class TitleStatementTest {
         val title = "Chine [sound recording] : le soleil et la lune = China : the sun and the moon."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Chine [sound recording]"),
@@ -361,7 +361,7 @@ class TitleStatementTest {
                 "Jian·Huojing (Jane Hawking) zhu ; Zhang Jing, Wang Hanmin yi."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Wo he Huojin de sheng huo"),
@@ -387,7 +387,7 @@ class TitleStatementTest {
                 " = Cinq sports mexicains / Raziel Garcia Arroyo."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Macuilli tlachtli"),
@@ -414,7 +414,7 @@ class TitleStatementTest {
                 "Agassi ; illustrado por Marieka Heinlen."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Hands are not for hitting"),
@@ -440,7 +440,7 @@ class TitleStatementTest {
                 "Feldman ; traduccion al espanol Mauricio Velazquez de Leon."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Hulk Hogan"),
@@ -471,7 +471,7 @@ class TitleStatementTest {
                 "Baeza Ventura ; ilustraciones de Leonardo Mora."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The missing chancleta and other top-secret cases")
@@ -509,7 +509,7 @@ class TitleStatementTest {
                 "Ravel."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Bilder einer Ausstellang [sound recording]"),
@@ -530,7 +530,7 @@ class TitleStatementTest {
                     SOR("Modest Mussorgsky")
                 )
             ),
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Valses nobles et sentimentales")
@@ -556,7 +556,7 @@ class TitleStatementTest {
                 " ; photographs by Patricia Ruben."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("This can lick a lollipop"),
@@ -590,7 +590,7 @@ class TitleStatementTest {
         val title = "To life [sound recording] = Le chaim! : Jewish party."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("To life [sound recording]"),
@@ -612,7 +612,7 @@ class TitleStatementTest {
         val title = "Long nian dang an = Dragon year file / Ke Yunlu Zhu."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Long nian dang an"),
@@ -634,7 +634,7 @@ class TitleStatementTest {
         val title = "Le Quai Des Brumes = Port of Shadows"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Le Quai Des Brumes"),
@@ -655,7 +655,7 @@ class TitleStatementTest {
         val title = "Hui dao can zhuo, hui dao sheng huo = Life / Cai Yingqing zhu."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Hui dao can zhuo, hui dao sheng huo"),
@@ -677,7 +677,7 @@ class TitleStatementTest {
         val title = "Spennigens land = The land of suspense / Knut Nystedt."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Spennigens land"),
@@ -703,7 +703,7 @@ class TitleStatementTest {
                 "Hussain va Glen Bird ; Nguoi dich: Viet Hoang - Viet Chung."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Atlas the gioi khu'ng long"),
@@ -733,7 +733,7 @@ class TitleStatementTest {
                 " ; [English translation by Rosemary Lanning]"
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Arc-en-ciel"),
@@ -766,7 +766,7 @@ class TitleStatementTest {
         val title = "Animals = Animales : English-Spanish / [designed by Hakan Şan Borteçin]."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Animals"),
@@ -791,7 +791,7 @@ class TitleStatementTest {
                 "Nabīl Qaddūh."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("aal-Ghurāb al-miskīn"),
@@ -820,7 +820,7 @@ class TitleStatementTest {
                 " ; Sun Lu yi = Little fires everywhere / Celeste Ng."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Xiao xiao xiao xiao de huo")
@@ -852,7 +852,7 @@ class TitleStatementTest {
                 "González Paraíso and Francisco López."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("A collection of Latin American folksongs"),
@@ -878,7 +878,7 @@ class TitleStatementTest {
         val title = "Opposites = Zheng fan, English-Chinese / [designed by Hakan Şan Borteçin]."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Opposites"),
@@ -902,7 +902,7 @@ class TitleStatementTest {
                 " ; traducio por Queta Fernandez."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("¿Qué hay en el cielo, querido dragón?"),
@@ -930,7 +930,7 @@ class TitleStatementTest {
                 "by David Schimmel ; traducido par Queta Fernandez."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("¿Qué hay en el bosque, querido dragón?"),
@@ -960,7 +960,7 @@ class TitleStatementTest {
                 "translation by André Antreasyan]."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("How will we get to the beach?"),
@@ -989,7 +989,7 @@ class TitleStatementTest {
                 "Williams ; French translation, Aude Fondard."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The world's most beautiful libraries"),
@@ -1025,7 +1025,7 @@ class TitleStatementTest {
                 "Domenico Procacci."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Mia madre"),
@@ -1059,7 +1059,7 @@ class TitleStatementTest {
                 "Richmond Miner ; decorations by Will Jenkins."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("Howdy, honey, howdy"),
@@ -1087,7 +1087,7 @@ class TitleStatementTest {
                 " ; translated by Peter Deriabin."
 
         val expected = listOf(
-            TitleStatementNode(
+            TitleStatement(
                 titles = listOf(
                     Title(
                         titleProper = TitleProper("The Penkovskiy papers")
@@ -1106,5 +1106,26 @@ class TitleStatementTest {
 
         assertNotNull(result)
         assertEquals(expected, result)
+    }
+
+    @Test
+    fun t39() {
+        val title = "Under the green star / by Lin Carter ; illustrated by Tim Kirk" +
+                " ; With an epilogue by the author on the \"Burroughs tradition\"."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("Under the green star")
+                    )
+                ),
+                sors = listOf(
+                    SOR("by Lin Carter"),
+                    SOR("illustrated by Tim Kirk"),
+                    SOR("With an epilogue by the author on the \"Burroughs tradition\"")
+                )
+            )
+        )
     }
 }
