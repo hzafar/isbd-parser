@@ -8,8 +8,8 @@ import org.junit.Test
 
 class PunctuationPatternsTest {
 
-    private val t: TitleStatement =
-        TitleStatement()
+    private val t: TitleStatementParser =
+        TitleStatementParser()
 
     @Test
     fun p1() {

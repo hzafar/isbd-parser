@@ -3,11 +3,12 @@ package ca.voidstarzero.isbd.titlestatement
 import ca.voidstarzero.isbd.titlestatement.ast.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Ignore
 import org.junit.Test
 
-class TitleStatementTest {
+class TitleStatementParserTest {
 
-    private val t: TitleStatement = TitleStatement()
+    private val t: TitleStatementParser = TitleStatementParser()
 
     @Test
     fun t1() {
@@ -501,51 +502,17 @@ class TitleStatementTest {
     }
 
     @Test
+    @Ignore
     fun t18() {
-        val title = "Bilder einer Ausstellang [sound recording] = Pictures " +
-                "at an exhibition = Tableaux d'une exposition ; Eine Nacht auf " +
-                "dem kahlen Berge = Night on Bald Mountain = Une nuit sur le mont " +
-                "chauve / Modest Mussorgsky. Valses nobles et sentimentales / Maurice " +
-                "Ravel."
+        val title = "The royals. The slings and arrows of outrageous fortune / E! Entertainment Television."
 
-        val expected = listOf(
-            TitleStatement(
-                titles = listOf(
-                    Title(
-                        titleProper = TitleProper("Bilder einer Ausstellang [sound recording]"),
-                        parallelTitles = listOf(
-                            ParallelTitle("Pictures at an exhibition"),
-                            ParallelTitle("Tableaux d'une exposition")
-                        )
-                    ),
-                    Title(
-                        titleProper = TitleProper("Eine Nacht auf dem kahlen Berge"),
-                        parallelTitles = listOf(
-                            ParallelTitle("Night on Bald Mountain"),
-                            ParallelTitle("Une nuit sur le mont chauve")
-                        )
-                    )
-                ),
-                sors = listOf(
-                    SOR("Modest Mussorgsky")
-                )
-            ),
-            TitleStatement(
-                titles = listOf(
-                    Title(
-                        titleProper = TitleProper("Valses nobles et sentimentales")
-                    )
-                ),
-                sors = listOf(
-                    SOR("Maurice Ravel")
-                )
-            )
-        )
+        val expected = TODO()
 
         val result = t.parse(title)
 
         assertNotNull(result)
         assertEquals(expected, result)
+
     }
 
     @Test
@@ -1127,5 +1094,38 @@ class TitleStatementTest {
                 )
             )
         )
+
+        val result = t.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t40() {
+        val title = "3 symphonies [sound recording] ; The rock = Der Fels = Le rocher / Serge Rachmaninoff."
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Title(
+                        titleProper = TitleProper("3 symphonies [sound recording]")
+                    ),
+                    Title(
+                        titleProper = TitleProper("The rock"),
+                        parallelTitles = listOf(
+                            ParallelTitle("Der Fels"),
+                            ParallelTitle("Le rocher")
+                        )
+                    )
+                ),
+                sors = listOf(SOR("Serge Rachmaninoff"))
+            )
+        )
+
+        val result = t.parse(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
     }
 }
