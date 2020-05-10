@@ -93,8 +93,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    implementation 'com.github.norswap:autumn:80abd5c207'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    compile 'com.github.norswap:autumn:80abd5c207'
     testCompile 'junit:junit:4.12'
 }
 
