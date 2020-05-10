@@ -1,5 +1,12 @@
 package ca.voidstarzero.isbd.titlestatement.ast
 
+/**
+ * Class containing a parsed parallel title.
+ *
+ * @property title the parallel title string.
+ * @property otherInfo a list of parallel other title information strings, if present.
+ * @property sors a list of parallel statements of responsibility, if present.
+ */
 data class ParallelTitle(
     val title: String,
     val otherInfo: List<ParallelOtherInfo> = emptyList(),

@@ -8,7 +8,7 @@ import norswap.autumn.ParseOptions
 /**
  * Parser class for title statements.
  */
-class TitleStatement : TitleStatementGrammar() {
+class TitleStatementParser : TitleStatementGrammar() {
 
     /**
      * Parses the [input] title statement string into a list of [TitleStatement]s.

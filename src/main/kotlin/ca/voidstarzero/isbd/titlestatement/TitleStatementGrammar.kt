@@ -185,7 +185,7 @@ abstract class TitleStatementGrammar : DSL() {
             }
         }
 
-        Title(titleProper, otherInfos, parallelOtherInfos, parallelTitles)
+        Title(titleProper, otherInfos, parallelTitles, parallelOtherInfos)
     }
 
     private val titleList: rule = seq(title).sep(1, semicolon)
