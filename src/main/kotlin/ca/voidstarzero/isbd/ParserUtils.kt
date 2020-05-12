@@ -1,11 +1,12 @@
 package ca.voidstarzero.isbd
 
 fun prepare(input: String): List<String> {
+    val REPLACE = 0xfffd.toChar()
     val cleanedInput = input
-        .replace(" = ", "_=_")
-        .replace(" : ", "_:_")
-        .replace(" / ", "_/_")
-        .replace(" ; ", "_;_")
+        .replace(" = ", "$REPLACE=$REPLACE")
+        .replace(" : ", "$REPLACE:$REPLACE")
+        .replace(" / ", "$REPLACE/$REPLACE")
+        .replace(" ; ", "$REPLACE;$REPLACE")
         .removeSuffix(".")
         .trim()
 

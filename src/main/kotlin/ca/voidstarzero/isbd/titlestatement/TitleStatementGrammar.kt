@@ -10,10 +10,12 @@ abstract class TitleStatementGrammar : DSL() {
 
     val store: ParseState<TitleParseContext> = ParseState(TitleStatementGrammar::class, ::TitleParseContext)
 
+    private val REPLACE = 0xfffd.toChar()
+
     private val colon = rule(
         object : AbstractForwarding(
             "colon",
-            str("_:_")
+            str("$REPLACE:$REPLACE")
                 .collect().action_with_string { parse, _, _ ->
                     parse.log.apply {
                         val context = store.data(parse)
@@ -30,7 +32,7 @@ abstract class TitleStatementGrammar : DSL() {
     private val slash = rule(
         object : AbstractForwarding(
             "slash",
-            str("_/_")
+            str("$REPLACE/$REPLACE")
                 .collect().action_with_string { parse, _, _ ->
                     parse.log.apply {
                         val context = store.data(parse)
@@ -44,12 +46,13 @@ abstract class TitleStatementGrammar : DSL() {
         ) {}
     )
 
-    private val equalSign: rule = str("_=_")
-    private val semicolon: rule = str("_;_")
+    private val equalSign: rule = str("$REPLACE=$REPLACE")
+    private val semicolon: rule = str("$REPLACE;$REPLACE")
     private val period: rule = str(". ")
+    private val comma: rule = str(", ")
 
     private val char = rule(CharPredicate("char") {
-        it !in listOf('\u0000', '_', ' ', '.', '\t', '\n', '\r').map(Char::toInt)
+        it !in listOf(REPLACE, '\u0000', ' ', '.', '\t', '\n', '\r').map(Char::toInt)
     })
 
     private val data: rule = char.at_least(1).sep(0, usual_whitespace)
