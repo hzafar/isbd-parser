@@ -22,6 +22,7 @@ task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn dokka
     from("$buildDir/dokka/isbd-parser")
+    from("$buildDir/dokka/style.css")
 }
 
 publishing {
