@@ -8,7 +8,7 @@ import org.junit.Test
 
 class TitleStatementParserTest {
 
-    private val t: TitleStatementParser = TitleStatementParser()
+    private val t = TitleStatementParser()
 
     @Test
     fun t1() {
@@ -19,10 +19,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Tous les matins du monde [videorecording]"),
                         parallelTitles = listOf(
-                            ParallelTitle("All the mornings of the world")
+                            ParallelMonograph("All the mornings of the world")
                         )
                     )
                 ),
@@ -49,17 +49,17 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Belgique [sound recording]"),
                         otherInfo = listOf(OtherInfo("musique flamande")),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "België",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("Vlaamse volksmuziek")
                                 )
                             ),
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "Belgium",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("Flemish folk music")
@@ -86,10 +86,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Mercadet"),
                         otherInfo = listOf(OtherInfo("a comedy in three acts")),
-                        parallelTitles = listOf(ParallelTitle("The Napoleon of finance"))
+                        parallelTitles = listOf(ParallelMonograph("The Napoleon of finance"))
                     )
                 ),
                 sors = listOf(
@@ -112,9 +112,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Hiberniae delineatio"),
-                        parallelTitles = listOf(ParallelTitle("atlas of Ireland"))
+                        parallelTitles = listOf(ParallelMonograph("atlas of Ireland"))
                     )
                 )
             )
@@ -134,10 +134,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The modern English-Nihongo dictionary"),
                         parallelTitles = listOf(
-                            ParallelTitle("Nihongo gakushu Ei-Nichi jiten")
+                            ParallelMonograph("Nihongo gakushu Ei-Nichi jiten")
                         )
                     )
                 ),
@@ -164,12 +164,12 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Das grosse lehrbuch der gemüse- & früchte-schnitzerei"),
                         parallelTitles = listOf(
-                            ParallelTitle("The complete manual to vegetable & fruit carving"),
-                            ParallelTitle("Le grand manuel de la sculpture des légumes & des fruit"),
-                            ParallelTitle("Il grande manuale dell' intaglio di verdura & frutta")
+                            ParallelMonograph("The complete manual to vegetable & fruit carving"),
+                            ParallelMonograph("Le grand manuel de la sculpture des légumes & des fruit"),
+                            ParallelMonograph("Il grande manuale dell' intaglio di verdura & frutta")
                         )
                     )
                 ),
@@ -190,9 +190,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Overtüren"),
-                        parallelTitles = listOf(ParallelTitle("Overtures [sound recording]"))
+                        parallelTitles = listOf(ParallelMonograph("Overtures [sound recording]"))
                     )
                 ),
                 sors = listOf(SOR("Jacques Offenbach"))
@@ -214,14 +214,14 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Die Klaviersonaten [sound recording]")
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Tänze"),
-                        parallelTitles = listOf(ParallelTitle("The piano sonatas"))
+                        parallelTitles = listOf(ParallelMonograph("The piano sonatas"))
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Dances"),
                         otherInfo = listOf(OtherInfo("complete recording"))
                     )
@@ -243,9 +243,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Russian stories"),
-                        parallelTitles = listOf(ParallelTitle("Russkie rasskazy"))
+                        parallelTitles = listOf(ParallelMonograph("Russkie rasskazy"))
                     )
                 ),
                 sors = listOf(SOR("edited by Gleb Struve"))
@@ -266,11 +266,11 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The Mexican league"),
                         otherInfo = listOf(OtherInfo("comprehensive player statistics, 1937-2001")),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "La liga Mexicana",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("estadísticas comprensivas de los jugadores, 1937-2001")
@@ -298,13 +298,13 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("That's not fair!"),
                         otherInfo = listOf(
                             OtherInfo("Emma Tenayuca's struggle for justice")
                         ),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "No es justo!",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("la lucha de Emma Tenayuca por la justicia")
@@ -334,11 +334,11 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Chine [sound recording]"),
                         otherInfo = listOf(OtherInfo("le soleil et la lune")),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "China",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("the sun and the moon")
@@ -364,9 +364,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Wo he Huojin de sheng huo"),
-                        parallelTitles = listOf(ParallelTitle("Travelling to infinity"))
+                        parallelTitles = listOf(ParallelMonograph("Travelling to infinity"))
                     )
                 ),
                 sors = listOf(
@@ -390,12 +390,12 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Macuilli tlachtli"),
                         parallelTitles = listOf(
-                            ParallelTitle("Cinco deportes mexicanos"),
-                            ParallelTitle("Five Mexican sports"),
-                            ParallelTitle("Cinq sports mexicains")
+                            ParallelMonograph("Cinco deportes mexicanos"),
+                            ParallelMonograph("Five Mexican sports"),
+                            ParallelMonograph("Cinq sports mexicains")
                         )
                     )
                 ),
@@ -417,9 +417,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Hands are not for hitting"),
-                        parallelTitles = listOf(ParallelTitle("Las manos no son para pegar"))
+                        parallelTitles = listOf(ParallelMonograph("Las manos no son para pegar"))
                     )
                 ),
                 sors = listOf(
@@ -443,7 +443,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Hulk Hogan"),
                         otherInfo = listOf(OtherInfo("wrestling pro")),
                         parallelOtherInfo = listOf(
@@ -474,7 +474,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The missing chancleta and other top-secret cases")
                     )
                 ),
@@ -483,7 +483,7 @@ class TitleStatementParserTest {
                     SOR("cover and inside illustrations by Leonardo Mora")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle(
+                    ParallelMonograph(
                         title = "La chancleta perdida y ostros casos secretos",
                         sors = listOf(
                             ParallelSOR("por Alidis Vincente"),
@@ -525,11 +525,11 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("This can lick a lollipop"),
                         otherInfo = listOf(OtherInfo("body riddles for kids")),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "Esto gozo chupando un caramelo",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("les partes del cuerpo en adivinanzas infantiles")
@@ -559,10 +559,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("To life [sound recording]"),
                         otherInfo = listOf(OtherInfo("Jewish party")),
-                        parallelTitles = listOf(ParallelTitle("Le chaim!"))
+                        parallelTitles = listOf(ParallelMonograph("Le chaim!"))
                     )
                 )
             )
@@ -581,9 +581,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Long nian dang an"),
-                        parallelTitles = listOf(ParallelTitle("Dragon year file"))
+                        parallelTitles = listOf(ParallelMonograph("Dragon year file"))
                     )
                 ),
                 sors = listOf(SOR("Ke Yunlu Zhu"))
@@ -603,9 +603,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Le Quai Des Brumes"),
-                        parallelTitles = listOf(ParallelTitle("Port of Shadows"))
+                        parallelTitles = listOf(ParallelMonograph("Port of Shadows"))
                     )
                 )
             )
@@ -624,9 +624,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Hui dao can zhuo, hui dao sheng huo"),
-                        parallelTitles = listOf(ParallelTitle("Life"))
+                        parallelTitles = listOf(ParallelMonograph("Life"))
                     )
                 ),
                 sors = listOf(SOR("Cai Yingqing zhu"))
@@ -646,9 +646,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Spennigens land"),
-                        parallelTitles = listOf(ParallelTitle("The land of suspense"))
+                        parallelTitles = listOf(ParallelMonograph("The land of suspense"))
                     )
                 ),
                 sors = listOf(SOR("Knut Nystedt"))
@@ -672,10 +672,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Atlas the gioi khu'ng long"),
                         parallelTitles = listOf(
-                            ParallelTitle("The Usborne Internet-linked world atlas of dinosaurs")
+                            ParallelMonograph("The Usborne Internet-linked world atlas of dinosaurs")
                         )
                     )
                 ),
@@ -702,11 +702,11 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Arc-en-ciel"),
                         otherInfo = listOf(OtherInfo("le plus beau poisson des océans")),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "The rainbow fish",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("the most beautiful fish in the ocean")
@@ -735,10 +735,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Animals"),
                         otherInfo = listOf(OtherInfo("English-Spanish")),
-                        parallelTitles = listOf(ParallelTitle("Animales"))
+                        parallelTitles = listOf(ParallelMonograph("Animales"))
                     )
                 ),
                 sors = listOf(SOR("[designed by Hakan Şan Borteçin]"))
@@ -760,9 +760,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("aal-Ghurāb al-miskīn"),
-                        parallelTitles = listOf(ParallelTitle("The Poor crow"))
+                        parallelTitles = listOf(ParallelMonograph("The Poor crow"))
                     )
                 ),
                 sors = listOf(
@@ -789,7 +789,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Xiao xiao xiao xiao de huo")
                     )
                 ),
@@ -798,7 +798,7 @@ class TitleStatementParserTest {
                     SOR("Sun Lu yi")
                 ),
                 parallelTitles = listOf(
-                    ParallelTitle(
+                    ParallelMonograph(
                         title = "Little fires everywhere",
                         sors = listOf(ParallelSOR("Celeste Ng"))
                     )
@@ -821,10 +821,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("A collection of Latin American folksongs"),
                         parallelTitles = listOf(
-                            ParallelTitle("Collección de cancionces folklóricas Latinoamericanas")
+                            ParallelMonograph("Collección de cancionces folklóricas Latinoamericanas")
                         )
                     )
                 ),
@@ -847,9 +847,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Opposites"),
-                        parallelTitles = listOf(ParallelTitle("Zheng fan, English-Chinese"))
+                        parallelTitles = listOf(ParallelMonograph("Zheng fan, English-Chinese"))
                     )
                 ),
                 sors = listOf(SOR("[designed by Hakan Şan Borteçin]"))
@@ -871,9 +871,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("¿Qué hay en el cielo, querido dragón?"),
-                        parallelTitles = listOf(ParallelTitle("What's in the sky, dear dragon?"))
+                        parallelTitles = listOf(ParallelMonograph("What's in the sky, dear dragon?"))
                     )
                 ),
                 sors = listOf(
@@ -899,10 +899,10 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("¿Qué hay en el bosque, querido dragón?"),
                         parallelTitles = listOf(
-                            ParallelTitle("What's in the woods, dear dragon?")
+                            ParallelMonograph("What's in the woods, dear dragon?")
                         )
                     )
                 ),
@@ -929,9 +929,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("How will we get to the beach?"),
-                        parallelTitles = listOf(ParallelTitle("Cómo iremos a la playa?"))
+                        parallelTitles = listOf(ParallelMonograph("Cómo iremos a la playa?"))
                     )
                 ),
                 sors = listOf(
@@ -958,11 +958,11 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The world's most beautiful libraries"),
                         parallelTitles = listOf(
-                            ParallelTitle("Die schönsten Bibliotheken der Welt"),
-                            ParallelTitle("Les plus belles bibliothèques du monde")
+                            ParallelMonograph("Die schönsten Bibliotheken der Welt"),
+                            ParallelMonograph("Les plus belles bibliothèques du monde")
                         )
                     )
                 ),
@@ -994,9 +994,9 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Mia madre"),
-                        parallelTitles = listOf(ParallelTitle("My mother"))
+                        parallelTitles = listOf(ParallelMonograph("My mother"))
                     )
                 ),
                 sors = listOf(
@@ -1028,7 +1028,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Howdy, honey, howdy"),
                         otherInfo = listOf(OtherInfo("illustrated with photos"))
                     )
@@ -1056,7 +1056,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The Penkovskiy papers")
                     )
                 ),
@@ -1083,7 +1083,7 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Under the green star")
                     )
                 ),
@@ -1108,14 +1108,14 @@ class TitleStatementParserTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("3 symphonies [sound recording]")
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The rock"),
                         parallelTitles = listOf(
-                            ParallelTitle("Der Fels"),
-                            ParallelTitle("Le rocher")
+                            ParallelMonograph("Der Fels"),
+                            ParallelMonograph("Le rocher")
                         )
                     )
                 ),

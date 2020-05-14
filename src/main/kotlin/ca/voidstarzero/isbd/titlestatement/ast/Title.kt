@@ -1,17 +1,36 @@
 package ca.voidstarzero.isbd.titlestatement.ast
 
 /**
+ * Base class for titles.
+ */
+sealed class Title : Node()
+
+/**
  * A class holding the title part of a title statement.
  *
- * @property titleProper the title proper, or main title.
+ * @property titleProper the title proper, or main title, if this is not a series entry.
  * @property otherInfo a list of other title information associated with this title.
  * @property parallelTitles a list of parallel titles associated with this title.
  * @property parallelOtherInfo a list of parallel other title information associated
  * with this title.
  */
-data class Title(
+data class Monograph(
     val titleProper: TitleProper,
     val otherInfo: List<OtherInfo> = emptyList(),
-    val parallelTitles: List<ParallelTitle> = emptyList(),
+    val parallelTitles: List<ParallelMonograph> = emptyList(),
     val parallelOtherInfo: List<ParallelOtherInfo> = emptyList()
-) : Node()
+) : Title()
+
+
+/**
+ * A class holding elements of a series entry title.
+ *
+ * @property seriesTitle the title of the series to which this entry belongs.
+ * @property entryTitle the title of the entry.
+ * @property designation the part number or designation of the series entry.
+ */
+data class SeriesEntry(
+    val seriesTitle: SeriesTitle,
+    val entryTitle: SeriesEntryTitle? = null,
+    val designation: SeriesEntryDesignation? = null
+) : Title()

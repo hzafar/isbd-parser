@@ -17,10 +17,10 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Moreninha"),
                         otherInfo = listOf(OtherInfo("from A Prole do Bebe, no 1")),
-                        parallelTitles = listOf(ParallelTitle("The little paper doll"))
+                        parallelTitles = listOf(ParallelMonograph("The little paper doll"))
                     )
                 ),
                 sors = listOf(
@@ -45,13 +45,13 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Sonate d-moll"),
                         otherInfo = listOf(
                             OtherInfo("fur Altblockflote (Querflote) und Basso continuo")
                         ),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "Sonata D minor",
                                 otherInfo = listOf(
                                     ParallelOtherInfo(
@@ -83,9 +83,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("A source book in theatrical history"),
-                        parallelTitles = listOf(ParallelTitle("Sources of theatrical history"))
+                        parallelTitles = listOf(ParallelMonograph("Sources of theatrical history"))
                     )
                 ),
                 sors = listOf(SOR("by A M Nagler"))
@@ -105,9 +105,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Perrazo y Perrito"),
-                        parallelTitles = listOf(ParallelTitle("Big Dog and Little Dog"))
+                        parallelTitles = listOf(ParallelMonograph("Big Dog and Little Dog"))
                     )
                 ),
                 sors = listOf(
@@ -131,9 +131,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Das Kantatenwerk Vol 34 [sound recording]"),
-                        parallelTitles = listOf(ParallelTitle("Complete canatas"))
+                        parallelTitles = listOf(ParallelMonograph("Complete canatas"))
                     )
                 ),
                 sors = listOf(SOR("Johann Sebastian Bach"))
@@ -154,9 +154,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The new churches of Europe"),
-                        parallelTitles = listOf(ParallelTitle("Las neuvas iglesias de Europa"))
+                        parallelTitles = listOf(ParallelMonograph("Las neuvas iglesias de Europa"))
                     )
                 ),
                 sors = listOf(SOR("[by] G E Kidder Smith"))
@@ -177,9 +177,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Good night, Mr Panda"),
-                        parallelTitles = listOf(ParallelTitle("Buenas noches, Sr Panda"))
+                        parallelTitles = listOf(ParallelMonograph("Buenas noches, Sr Panda"))
                     )
                 ),
                 sors = listOf(
@@ -204,10 +204,10 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Brown bear, brown bear, what do you see?"),
                         parallelTitles = listOf(
-                            ParallelTitle("Oso pardo, oso pardo, ¿qué ves ahí?")
+                            ParallelMonograph("Oso pardo, oso pardo, ¿qué ves ahí?")
                         )
                     )
                 ),
@@ -239,14 +239,14 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Crosscurrents of modernism"),
                         otherInfo = listOf(
                             OtherInfo("four Latin American pioneers"),
                             OtherInfo("Diego Rivera, Joaquin Torres-Garcia, Wifredo Lam, Matta")
                         ),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 title = "Intercambios del modernismo",
                                 otherInfo = listOf(
                                     ParallelOtherInfo("cuatro precursores latinoamericanos"),
@@ -284,10 +284,10 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Huasipungo"),
                         otherInfo = listOf(OtherInfo("a novel")),
-                        parallelTitles = listOf(ParallelTitle("The villagers"))
+                        parallelTitles = listOf(ParallelMonograph("The villagers"))
                     )
                 ),
                 sors = listOf(
@@ -311,10 +311,10 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Larvae and pupae of Integripalpia"),
                         parallelTitles = listOf(
-                            ParallelTitle(
+                            ParallelMonograph(
                                 "Lichinki i kukolki podotryada " +
                                         "tselnoshchupikovych"
                             )
@@ -343,7 +343,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Preparatory trill studies"),
                         otherInfo = listOf(
                             OtherInfo("for the violin"),
@@ -353,7 +353,7 @@ class PeriodsTest {
                             ),
                             OtherInfo("op 7")
                         ),
-                        parallelTitles = listOf(ParallelTitle("Estudios preparatorios de trinos"))
+                        parallelTitles = listOf(ParallelMonograph("Estudios preparatorios de trinos"))
                     )
                 ),
                 sors = listOf(
@@ -378,12 +378,12 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Folk songs"),
                         otherInfo = listOf(
                             OtherInfo("for voice and piano, German and English texts")
                         ),
-                        parallelTitles = listOf(ParallelTitle("Deutsche Volkslieder"))
+                        parallelTitles = listOf(ParallelMonograph("Deutsche Volkslieder"))
                     )
                 ),
                 sors = listOf(
@@ -406,9 +406,9 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Thank you, Mr Panda"),
-                        parallelTitles = listOf(ParallelTitle("Gracias, Sr Panda"))
+                        parallelTitles = listOf(ParallelMonograph("Gracias, Sr Panda"))
                     )
                 ),
                 sors = listOf(SOR("Steve Antony"))
@@ -430,7 +430,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("La mer [sound recording]")
                     )
                 ),
@@ -438,10 +438,10 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Valses nobles et sentimentales")
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("La valse")
                     )
                 ),
@@ -449,7 +449,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Suite no 2 from Bacchus et Ariane")
                     )
                 ),
@@ -472,7 +472,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Beethoven's letters")
                     )
                 ),
@@ -498,7 +498,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Rickshaw boy")
                     )
                 ),
@@ -525,7 +525,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Joyful wisdom")
                     )
                 ),
@@ -552,7 +552,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("New encyclopedia of philosophy")
                     )
                 ),
@@ -581,7 +581,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Redes")
                     )
                 ),
@@ -589,7 +589,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Concerto grosso for string quartet and orchestra")
                     )
                 ),
@@ -597,7 +597,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Sense maya")
                     )
                 ),
@@ -605,7 +605,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Pampeana no 3")
                     )
                 ),
@@ -629,7 +629,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Violin concerto [sound recording]")
                     )
                 ),
@@ -637,7 +637,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Violin concerto no 2")
                     )
                 ),
@@ -645,7 +645,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Violin concerto")
                     )
                 ),
@@ -668,7 +668,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper(
                             "Trio for violin, cello, and " +
                                     "piano, in D minor, op 11 (posth)"
@@ -679,7 +679,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Tarantella, op 6")
                     )
                 ),
@@ -687,7 +687,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Paganiniana")
                     )
                 ),
@@ -710,7 +710,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The Johannine epistles"),
                         otherInfo = listOf(
                             OtherInfo("a commentary on the Johannine epistles")
@@ -742,10 +742,10 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Rhapsody in blue [sound recording]")
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("An American in Paris")
                     )
                 ),
@@ -753,7 +753,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Grand Canyon suite")
                     )
                 ),
@@ -761,7 +761,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Prelude, fugue and riffs")
                     )
                 ),
@@ -785,7 +785,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Russian-German settlements in the United States")
                     )
                 ),
@@ -796,7 +796,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper(
                             "Place names of German " +
                                     "colonies in Russia and the Dobrudja"
@@ -807,7 +807,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper(
                             "Prairie architecture of " +
                                     "the Russian-German settlers"
@@ -832,7 +832,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Guernica, Pablo Picasso")
                     )
                 ),
@@ -858,7 +858,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("String quartet op 10 [sound recording]")
                     )
                 ),
@@ -866,7 +866,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("String Quartet")
                     )
                 ),
@@ -889,7 +889,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Adventure time [12], Thunder road")
                     )
                 ),
@@ -918,7 +918,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Three Irish plays"),
                         otherInfo = listOf(
                             OtherInfo("The moon in the Yellow River")
@@ -929,7 +929,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("The iron harp")
                     )
                 ),
@@ -937,7 +937,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Step-in-the-hollow")
                     )
                 ),
@@ -962,18 +962,18 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Bilder einer Ausstellang [sound recording]"),
                         parallelTitles = listOf(
-                            ParallelTitle("Pictures at an exhibition"),
-                            ParallelTitle("Tableaux d'une exposition")
+                            ParallelMonograph("Pictures at an exhibition"),
+                            ParallelMonograph("Tableaux d'une exposition")
                         )
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Eine Nacht auf dem kahlen Berge"),
                         parallelTitles = listOf(
-                            ParallelTitle("Night on Bald Mountain"),
-                            ParallelTitle("Une nuit sur le mont chauve")
+                            ParallelMonograph("Night on Bald Mountain"),
+                            ParallelMonograph("Une nuit sur le mont chauve")
                         )
                     )
                 ),
@@ -983,7 +983,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Valses nobles et sentimentales")
                     )
                 ),
@@ -1007,7 +1007,7 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Fantasie in C major, op 15 [sound recording]"),
                         otherInfo = listOf(
                             OtherInfo("Wandererfantasie")
@@ -1018,7 +1018,7 @@ class PeriodsTest {
             ),
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Fantasie in C major, op 17")
                     )
                 ),
@@ -1042,20 +1042,20 @@ class PeriodsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Concerto no 1 for piano & orchestra, " +
                                 "op 15, C major [sound recording]"),
                         parallelTitles = listOf(
-                            ParallelTitle("C-Dur"),
-                            ParallelTitle("ut majeur")
+                            ParallelMonograph("C-Dur"),
+                            ParallelMonograph("ut majeur")
                         )
                     ),
-                    Title(
+                    Monograph(
                         titleProper = TitleProper("Concerto no 3 for piano & " +
                                 "orchestra, op 37, C minor"),
                         parallelTitles = listOf(
-                            ParallelTitle("c-moll"),
-                            ParallelTitle("ut mineur")
+                            ParallelMonograph("c-moll"),
+                            ParallelMonograph("ut mineur")
                         )
                     )
                 ),

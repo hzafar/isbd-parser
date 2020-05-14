@@ -1,32 +1,32 @@
 package ca.voidstarzero.isbd.titlestatement.ast
 
 /**
+ * Base class for parallel titles.
+ */
+sealed class ParallelTitle : Node()
+
+/**
  * Class containing a parsed parallel title.
  *
  * @property title the parallel title string.
- * @property otherInfo a list of parallel other title information strings, if present.
- * @property sors a list of parallel statements of responsibility, if present.
+ * @property otherInfo a list of parallel other title information strings.
+ * @property sors a list of parallel statements of responsibility.
  */
-data class ParallelTitle(
+data class ParallelMonograph(
     val title: String,
     val otherInfo: List<ParallelOtherInfo> = emptyList(),
     val sors: List<ParallelSOR> = emptyList()
-) : Node() {
+) : ParallelTitle()
 
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is ParallelTitle ->
-                title == other.title
-                        && otherInfo == other.otherInfo
-                        && sors == other.sors
-            else -> false
-        }
-    }
-
-    override fun hashCode(): Int {
-        var result = title.hashCode()
-        result = 31 * result + otherInfo.hashCode()
-        result = 31 * result + sors.hashCode()
-        return result
-    }
-}
+/** A class holding a parallel series entry title.
+ *
+ * @property seriesTitle the parallel title of the series to which this entry belongs.
+ * @property entryTitle the parallel title of the entry.
+ * @property designation the parallel part number or designation of the series entry.
+ * @property sors a list of parallel statements of responsibility for the series entry.
+ */
+data class ParallelSeriesEntry(
+    val seriesTitle: SeriesTitle,
+    val entryTitle: SeriesEntryTitle? = null,
+    val designation: SeriesEntryDesignation? = null
+) : ParallelTitle()

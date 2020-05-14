@@ -27,6 +27,25 @@ open class SimpleNode(val value: String) : Node() {
  */
 class TitleProper(value: String) : SimpleNode(value)
 
+
+/**
+ * A string containing other title information for a series title.
+ *
+ */
+class SeriesOtherInfo(value: String): SimpleNode(value)
+
+/**
+ * A string containing other title information for a series entry.
+ *
+ */
+class SeriesEntryOtherInfo(value: String): SimpleNode(value)
+
+/**
+ * A series entry part or designation.
+ *
+ */
+class SeriesEntryDesignation(value: String) : SimpleNode(value)
+
 /**
  * A string containing other title information, such as a subtitle.
  *

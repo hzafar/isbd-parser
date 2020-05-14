@@ -1,16 +1,17 @@
 package ca.voidstarzero.isbd
 
-fun prepare(input: String): List<String> {
+fun cleanInput(input: String): String {
     val REPLACE = 0xfffd.toChar()
-    val cleanedInput = input
+    return input
         .replace(" = ", "$REPLACE=$REPLACE")
         .replace(" : ", "$REPLACE:$REPLACE")
         .replace(" / ", "$REPLACE/$REPLACE")
         .replace(" ; ", "$REPLACE;$REPLACE")
         .removeSuffix(".")
         .trim()
-
-    return droppedPeriods(cleanedInput)
+}
+fun prepare(input: String): List<String> {
+    return droppedPeriods(cleanInput(input))
 }
 
 fun findPeriods(input: String): List<Int> {

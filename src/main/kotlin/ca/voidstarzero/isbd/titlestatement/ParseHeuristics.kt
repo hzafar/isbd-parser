@@ -1,15 +1,21 @@
 package ca.voidstarzero.isbd.titlestatement
 
+import ca.voidstarzero.isbd.titlestatement.ast.Monograph
+import ca.voidstarzero.isbd.titlestatement.ast.SeriesEntry
 import ca.voidstarzero.isbd.titlestatement.ast.TitleProper
 import ca.voidstarzero.isbd.titlestatement.ast.TitleStatement
 
-fun likelyTitle(titleProper: TitleProper): Boolean {
-    return !titleProper.value[0].isDigit()
-            && !titleProper.value.startsWith(')')
+fun likelyTitle(title: String): Boolean {
+    return !title[0].isDigit()
+            && !title.startsWith(')')
 }
 
 fun goodParse(parse: List<TitleStatement>): Boolean {
     return parse.all { node ->
-        node.titles.all { likelyTitle(it.titleProper) }
+        node.titles.mapNotNull { when(it) {
+            is Monograph -> it.titleProper.value
+            is SeriesEntry -> it.seriesTitle.title
+        } }
+            .all { likelyTitle(it) }
     }
 }
