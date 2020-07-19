@@ -6,14 +6,10 @@ import ca.voidstarzero.isbd.titlestatement.ast.SOR
 import norswap.autumn.DSL.rule
 
 val TitleStatementGrammar.sor: rule
-    get() = seq(slash, data)
-        .push { items -> SOR(items[0] as String) }
+    get() = sorOfType(::SOR)
 
 val TitleStatementGrammar.additionalSOR: rule
-    get() = seq(semicolon, data).at_least(1)
-        .push { items ->
-            NodeList(items.filterNotNull().map { SOR(it as String) })
-        }
+    get() = additionalSOROfType(::SOR)
 
 val TitleStatementGrammar.sorList: rule
     get() = seq(sor, additionalSOR.maybe())
@@ -25,16 +21,10 @@ val TitleStatementGrammar.sorList: rule
         }
 
 val TitleStatementGrammar.parallelSOR: rule
-    get() = seq(slash, data)
-        .push { items ->
-            ParallelSOR(items[0] as String)
-        }
+    get() = sorOfType(::ParallelSOR)
 
 val TitleStatementGrammar.parallelAdditionalSOR: rule
-    get() = seq(semicolon, data).at_least(1)
-        .push { items ->
-            NodeList(items.filterNotNull().map { ParallelSOR(it as String) })
-        }
+    get() = additionalSOROfType(::ParallelSOR)
 
 val TitleStatementGrammar.parallelSORList: rule
     get() = seq(parallelSOR, parallelAdditionalSOR.maybe())

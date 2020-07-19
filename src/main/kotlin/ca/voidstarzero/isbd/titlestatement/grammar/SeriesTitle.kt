@@ -15,20 +15,16 @@ val TitleStatementGrammar.seriesTitle: rule
             )
         }
 
-val TitleStatementGrammar.designation: rule
-    get() = seq(dataWithoutComma, comma)
-        .push { items -> SeriesEntryDesignation(items[0] as String) }
-
 val TitleStatementGrammar.commonDependentTitle: rule
     get() = seq(
         seriesTitle,
-        designation.maybe(),
-        entryTitleOrDesignation.maybe()
+        seq(rule(DesignationFromMarcParser()), comma.maybe()).maybe(),
+        seriesEntryTitle.maybe()
     ).push { items ->
         SeriesEntry(
             seriesTitle = items[0] as SeriesTitle,
             entryTitle = items[2] as? SeriesEntryTitle,
-            designation = items[1] as? SeriesEntryDesignation ?: items[2] as? SeriesEntryDesignation
+            designation = items[1] as? SeriesEntryDesignation
         )
     }
 

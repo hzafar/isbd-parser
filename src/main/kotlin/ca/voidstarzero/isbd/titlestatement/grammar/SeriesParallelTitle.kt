@@ -7,13 +7,13 @@ val TitleStatementGrammar.parallelCommonDependentTitle: rule
     get() = seq(
         equalSign,
         seriesTitle,
-        designation.maybe(),
-        entryTitleOrDesignation.maybe()
+        seq(rule(DesignationFromMarcParser()), comma.maybe()).maybe(),
+        seriesEntryTitle.maybe()
     ).push { items ->
         ParallelSeriesEntry(
             seriesTitle = items[0] as SeriesTitle,
             entryTitle = items[2] as? SeriesEntryTitle,
-            designation = items[1] as? SeriesEntryDesignation ?: items[2] as? SeriesEntryDesignation
+            designation = items[1] as? SeriesEntryDesignation
         )
     }
 
