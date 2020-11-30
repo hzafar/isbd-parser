@@ -15,10 +15,9 @@ open class Title() : Node() {
 
     constructor(
         seriesTitle: SeriesTitle,
-        entryTitle: SeriesEntryTitle? = null,
-        designation: SeriesEntryDesignation? = null
+        seriesEntry: List<SeriesEntry> = emptyList()
     ) : this() {
-        SeriesEntry(seriesTitle, entryTitle, designation)
+        Series(seriesTitle, seriesEntry)
     }
 }
 
@@ -43,11 +42,9 @@ data class Monograph(
  * A class holding elements of a series entry title.
  *
  * @property seriesTitle the title of the series to which this entry belongs.
- * @property entryTitle a hierarchical list of entry parts.
- * @property designation a list of part numbers or designations of the series entry.
+ * @property seriesEntry a hierarchical list of entry parts.
  */
-data class SeriesEntry(
+data class Series(
     val seriesTitle: SeriesTitle,
-    val entryTitle: SeriesEntryTitle? = null,
-    val designation: SeriesEntryDesignation? = null
+    val seriesEntry: List<SeriesEntry> = emptyList()
 ) : Title()

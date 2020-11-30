@@ -41,6 +41,12 @@ class SeriesOtherInfo(value: String): SimpleNode(value)
 class SeriesEntryOtherInfo(value: String): SimpleNode(value)
 
 /**
+ * A series entry title.
+ *
+ */
+class SeriesEntryTitle(value: String) : SimpleNode(value)
+
+/**
  * A series entry part or designation.
  *
  */

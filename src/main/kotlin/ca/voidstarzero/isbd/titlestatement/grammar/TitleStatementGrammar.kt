@@ -10,6 +10,7 @@ import norswap.autumn.Parser
 import norswap.autumn.parsers.AbstractForwarding
 import norswap.autumn.parsers.AbstractPrimitive
 import norswap.autumn.parsers.CharPredicate
+import java.lang.Math.min
 
 abstract class TitleStatementGrammar : DSL() {
 
@@ -68,7 +69,22 @@ abstract class TitleStatementGrammar : DSL() {
     /**
      * Matches the string " = " exactly.
      */
-    val equalSign: rule = str("$REPLACE=$REPLACE")
+    val equalSign: rule = rule(
+        object : AbstractForwarding(
+            "equal_sign",
+            str("$REPLACE=$REPLACE")
+                .collect().action_with_string { parse, _, _ ->
+                    parse.log.apply {
+                        val context = store.data(parse)
+                        val oldParallelInfo = context.parallelInfo
+                        context.parallelInfo = true
+                        return@apply Runnable {
+                            context.parallelInfo = oldParallelInfo
+                        }
+                    }
+                }.get()
+        ) {}
+    )
 
     /**
      * Matches the string " ; " exactly.
@@ -182,7 +198,7 @@ abstract class TitleStatementGrammar : DSL() {
         }
     }
 
-    inner class DesignationFromMarcParser : Parser() {
+    inner class SeriesEntryDesignationFromMarc : Parser() {
         override fun children(): MutableIterable<Parser> {
             return mutableListOf()
         }
@@ -194,22 +210,49 @@ abstract class TitleStatementGrammar : DSL() {
             val designations: List<String> = marcData?.subfields
                 ?.filter { it.first == 'n' }
                 ?.map { it.second }
+                ?.drop(context.marcDataSubfieldNPosition)
                 ?: emptyList()
 
             var pos = parse.pos
             while (pos < parse.string.length
                 && !parse.match(pos, ",")
-                && !parse.match(pos, REPLACE.toString()))
-            {
+                && !parse.match(pos, REPLACE.toString())
+            ) {
                 pos += 1
             }
 
             val data = parse.string.substring(parse.pos, pos)
-            if (designations.any { it.startsWith(data) }) {
+
+            if (parse.string.substring(pos, (pos + 2).coerceAtMost(parse.string.length)) == ", ") {
+                pos += 2
+            }
+
+            if (context.parallelInfo
+                && context.parsedDesignation
+                && designations.isEmpty()
+            ) {
                 parse.pos = pos
                 parse.stack.push(SeriesEntryDesignation(data))
                 return true
             }
+
+            val initialSubfieldNPosition = context.marcDataSubfieldNPosition
+            val initialParsedDesignation = context.parsedDesignation
+            designations.withIndex().firstOrNull { it.value.startsWith(data) }
+                ?.let { match ->
+                    parse.pos = pos
+                    parse.stack.push(SeriesEntryDesignation(data))
+                    parse.log.apply {
+                        context.marcDataSubfieldNPosition = match.index + 1
+                        context.parsedDesignation = true
+                        return@apply Runnable {
+                            context.marcDataSubfieldNPosition = initialSubfieldNPosition
+                            context.parsedDesignation = initialParsedDesignation
+                        }
+                    }
+
+                    return true
+                }
 
             return false
         }
@@ -219,24 +262,6 @@ abstract class TitleStatementGrammar : DSL() {
         }
     }
 
-    /**
-     * Matches a string of characters optionally followed by [colon] and another
-     * string.
-     *
-     * Uses the MARC data, if available, to determine whether the first matched
-     * string is a part number / section of work, in which case the value is pushed
-     * as a [SeriesEntryDesignation] to the parser's value stack. If it is not a
-     * part number / section of work according to the MARC data, the matched values
-     * are pushed as a [SeriesEntryTitle].
-     */
-    val seriesEntryTitle: rule
-        get() = seq(data, entryOtherInfo.maybe())
-            .push { items ->
-                SeriesEntryTitle(
-                    title = items[0] as String,
-                    otherInfo = (items[1] as? SeriesEntryOtherInfo)?.let { listOf(it) } ?: emptyList()
-                )
-            }
     init {
         ws = usual_whitespace
         make_rule_names()

@@ -7,13 +7,18 @@ val TitleStatementGrammar.parallelCommonDependentTitle: rule
     get() = seq(
         equalSign,
         seriesTitle,
-        seq(rule(DesignationFromMarcParser()), comma.maybe()).maybe(),
-        seriesEntryTitle.maybe()
+        hierarchicalSeriesEntryTitles.maybe(),
+        dependentTitle.maybe()
     ).push { items ->
-        ParallelSeriesEntry(
+        val seriesEntries = mutableListOf<SeriesEntry>()
+            .plus((items[1] as? NodeList)?.values
+                ?.map { it as SeriesEntry } ?: emptyList())
+            .plus((items[2] as? SeriesEntry)
+                ?.let { listOf(it) } ?: emptyList()
+            )
+        ParallelSeries(
             seriesTitle = items[0] as SeriesTitle,
-            entryTitle = items[2] as? SeriesEntryTitle,
-            designation = items[1] as? SeriesEntryDesignation
+            seriesEntry = seriesEntries
         )
     }
 
@@ -22,14 +27,8 @@ val TitleStatementGrammar.parallelSeriesFull: rule
         parallelCommonDependentTitle,
         parallelSORList
     ).push { items ->
-        val entry = items[0] as ParallelSeriesEntry
+        val entry = items[0] as ParallelSeries
         NodeList(
-            values = listOf(
-                ParallelSeriesEntry(
-                    seriesTitle = entry.seriesTitle,
-                    entryTitle = entry.entryTitle,
-                    designation = entry.designation
-                )
-            ).plus((items[1] as NodeList).values)
+            values = listOf(entry).plus((items[1] as NodeList).values)
         )
     }

@@ -46,13 +46,35 @@ val TitleStatementGrammar.parallelOtherInfoList: rule
  *
  * Pushes the matched data as a [SeriesOtherInfo] to the parser's value stack.
  */
-val TitleStatementGrammar.seriesOtherInfo: rule
+val TitleStatementGrammar.seriesTitleOtherInfo: rule
     get() = otherInfoOfType(::SeriesOtherInfo)
+
+/**
+ * Matches a list of series other information, as matched by [seriesTitleOtherInfo].
+ *
+ * Pushes the result as a [NodeList] of [SeriesOtherInfo].
+ */
+val TitleStatementGrammar.seriesTitleOtherInfoList: rule
+    get() = seriesTitleOtherInfo.at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { it as SeriesOtherInfo })
+        }
 
 /**
  * Matches a [TitleStatementGrammar.colon] followed by a string of characters.
  *
  * Pushes the matched data as a [SeriesEntryOtherInfo] to the parser's value stack.
  */
-val TitleStatementGrammar.entryOtherInfo: rule
+val TitleStatementGrammar.seriesEntryOtherInfo: rule
     get() = otherInfoOfType(::SeriesEntryOtherInfo)
+
+/**
+ * Matches a list of series entry other information, as matched by [seriesEntryOtherInfo].
+ *
+ * Pushes the matched data as a [NodeList] of [SeriesEntryOtherInfo].
+ */
+val TitleStatementGrammar.seriesEntryOtherInfoList: rule
+    get() = seriesEntryOtherInfo.at_least(1)
+        .push { items ->
+            NodeList(items.filterNotNull().map { it as SeriesEntryOtherInfo })
+        }

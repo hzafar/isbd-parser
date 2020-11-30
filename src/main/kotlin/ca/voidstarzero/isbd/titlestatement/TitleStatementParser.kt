@@ -44,13 +44,25 @@ class TitleStatementParser : TitleStatementGrammar() {
     ): List<TitleStatement> {
         val parseRoot: rule = marc?.let { seriesRootWithMARC(it) } ?: seriesRoot
         val result = Autumn.parse(parseRoot, cleanInput(input), ParseOptions.get())
-
         if (result.full_match) {
             return result.value_stack.mapNotNull { it as TitleStatement }
         }
 
         return emptyList()
 
+    }
+
+    fun parseAllSerial(
+        input: String,
+        marc: MARCField? = null
+    ): List<List<TitleStatement>> {
+        val parseRoot: rule = marc?.let { seriesRootWithMARC(it) } ?: seriesRoot
+        return prepare(input)
+            .map { Autumn.parse(parseRoot, it, ParseOptions.get()) }
+            .filter { it.full_match }
+            .map { result ->
+                result.value_stack.mapNotNull { it as TitleStatement }
+            }
     }
 
     /**

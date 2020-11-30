@@ -2,10 +2,8 @@ package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.titlestatement.ast.*
 import ca.voidstarzero.marc.MARCField
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Ignore
 import org.junit.Test
 
 class SeriesTitleTest {
@@ -33,14 +31,20 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Abstracts of Bulgarian scientific literature"),
-                        entryTitle = SeriesEntryTitle("Mathematics, physics, astronomy, geophysics, geodesy")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Mathematics, physics, astronomy, geophysics, geodesy"),
+                                sors = listOf(
+                                    SOR(
+                                        "Bulgarian Academy of Sciences, Centre for Scientific Information " +
+                                                "and Documentation"
+                                    )
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("Bulgarian Academy of Sciences, Centre for Scientific Information " +
-                            "and Documentation")
                 )
             )
         )
@@ -70,14 +74,18 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Nauchno-tekhnicheskai︠a︡ informat︠s︡ii︠a︡"),
-                        designation = SeriesEntryDesignation("Serii︠a︡ 2"),
-                        entryTitle = SeriesEntryTitle("Informat︠s︡ionnye prot︠s︡essy i sistemy")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Informat︠s︡ionnye prot︠s︡essy i sistemy"),
+                                designation = SeriesEntryDesignation("Serii︠a︡ 2"),
+                                sors = listOf(
+                                    SOR("Vsesoi︠u︡znyĭ institut nauchnoĭ i tekhnicheskoĭ informat︠s︡ii")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("Vsesoi︠u︡znyĭ institut nauchnoĭ i tekhnicheskoĭ informat︠s︡ii")
                 )
             )
         )
@@ -100,10 +108,14 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Vestnik Leningradskogo universiteta"),
-                        designation = SeriesEntryDesignation("Serii︠a︡ 3"),
-                        entryTitle = SeriesEntryTitle("Biologii︠a︡")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Biologii︠a︡"),
+                                designation = SeriesEntryDesignation("Serii︠a︡ 3")
+                            )
+                        )
                     )
                 )
             )
@@ -128,10 +140,14 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Bulletin of the Faculty of Science, Ibaraki University"),
-                        designation = SeriesEntryDesignation("Series A"),
-                        entryTitle = SeriesEntryTitle("Mathematics")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Mathematics"),
+                                designation = SeriesEntryDesignation("Series A")
+                            )
+                        )
                     )
                 )
             )
@@ -156,10 +172,14 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("MInd, the meetings index"),
-                        designation = SeriesEntryDesignation("Series SEMT"),
-                        entryTitle = SeriesEntryTitle("Science, engineering, medicine, technology")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Science, engineering, medicine, technology"),
+                                designation = SeriesEntryDesignation("Series SEMT")
+                            )
+                        )
                     )
                 )
             )
@@ -183,10 +203,14 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Bulletin of the Stefan University"),
-                        designation = SeriesEntryDesignation("Series B"),
-                        entryTitle = SeriesEntryTitle("Stefan frontier conferences")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Stefan frontier conferences"),
+                                designation = SeriesEntryDesignation("Series B")
+                            )
+                        )
                     )
                 )
             )
@@ -215,9 +239,13 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Los 10 mejores videoss"),
-                        designation = SeriesEntryDesignation("Vol. 2")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                designation = SeriesEntryDesignation("Vol. 2")
+                            )
+                        )
                     )
                 )
             )
@@ -241,9 +269,13 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Chinese annals of mathematics"),
-                        designation = SeriesEntryDesignation("Ser. B")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                designation = SeriesEntryDesignation("Ser. B")
+                            )
+                        )
                     )
                 )
             )
@@ -276,15 +308,23 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Izvestii︠a︡ Akademii nauk SSSR"),
-                        entryTitle = SeriesEntryTitle("Otdelenie khimicheskikh nauk")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Otdelenie khimicheskikh nauk")
+                            )
+                        )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
+                    ParallelSeries(
                         seriesTitle = SeriesTitle("Bulletin de l'Académie des sciences de l'URSS"),
-                        entryTitle = SeriesEntryTitle("Classe des sciences chimiques")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Classe des sciences chimiques")
+                            )
+                        )
                     )
                 )
             )
@@ -310,15 +350,23 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Agricultural prices"),
-                        entryTitle = SeriesEntryTitle("Price indices and absolute prices, quarterly statistics")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Price indices and absolute prices, quarterly statistics")
+                            )
+                        )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
+                    ParallelSeries(
                         seriesTitle = SeriesTitle("Prix agricoles"),
-                        entryTitle = SeriesEntryTitle("Indices de prix et prix absolus, statistiques trimestrielles")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Indices de prix et prix absolus, statistiques trimestrielles")
+                            )
+                        )
                     )
                 )
             )
@@ -344,15 +392,23 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Bulletin of the Russian Academy of Sciences"),
-                        entryTitle = SeriesEntryTitle("Physics")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Physics")
+                            )
+                        )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
+                    ParallelSeries(
                         seriesTitle = SeriesTitle("Izvestiya Rossiiskoi Akademii Nauk"),
-                        entryTitle = SeriesEntryTitle("Seriya fizicheskaya")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Seriya fizicheskaya")
+                            )
+                        )
                     )
                 )
             )
@@ -365,7 +421,6 @@ class SeriesTitleTest {
     }
 
     @Test
-    @Ignore("Designations in parallel titles not correctly recognized.")
     fun t12() {
         val title = "Befolkningsstatistikk. Hefte I, Endringstal for kommunar = Population statistics. " +
                 "Volume I, Population changes in municipalities."
@@ -379,17 +434,25 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Befolkningsstatistikk"),
-                        designation = SeriesEntryDesignation("Hefte I"),
-                        entryTitle = SeriesEntryTitle("Endringstal for kommunar")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Endringstal for kommunar"),
+                                designation = SeriesEntryDesignation("Hefte I")
+                            )
+                        )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
+                    ParallelSeries(
                         seriesTitle = SeriesTitle("Population statistics"),
-                        designation = SeriesEntryDesignation("Volume I"),
-                        entryTitle = SeriesEntryTitle("Population changes in municipalities")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Population changes in municipalities"),
+                                designation = SeriesEntryDesignation("Volume I")
+                            )
+                        )
                     )
                 )
             )
@@ -420,13 +483,17 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("The royals"),
-                        entryTitle = SeriesEntryTitle("The slings and arrows of outrageous fortune")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("The slings and arrows of outrageous fortune"),
+                                sors = listOf(
+                                    SOR("E! Entertainment Television")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("E! Entertainment Television")
                 )
             )
         )
@@ -452,14 +519,18 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Americas"),
-                        entryTitle = SeriesEntryTitle("The garden of forking paths")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("The garden of forking paths"),
+                                sors = listOf(
+                                    SOR("a production of WGBH/Boston and Central Television Enterprises for Channel 4"),
+                                    SOR("directed and written by David Ash")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("a production of WGBH/Boston and Central Television Enterprises for Channel 4"),
-                    SOR("directed and written by David Ash")
                 )
             )
         )
@@ -482,13 +553,17 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Los años maravillosos"),
-                        entryTitle = SeriesEntryTitle("Amor y muerte")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Amor y muerte"),
+                                sors = listOf(
+                                    SOR("BeTV")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("BeTV")
                 )
             )
         )
@@ -511,15 +586,19 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Prófugos"),
-                        designation = SeriesEntryDesignation("Episode 13")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                designation = SeriesEntryDesignation("Episode 13"),
+                                sors = listOf(
+                                    SOR("Efetres"),
+                                    SOR("Fabula"),
+                                    SOR("Home Box Office Ole Originals")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("Efetres"),
-                    SOR("Fabula"),
-                    SOR("Home Box Office Ole Originals")
                 )
             )
         )
@@ -544,13 +623,17 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Annuario de estadísticas vitales"),
-                        entryTitle = SeriesEntryTitle("Nacimientos y defunciones")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Nacimientos y defunciones"),
+                                sors = listOf(
+                                    SOR("Instituto Nacional de Estadística y Censos")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("Instituto Nacional de Estadística y Censos")
                 )
             )
         )
@@ -579,11 +662,13 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Acta polytechnica Scandinavica"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Chemical technology series",
-                            otherInfo = listOf(SeriesEntryOtherInfo("ch"))
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Chemical technology series"),
+                                otherInfo = listOf(SeriesEntryOtherInfo("ch"))
+                            )
                         )
                     )
                 )
@@ -597,7 +682,6 @@ class SeriesTitleTest {
     }
 
     @Test
-    @Ignore("Periods in entry title are not handled correctly.")
     fun t19() {
         val title = "Internationale Strassenkarte. Europe 1:2.5 Mio. : mit Register" +
                 " = International road map. Europe, 1:2.5 mio : with index / RV Reise- " +
@@ -613,33 +697,38 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle("Internationale Strassenkarte"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Europe 1:2.5 Mio",
-                            otherInfo = listOf(SeriesEntryOtherInfo("mit Register"))
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Europe 1:25 Mio"),
+                                otherInfo = listOf(SeriesEntryOtherInfo("mit Register"))
+                            )
                         )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
+                    ParallelSeries(
                         seriesTitle = SeriesTitle("International road map"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Europe, 1:2.5 mio",
-                            otherInfo = listOf(SeriesEntryOtherInfo("with index"))
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Europe, 1:25 mio"),
+                                otherInfo = listOf(SeriesEntryOtherInfo("with index")),
+                                sors = listOf(
+                                    SOR("RV Reise- und Verkehrsverlag")
+                                )
+                            )
                         )
                     )
-                ),
-                sors = listOf(
-                    SOR("RV Reise- und Verkehrsverlag")
                 )
             )
         )
 
-        val result = t.parseSerial(title, marc)
+        val result = t.parseAllSerial(title, marc).firstOrNull()
 
         assertNotNull(result)
         assertEquals(expected, result)
+        println(result)
     }
 
     @Test
@@ -658,20 +747,26 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle(
                             title = "Bibliographie de la France Biblio",
                             otherInfo = listOf(
-                                SeriesOtherInfo("journal officiel du livre francais " +
-                                        "paraissant tous les mercredis")
+                                SeriesOtherInfo(
+                                    "journal officiel du livre francais " +
+                                            "paraissant tous les mercredis"
+                                )
                             )
                         ),
-                        designation = SeriesEntryDesignation("1ere partie"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Bibliographie officielle",
-                            otherInfo = listOf(
-                                SeriesEntryOtherInfo("publications recues par " +
-                                    "le Service du depot legl")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Bibliographie officielle"),
+                                designation = SeriesEntryDesignation("1ere partie"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo(
+                                        "publications recues par " +
+                                                "le Service du depot legl"
+                                    )
+                                )
                             )
                         )
                     )
@@ -700,15 +795,21 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle(
                             title = "Periodica polytechnica",
                             otherInfo = listOf(
-                                SeriesOtherInfo("contributions to international technical" +
-                                        " sciences published by the Technical University of Budapest")
+                                SeriesOtherInfo(
+                                    "contributions to international technical" +
+                                            " sciences published by the Technical University of Budapest"
+                                )
                             )
                         ),
-                        entryTitle = SeriesEntryTitle("Transportation engineering")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Transportation engineering")
+                            )
+                        )
                     )
                 )
             )
@@ -735,7 +836,6 @@ class SeriesTitleTest {
      */
 
     @Test
-    @Ignore("Hierarchical entries.")
     fun t22() {
         val title = "Publications of the Institute. Historical Studies. Series III, Renaissance " +
                 "Europe : texts and commentaries"
@@ -746,7 +846,28 @@ class SeriesTitleTest {
             '|'
         )
 
-        val expected = TODO()
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Publications of the Institute"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Historical Studies")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Renaissance Europe"),
+                                designation = SeriesEntryDesignation("Series III"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo("texts and commentaries")
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
 
         val result = t.parseSerial(title, marc)
 
@@ -755,7 +876,6 @@ class SeriesTitleTest {
     }
 
     @Test
-    @Ignore("Hierarchical entries.")
     fun t23() {
         val title = "Deutsche Bibliographie. Wöchentliches Verzeichnis. Reihe B, Beilage, " +
                 "Erscheinungen ausserhalb des Verlagsbuchhandels : Amtsblatt der Deutschen Bibliothek."
@@ -767,7 +887,27 @@ class SeriesTitleTest {
             '|'
         )
 
-        val expected = TODO()
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Deutsche Bibliographie"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Wöchentliches Verzeichnis")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Beilage, Erscheinungen ausserhalb des Verlagsbuchhandels"),
+                                designation = SeriesEntryDesignation("Reihe B"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo("Amtsblatt der Deutschen Bibliothek")
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
 
         val result = t.parseSerial(title, marc)
 
@@ -776,7 +916,6 @@ class SeriesTitleTest {
     }
 
     @Test
-    @Ignore("Hierarchical entries.")
     fun t24() {
         val title = "Australian Council for Educational Research. Series 3. Memorandum. Hawthorn, " +
                 "Australia. 1966- ."
@@ -790,14 +929,23 @@ class SeriesTitleTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Nauchno-tekhnicheskai︠a︡ informat︠s︡ii︠"),
-                        designation = SeriesEntryDesignation("Serii︠a︡ 2"),
-                        entryTitle = SeriesEntryTitle("Informat︠s︡ionnye prot︠s︡essy i sistemy")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Australian Council for Educational Research"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Series 3")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Memorandum")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Hawthorn, Australia")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle("1966-")
+                            )
+                        )
                     )
-                ),
-                sors = listOf(
-                    SOR("Vsesoi︠u︡znyĭ institut nauchnoĭ i tekhnicheskoĭ informat︠s︡ii")
                 )
             )
         )

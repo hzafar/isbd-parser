@@ -436,7 +436,6 @@ class PunctuationPatternsTest {
         assertNotNull(result)
         assertEquals(expected, result)
     }
-    /*
 
     @Test
     fun p18() {
@@ -446,12 +445,12 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle(
-                            title = "Common title"
-                        ),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Dependent title"
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title")
+                            )
                         )
                     )
                 )
@@ -475,10 +474,14 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Common title"),
-                        entryTitle = SeriesEntryTitle("Dependent title"),
-                        designation = SeriesEntryDesignation("Dependent title designation")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title"),
+                                designation = SeriesEntryDesignation("Dependent title designation")
+                            )
+                        )
                     )
                 )
             )
@@ -498,9 +501,13 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Common title"),
-                        designation = SeriesEntryDesignation("Dependent title designation")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                designation = SeriesEntryDesignation("Dependent title designation")
+                            )
+                        )
                     )
                 )
             )
@@ -522,15 +529,23 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Common title"),
-                        entryTitle = SeriesEntryTitle("Dependent title")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title")
+                            )
+                        )
                     )
                 ),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
-                        seriesTitle = SeriesTitle("Parallel common title"),
-                        entryTitle = SeriesEntryTitle("Parallel dependent title")
+                    ParallelSeries(
+                        seriesTitle = SeriesTitle(title = "Parallel common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Parallel dependent title")
+                            )
+                        )
                     )
                 )
             )
@@ -551,12 +566,18 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Common title"),
-                        entryTitle = SeriesEntryTitle("Dependent title")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title"),
+                                sors = listOf(
+                                    SOR("statement of responsibility")
+                                )
+                            )
+                        )
                     )
-                ),
-                sors = listOf(SOR("statement of responsibility"))
+                )
             )
         )
 
@@ -576,17 +597,19 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
+                    Series(
                         seriesTitle = SeriesTitle(
                             title = "Common title",
                             otherInfo = listOf(
                                 SeriesOtherInfo("other title information 1")
                             )
                         ),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Dependent title",
-                            otherInfo = listOf(
-                                SeriesEntryOtherInfo("other title information 2")
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo("other title information 2")
+                                )
                             )
                         )
                     )
@@ -614,29 +637,37 @@ class PunctuationPatternsTest {
         val expected = listOf(
             TitleStatement(
                 titles = listOf(
-                    SeriesEntry(
-                        seriesTitle = SeriesTitle("Common title"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Dependent title",
-                            otherInfo = listOf(
-                                SeriesEntryOtherInfo("other title information")
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Dependent title"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo("other title information")
+                                ),
+                                sors = listOf(
+                                    SOR("statement of responsibility")
+                                )
                             )
                         )
                     )
                 ),
-                sors = listOf(SOR("statement of responsibility")),
                 parallelTitles = listOf(
-                    ParallelSeriesEntry(
-                        seriesTitle = SeriesTitle("Parallel common title"),
-                        entryTitle = SeriesEntryTitle(
-                            title = "Parallel dependent title",
-                            otherInfo = listOf(
-                                SeriesEntryOtherInfo("parallel other title information")
+                    ParallelSeries(
+                        seriesTitle = SeriesTitle(title = "Parallel common title"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Parallel dependent title"),
+                                otherInfo = listOf(
+                                    SeriesEntryOtherInfo("parallel other title information")
+                                ),
+                                sors = listOf(
+                                    SOR("parallel statement of responsibility")
+                                )
                             )
                         )
                     )
-                ),
-                parallelSORs = listOf(ParallelSOR("parallel statement of responsibility"))
+                )
             )
         )
 
@@ -645,6 +676,4 @@ class PunctuationPatternsTest {
         assertNotNull(result)
         assertEquals(expected, result)
     }
-
-     */
 }

@@ -5,9 +5,11 @@ package ca.voidstarzero.isbd.titlestatement.ast
  *
  * @property title the title of the series
  * @property otherInfo other title information for the series.
+ * @property sors a list of statements of responsibility for the series.
  *
  */
 data class SeriesTitle(
     val title: String,
-    val otherInfo: List<SeriesOtherInfo> = emptyList()
+    val otherInfo: List<SeriesOtherInfo> = emptyList(),
+    val sors: List<SOR> = emptyList()
 ) : Node()

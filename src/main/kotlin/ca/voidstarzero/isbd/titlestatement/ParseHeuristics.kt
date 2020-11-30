@@ -1,8 +1,7 @@
 package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.titlestatement.ast.Monograph
-import ca.voidstarzero.isbd.titlestatement.ast.SeriesEntry
-import ca.voidstarzero.isbd.titlestatement.ast.TitleProper
+import ca.voidstarzero.isbd.titlestatement.ast.Series
 import ca.voidstarzero.isbd.titlestatement.ast.TitleStatement
 
 fun likelyTitle(title: String): Boolean {
@@ -14,7 +13,7 @@ fun goodParse(parse: List<TitleStatement>): Boolean {
     return parse.all { node ->
         node.titles.mapNotNull { when(it) {
             is Monograph -> it.titleProper.value
-            is SeriesEntry -> it.seriesTitle.title
+            is Series -> it.seriesTitle.title
             else -> null
         } }
             .all { likelyTitle(it) }

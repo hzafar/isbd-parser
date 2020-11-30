@@ -21,12 +21,9 @@ data class ParallelMonograph(
 /** A class holding a parallel series entry title.
  *
  * @property seriesTitle the parallel title of the series to which this entry belongs.
- * @property entryTitle the parallel title of the entry.
- * @property designation the parallel part number or designation of the series entry.
- * @property sors a list of parallel statements of responsibility for the series entry.
+ * @property seriesEntry the parallel title of the entry.
  */
-data class ParallelSeriesEntry(
+data class ParallelSeries(
     val seriesTitle: SeriesTitle,
-    val entryTitle: SeriesEntryTitle? = null,
-    val designation: SeriesEntryDesignation? = null
+    val seriesEntry: List<SeriesEntry> = emptyList()
 ) : ParallelTitle()
