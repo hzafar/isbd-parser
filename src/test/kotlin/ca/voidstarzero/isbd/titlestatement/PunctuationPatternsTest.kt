@@ -439,7 +439,9 @@ class PunctuationPatternsTest {
 
     @Test
     fun p18() {
-        val pattern = "Common title. Dependent title"
+        /**
+         * val pattern = "Common title. Dependent title"
+         * */
         val marc = MARCField("245", "|aCommon title.|pDependent title", '|')
 
         val expected = listOf(
@@ -457,7 +459,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -465,10 +467,13 @@ class PunctuationPatternsTest {
 
     @Test
     fun p19() {
-        val pattern = "Common title. Dependent title designation, Dependent title"
+        /**
+         * val pattern = "Common title. Dependent title designation, Dependent title"
+         */
         val marc = MARCField(
-            "245", "|aCommon title.|nDependent title designation," +
-                    "|pDependent title", '|'
+            "245",
+            "|aCommon title.|nDependent title designation,|pDependent title",
+            '|'
         )
 
         val expected = listOf(
@@ -487,7 +492,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -495,8 +500,14 @@ class PunctuationPatternsTest {
 
     @Test
     fun p20() {
-        val pattern = "Common title. Dependent title designation"
-        val marc = MARCField("245", "|aCommon title.|nDependent title designation", '|')
+        /**
+         * val pattern = "Common title. Dependent title designation"
+         */
+        val marc = MARCField(
+            "245",
+            "|aCommon title.|nDependent title designation",
+            '|'
+        )
 
         val expected = listOf(
             TitleStatement(
@@ -513,7 +524,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -521,10 +532,15 @@ class PunctuationPatternsTest {
 
     @Test
     fun p21() {
-        val pattern = "Common title. Dependent title = Parallel common title" +
-                ". Parallel dependent title"
-        val marc = MARCField("245", "|aCommon title.|pDependent title =|bParallel " +
-                "common title. Parallel dependent title")
+        /**
+         * val pattern = "Common title. Dependent title = Parallel common title" +
+         *      ". Parallel dependent title"
+         */
+        val marc = MARCField(
+            "245",
+            "|aCommon title.|pDependent title =|bParallel common title. Parallel dependent title",
+            '|'
+        )
 
         val expected = listOf(
             TitleStatement(
@@ -551,7 +567,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -559,9 +575,14 @@ class PunctuationPatternsTest {
 
     @Test
     fun p22() {
-        val pattern = "Common title. Dependent title / statement of responsibility"
-        val marc = MARCField("245", "|aCommon title.|pDependent title /" +
-                "|cstatement of responsibility")
+        /**
+         * val pattern = "Common title. Dependent title / statement of responsibility"
+         */
+        val marc = MARCField(
+            "245",
+            "|aCommon title.|pDependent title /|cstatement of responsibility",
+        '|'
+        )
 
         val expected = listOf(
             TitleStatement(
@@ -581,7 +602,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -589,10 +610,15 @@ class PunctuationPatternsTest {
 
     @Test
     fun p23() {
-        val pattern = "Common title : other title information 1. Dependent title" +
-                " : other title information 2"
-        val marc = MARCField("245", "|aCommon title :|bother title information 1." +
-                "|pDependent title : other title information 2")
+        /**
+         * val pattern = "Common title : other title information 1. Dependent title" +
+         *      " : other title information 2"
+         */
+        val marc = MARCField(
+            "245",
+            "|aCommon title :|bother title information 1.|pDependent title : other title information 2",
+        '|'
+        )
 
         val expected = listOf(
             TitleStatement(
@@ -617,7 +643,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
@@ -625,14 +651,20 @@ class PunctuationPatternsTest {
 
     @Test
     fun p24() {
-        val pattern = "Common title. Dependent title : other title information" +
-                " / statement of responsibility = Parallel common title" +
-                ". Parallel dependent title : parallel other title information" +
-                " / parallel statement of responsibility"
-        val marc = MARCField("245", "|aCommon title.|pDependent title :" +
+        /**
+         * val pattern = "Common title. Dependent title : other title information" +
+         *      " / statement of responsibility = Parallel common title" +
+         *      ". Parallel dependent title : parallel other title information" +
+         *      " / parallel statement of responsibility"
+         */
+        val marc = MARCField(
+            "245",
+            "|aCommon title.|pDependent title :" +
                 "|bother title information /|cstatement of responsibility = Parallel common " +
                 "title. Parallel dependent title : parallel other title information" +
-                " / parallel statement of responsibility")
+                " / parallel statement of responsibility",
+        '|'
+        )
 
         val expected = listOf(
             TitleStatement(
@@ -671,7 +703,7 @@ class PunctuationPatternsTest {
             )
         )
 
-        val result = t.parseSerial(pattern, marc)
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)

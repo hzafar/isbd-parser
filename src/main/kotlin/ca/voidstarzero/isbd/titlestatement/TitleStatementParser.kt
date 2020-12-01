@@ -16,9 +16,9 @@ import norswap.autumn.ParseOptions
  */
 class TitleStatementParser : TitleStatementGrammar() {
     /**
-     * Parses the [input] title statement string into a list of [TitleStatement]s.
+     * Parses the given title statement string into a list of [TitleStatement]s.
      *
-     * @param input the string containing title data.
+     * @param input the title statement to parse.
      * @return the first parse that consumes the entire input.
      */
     fun parse(input: String): List<TitleStatement> {
@@ -32,53 +32,34 @@ class TitleStatementParser : TitleStatementGrammar() {
     }
 
     /**
-     * Parses the [input] serial title statement string into a list of [TitleStatement]s.
+     * Parses the given title statement MARC field into a list of [TitleStatement]s.
      *
-     * @param input the string containing the title data.
-     * @param marc the MARC data for this field.
+     * @param marc the MARC field to parse.
      * @return the first parse that consumes the entire input.
      */
-    fun parseSerial(
-        input: String,
-        marc: MARCField? = null
-    ): List<TitleStatement> {
-        val parseRoot: rule = marc?.let { seriesRootWithMARC(it) } ?: seriesRoot
-        val result = Autumn.parse(parseRoot, cleanInput(input), ParseOptions.get())
+    fun parse(marc: MARCField): List<TitleStatement> {
+        return parse(marc.fieldData())
+    }
+
+    /**
+     * Parses the given serial title statement MARC field into a list of [TitleStatement]s.
+     *
+     * @param marc the MARC field to parse.
+     * @return the first parse that consumes the entire input.
+     */
+    fun parseSerial(marc: MARCField): List<TitleStatement> {
+        val parseRoot: rule = seriesRootWithMARC(marc)
+        val result = Autumn.parse(parseRoot, cleanInput(marc.fieldData()), ParseOptions.get())
         if (result.full_match) {
             return result.value_stack.mapNotNull { it as TitleStatement }
         }
 
         return emptyList()
-
     }
 
-    fun parseAllSerial(
-        input: String,
-        marc: MARCField? = null
-    ): List<List<TitleStatement>> {
-        val parseRoot: rule = marc?.let { seriesRootWithMARC(it) } ?: seriesRoot
-        return prepare(input)
-            .map { Autumn.parse(parseRoot, it, ParseOptions.get()) }
-            .filter { it.full_match }
-            .map { result ->
-                result.value_stack.mapNotNull { it as TitleStatement }
-            }
-    }
-
-    /**
-     * Parses the [input] title statement string into a list of [TitleStatement]s.
+    /** Produces all possible parses of the given title statement string.
      *
-     * @param input the string containing title data.
-     * @return the first parse that consumes the entire input and is likely to
-     * be a correct parse. See [goodParse] for details.
-     */
-    fun parseHeuristically(input: String): List<TitleStatement> {
-        return parseAll(input).firstOrNull { goodParse(it) } ?: emptyList()
-    }
-
-    /** Produces all possible parses of the [input] title statement string.
-     *
-     * @param input the string containing title data.
+     * @param input the title statement to parse.
      * @return all parses that consume the entire input.
      */
     fun parseAll(input: String): List<List<TitleStatement>> {
@@ -88,5 +69,51 @@ class TitleStatementParser : TitleStatementGrammar() {
             .map { result ->
                 result.value_stack.mapNotNull { it as TitleStatement }
             }
+    }
+
+    /** Produces all possible parses of the given title statement MARC field.
+     *
+     * @param marc the MARC field to parse.
+     * @return all parses that consume the entire input.
+     */
+    fun parseAll(marc: MARCField): List<List<TitleStatement>> {
+        return parseAll(marc.fieldData())
+    }
+
+    /** Produces all possible parses of the given serial title statement MARC field.
+     *
+     * @param marc the MARC field to parse.
+     * @return all parses that consume the entire input.
+     */
+    fun parseAllSerial(marc: MARCField): List<List<TitleStatement>> {
+        val parseRoot: rule = seriesRootWithMARC(marc)
+        return prepare(marc.fieldData())
+            .map { Autumn.parse(parseRoot, it, ParseOptions.get()) }
+            .filter { it.full_match }
+            .map { result ->
+                result.value_stack.mapNotNull { it as TitleStatement }
+            }
+    }
+
+    /**
+     * Parses the given title statement string into a list of [TitleStatement]s.
+     *
+     * @param input the title statement to parse.
+     * @return the first parse that consumes the entire input and is likely to
+     * be a correct parse. See [goodParse] for details.
+     */
+    fun parseHeuristically(input: String): List<TitleStatement> {
+        return parseAll(input).firstOrNull { goodParse(it) } ?: emptyList()
+    }
+
+    /**
+     * Parses the given title statement MARC field into a list of [TitleStatement]s.
+     *
+     * @param marc the MARC field to parse.
+     * @return the first parse that consumes the entire input and is likely to
+     * be a correct parse. See [goodParse] for details.
+     */
+    fun parseHeuristically(marc: MARCField): List<TitleStatement> {
+        return parseAll(marc).firstOrNull { goodParse(it) } ?: emptyList()
     }
 }
