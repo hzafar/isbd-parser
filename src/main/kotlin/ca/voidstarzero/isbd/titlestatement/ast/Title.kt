@@ -3,23 +3,7 @@ package ca.voidstarzero.isbd.titlestatement.ast
 /**
  * Base class for titles.
  */
-open class Title() : Node() {
-    constructor(
-        titleProper: TitleProper,
-        otherInfo: List<OtherInfo> = emptyList(),
-        parallelTitles: List<ParallelMonograph> = emptyList(),
-        parallelOtherInfo: List<ParallelOtherInfo> = emptyList()
-    ) : this() {
-        Monograph(titleProper, otherInfo, parallelTitles, parallelOtherInfo)
-    }
-
-    constructor(
-        seriesTitle: SeriesTitle,
-        seriesEntry: List<SeriesEntry> = emptyList()
-    ) : this() {
-        Series(seriesTitle, seriesEntry)
-    }
-}
+sealed class Title() : Node() {}
 
 /**
  * A class holding the title part of a title statement.
@@ -36,7 +20,6 @@ data class Monograph(
     val parallelTitles: List<ParallelMonograph> = emptyList(),
     val parallelOtherInfo: List<ParallelOtherInfo> = emptyList()
 ) : Title()
-
 
 /**
  * A class holding elements of a series entry title.

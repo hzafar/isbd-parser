@@ -1,5 +1,8 @@
 package ca.voidstarzero.isbd
 
+import ca.voidstarzero.isbd.titlestatement.ast.*
+import ca.voidstarzero.marc.MARCField
+
 fun cleanInput(input: String): String {
     val REPLACE = 0xfffd.toChar()
     return input
@@ -10,6 +13,7 @@ fun cleanInput(input: String): String {
         .removeSuffix(".")
         .trim()
 }
+
 fun prepare(input: String): List<String> {
     return droppedPeriods(cleanInput(input))
 }
@@ -47,4 +51,30 @@ fun droppedPeriods(input: String): List<String> {
     ).map { combination ->
         input.filterIndexed { i, _ -> i !in combination }
     }
+}
+
+fun usesISBD(input: MARCField): Boolean {
+    if (input.subfields.any { it.first == 'c' }
+        && !input.fieldData().contains(" / ")) {
+        return false;
+    }
+
+    if (input.subfields.any { it.first == 'b' }
+        && !input.fieldData().contains(" : | = ".toRegex())) {
+        return false;
+    }
+
+    return true;
+}
+
+fun simpleParse(input: MARCField): TitleStatement {
+    return TitleStatement(
+        titles = listOf(
+            Monograph(
+                titleProper = TitleProper(input.subfields.firstOrNull{ it.first == 'a' }?.second ?: ""),
+                otherInfo = input.subfields.filter { it.first == 'b' }.map { OtherInfo(it.second) }
+            )
+        ),
+        sors = input.subfields.filter { it.first == 'c' }.map { SOR(it.second) }
+    )
 }

@@ -1,6 +1,9 @@
 package ca.voidstarzero.isbd.titlestatement.grammar
 
-import ca.voidstarzero.isbd.titlestatement.ast.*
+import ca.voidstarzero.isbd.titlestatement.ast.NodeList
+import ca.voidstarzero.isbd.titlestatement.ast.ParallelSeries
+import ca.voidstarzero.isbd.titlestatement.ast.SeriesEntry
+import ca.voidstarzero.isbd.titlestatement.ast.SeriesTitle
 import norswap.autumn.DSL.rule
 
 val TitleStatementGrammar.parallelCommonDependentTitle: rule

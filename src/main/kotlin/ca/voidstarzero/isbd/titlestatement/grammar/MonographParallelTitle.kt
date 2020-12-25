@@ -1,9 +1,9 @@
 package ca.voidstarzero.isbd.titlestatement.grammar
 
 import ca.voidstarzero.isbd.titlestatement.ast.NodeList
+import ca.voidstarzero.isbd.titlestatement.ast.ParallelMonograph
 import ca.voidstarzero.isbd.titlestatement.ast.ParallelOtherInfo
 import ca.voidstarzero.isbd.titlestatement.ast.ParallelSOR
-import ca.voidstarzero.isbd.titlestatement.ast.ParallelMonograph
 import norswap.autumn.DSL.rule
 
 /**

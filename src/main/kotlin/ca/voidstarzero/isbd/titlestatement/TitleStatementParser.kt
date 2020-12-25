@@ -2,11 +2,12 @@ package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.cleanInput
 import ca.voidstarzero.isbd.prepare
+import ca.voidstarzero.isbd.simpleParse
 import ca.voidstarzero.isbd.titlestatement.ast.TitleStatement
 import ca.voidstarzero.isbd.titlestatement.grammar.TitleStatementGrammar
 import ca.voidstarzero.isbd.titlestatement.grammar.monographRoot
-import ca.voidstarzero.isbd.titlestatement.grammar.seriesRoot
 import ca.voidstarzero.isbd.titlestatement.grammar.seriesRootWithMARC
+import ca.voidstarzero.isbd.usesISBD
 import ca.voidstarzero.marc.MARCField
 import norswap.autumn.Autumn
 import norswap.autumn.ParseOptions
@@ -38,6 +39,10 @@ class TitleStatementParser : TitleStatementGrammar() {
      * @return the first parse that consumes the entire input.
      */
     fun parse(marc: MARCField): List<TitleStatement> {
+        if (!usesISBD(marc)) {
+            return listOf(simpleParse(marc))
+        }
+
         return parse(marc.fieldData())
     }
 
@@ -48,6 +53,10 @@ class TitleStatementParser : TitleStatementGrammar() {
      * @return the first parse that consumes the entire input.
      */
     fun parseSerial(marc: MARCField): List<TitleStatement> {
+        if (!usesISBD(marc)) {
+            return listOf(simpleParse(marc))
+        }
+
         val parseRoot: rule = seriesRootWithMARC(marc)
         val result = Autumn.parse(parseRoot, cleanInput(marc.fieldData()), ParseOptions.get())
         if (result.full_match) {

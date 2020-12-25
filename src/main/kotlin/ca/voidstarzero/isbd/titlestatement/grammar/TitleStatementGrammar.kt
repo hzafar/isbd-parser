@@ -10,7 +10,6 @@ import norswap.autumn.Parser
 import norswap.autumn.parsers.AbstractForwarding
 import norswap.autumn.parsers.AbstractPrimitive
 import norswap.autumn.parsers.CharPredicate
-import java.lang.Math.min
 
 abstract class TitleStatementGrammar : DSL() {
 
@@ -209,7 +208,7 @@ abstract class TitleStatementGrammar : DSL() {
             val marcData = context.marcData
             val designations: List<String> = marcData?.subfields
                 ?.filter { it.first == 'n' }
-                ?.map { it.second }
+                ?.map { it.second.substringBefore(REPLACE) }
                 ?.drop(context.marcDataSubfieldNPosition)
                 ?: emptyList()
 

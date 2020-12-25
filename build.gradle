@@ -7,7 +7,8 @@ plugins {
 }
 
 group = 'ca.voidstarzero'
-version = '1.0.0'
+version = '1.0.1'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 java {
     withSourcesJar()
@@ -86,7 +87,6 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-
 repositories {
     mavenCentral()
     jcenter()
@@ -94,9 +94,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    compile 'com.github.norswap:autumn:80abd5c207'
-    testCompile 'junit:junit:4.12'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    api 'com.github.norswap:autumn:80abd5c207' // FIXME? :(
+    testImplementation 'junit:junit:4.12'
 }
 
 compileKotlin {

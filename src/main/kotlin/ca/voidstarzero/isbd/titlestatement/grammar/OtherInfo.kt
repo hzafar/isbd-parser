@@ -14,7 +14,7 @@ val TitleStatementGrammar.otherInfo: rule
 /**
  * Matches a sequence of [otherInfo].
  *
- * Pushes the result as a [NodeList] of [OtherInfo].
+ * Pushes the result as a [NodeList] of [OtherInfo] to the parser's value stack.
  */
 val TitleStatementGrammar.otherInfoList: rule
     get() = otherInfo.at_least(1)
@@ -33,7 +33,7 @@ val TitleStatementGrammar.parallelOtherInfo: rule
 /**
  * Matches a list of parallel other information, as matched by [parallelOtherInfo].
  *
- * Pushes the result as a [NodeList] of [ParallelOtherInfo].
+ * Pushes the result as a [NodeList] of [ParallelOtherInfo] to the parser's value stack.
  */
 val TitleStatementGrammar.parallelOtherInfoList: rule
     get() = parallelOtherInfo.at_least(1)
@@ -52,7 +52,7 @@ val TitleStatementGrammar.seriesTitleOtherInfo: rule
 /**
  * Matches a list of series other information, as matched by [seriesTitleOtherInfo].
  *
- * Pushes the result as a [NodeList] of [SeriesOtherInfo].
+ * Pushes the result as a [NodeList] of [SeriesOtherInfo] to the parser's value stack.
  */
 val TitleStatementGrammar.seriesTitleOtherInfoList: rule
     get() = seriesTitleOtherInfo.at_least(1)
@@ -71,7 +71,7 @@ val TitleStatementGrammar.seriesEntryOtherInfo: rule
 /**
  * Matches a list of series entry other information, as matched by [seriesEntryOtherInfo].
  *
- * Pushes the matched data as a [NodeList] of [SeriesEntryOtherInfo].
+ * Pushes the matched data as a [NodeList] of [SeriesEntryOtherInfo] to the parser's value stack.
  */
 val TitleStatementGrammar.seriesEntryOtherInfoList: rule
     get() = seriesEntryOtherInfo.at_least(1)
