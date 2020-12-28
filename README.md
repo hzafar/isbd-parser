@@ -11,7 +11,13 @@ See the [wiki](https://github.com/hzafar/isbd-parser/wiki) for information on ge
 
 Documentation available [here](https://javadoc.io/doc/ca.voidstarzero/isbd-parser).
 
-## Maven
+## Try it out
+
+You can play with an example application made using this library at [isbuddy.voidstarzero.ca](http://isbuddy.voidstarzero.ca).
+
+## Installation
+
+### Maven
 
 ```
 <repositories>
@@ -25,11 +31,11 @@ Documentation available [here](https://javadoc.io/doc/ca.voidstarzero/isbd-parse
 <dependency>
   <groupId>ca.voidstarzero</groupId>
   <artifactId>isbd-parser</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
-## Gradle
+### Gradle
 ```
 repositories {
     mavenCentral()
@@ -37,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    implementation "ca.voidstarzero:isbd-parser:1.0.0"
+    implementation "ca.voidstarzero:isbd-parser:1.1.0"
 }
 ```
 
