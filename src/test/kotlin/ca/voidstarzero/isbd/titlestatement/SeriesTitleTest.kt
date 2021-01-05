@@ -38,8 +38,10 @@ class SeriesTitleTest {
                             )
                         ),
                         entrySors = listOf(
-                            SOR("Bulgarian Academy of Sciences, Centre for Scientific " +
-                                    "Information and Documentation")
+                            SOR(
+                                "Bulgarian Academy of Sciences, Centre for Scientific " +
+                                        "Information and Documentation"
+                            )
                         )
                     )
                 )
@@ -1041,4 +1043,34 @@ class SeriesTitleTest {
         assertNotNull(result)
         assertEquals(expected, result)
     }
+
+    @Test
+    fun t28() {
+        val marc = MARCField(
+            "245",
+            "|aState summary:|pType and amount of aids paid to all local governmental units and counties.",
+            '|'
+        )
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(
+                            title = "State summary",
+                            otherInfo = listOf(
+                                SeriesOtherInfo("Type and amount of aids paid to all local governmental units and counties")
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = t.parseSerial(marc)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
 }

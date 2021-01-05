@@ -1,13 +1,10 @@
 package ca.voidstarzero.isbd.titlestatement
 
-import ca.voidstarzero.isbd.cleanInput
-import ca.voidstarzero.isbd.prepare
-import ca.voidstarzero.isbd.simpleParse
+import ca.voidstarzero.isbd.*
 import ca.voidstarzero.isbd.titlestatement.ast.TitleStatement
 import ca.voidstarzero.isbd.titlestatement.grammar.TitleStatementGrammar
 import ca.voidstarzero.isbd.titlestatement.grammar.monographRoot
 import ca.voidstarzero.isbd.titlestatement.grammar.seriesRootWithMARC
-import ca.voidstarzero.isbd.usesISBD
 import ca.voidstarzero.marc.MARCField
 import ca.voidstarzero.marc.fieldData
 import norswap.autumn.Autumn
@@ -59,7 +56,8 @@ class TitleStatementParser : TitleStatementGrammar() {
         }
 
         val parseRoot: rule = seriesRootWithMARC(marc)
-        val result = Autumn.parse(parseRoot, cleanInput(marc.fieldData()), ParseOptions.get())
+        val preprocessedMarc = punctuationFixes(marc)
+        val result = Autumn.parse(parseRoot, cleanInput(preprocessedMarc.fieldData()), ParseOptions.get())
         if (result.full_match) {
             return result.value_stack.mapNotNull { it as TitleStatement }
         }

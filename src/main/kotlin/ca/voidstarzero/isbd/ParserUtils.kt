@@ -55,6 +55,27 @@ fun droppedPeriods(input: String): List<String> {
     }
 }
 
+// idea is we want to detect improper punctuation and
+// try to correct it to give a better parse. this may
+// ultimately not be the right way to do this.
+fun punctuationFixes(input: MARCField): MARCField {
+    // if colon at subfield boundary is missing preceding space, add it in
+    val withColonSpaces = input.subfields.map {
+        if (it.second.matches(".*[^ ]:$".toRegex())) {
+            val fieldData =  it.second.substring(0, it.second.length - 1) + " :"
+            Pair(it.first, fieldData)
+        } else {
+            it
+        }
+    }
+
+    return MARCField(
+        input.tag,
+        input.indicators,
+        withColonSpaces
+    )
+}
+
 fun usesISBD(input: MARCField): Boolean {
     if (input.subfields.any { it.first == 'c' }
         && !input.fieldData().contains(" / ")) {
