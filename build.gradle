@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'ca.voidstarzero'
-version = '1.1.0'
+version = '1.1.1'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 java {
@@ -95,7 +95,7 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    api 'com.github.norswap:autumn:80abd5c207' // FIXME? :(
+    api 'com.github.norswap:autumn:80abd5c207'
     testImplementation 'junit:junit:4.12'
 }
 

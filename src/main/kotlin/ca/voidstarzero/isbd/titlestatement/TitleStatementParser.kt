@@ -9,6 +9,7 @@ import ca.voidstarzero.isbd.titlestatement.grammar.monographRoot
 import ca.voidstarzero.isbd.titlestatement.grammar.seriesRootWithMARC
 import ca.voidstarzero.isbd.usesISBD
 import ca.voidstarzero.marc.MARCField
+import ca.voidstarzero.marc.fieldData
 import norswap.autumn.Autumn
 import norswap.autumn.ParseOptions
 
@@ -63,7 +64,7 @@ class TitleStatementParser : TitleStatementGrammar() {
             return result.value_stack.mapNotNull { it as TitleStatement }
         }
 
-        return emptyList()
+        throw Exception(result.toString())
     }
 
     /** Produces all possible parses of the given title statement string.

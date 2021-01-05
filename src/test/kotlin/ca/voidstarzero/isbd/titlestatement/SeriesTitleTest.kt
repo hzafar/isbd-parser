@@ -2,8 +2,10 @@ package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.titlestatement.ast.*
 import ca.voidstarzero.marc.MARCField
+import ca.voidstarzero.marc.groupSeriesEntries
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Ignore
 import org.junit.Test
 
 class SeriesTitleTest {
@@ -32,14 +34,12 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Abstracts of Bulgarian scientific literature"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Mathematics, physics, astronomy, geophysics, geodesy"),
-                                sors = listOf(
-                                    SOR(
-                                        "Bulgarian Academy of Sciences, Centre for Scientific Information " +
-                                                "and Documentation"
-                                    )
-                                )
+                                title = SeriesEntryTitle("Mathematics, physics, astronomy, geophysics, geodesy")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("Bulgarian Academy of Sciences, Centre for Scientific " +
+                                    "Information and Documentation")
                         )
                     )
                 )
@@ -74,11 +74,11 @@ class SeriesTitleTest {
                         seriesEntry = listOf(
                             SeriesEntry(
                                 title = SeriesEntryTitle("Informat︠s︡ionnye prot︠s︡essy i sistemy"),
-                                designation = SeriesEntryDesignation("Serii︠a︡ 2"),
-                                sors = listOf(
-                                    SOR("Vsesoi︠u︡znyĭ institut nauchnoĭ i tekhnicheskoĭ informat︠s︡ii")
-                                )
+                                designation = SeriesEntryDesignation("Serii︠a︡ 2")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("Vsesoi︠u︡znyĭ institut nauchnoĭ i tekhnicheskoĭ informat︠s︡ii")
                         )
                     )
                 )
@@ -349,7 +349,8 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Prix agricoles"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Indices de prix et prix absolus, statistiques trimestrielles")
+                                title = SeriesEntryTitle("statistiques trimestrielles"),
+                                designation = SeriesEntryDesignation("Indices de prix et prix absolus")
                             )
                         )
                     )
@@ -466,11 +467,11 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("The royals"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("The slings and arrows of outrageous fortune"),
-                                sors = listOf(
-                                    SOR("E! Entertainment Television")
-                                )
+                                title = SeriesEntryTitle("The slings and arrows of outrageous fortune")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("E! Entertainment Television")
                         )
                     )
                 )
@@ -500,12 +501,12 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Americas"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("The garden of forking paths"),
-                                sors = listOf(
-                                    SOR("a production of WGBH/Boston and Central Television Enterprises for Channel 4"),
-                                    SOR("directed and written by David Ash")
-                                )
+                                title = SeriesEntryTitle("The garden of forking paths")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("a production of WGBH/Boston and Central Television Enterprises for Channel 4"),
+                            SOR("directed and written by David Ash")
                         )
                     )
                 )
@@ -533,11 +534,11 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Los años maravillosos"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Amor y muerte"),
-                                sors = listOf(
-                                    SOR("BeTV")
-                                )
+                                title = SeriesEntryTitle("Amor y muerte")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("BeTV")
                         )
                     )
                 )
@@ -565,13 +566,13 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Prófugos"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                designation = SeriesEntryDesignation("Episode 13"),
-                                sors = listOf(
-                                    SOR("Efetres"),
-                                    SOR("Fabula"),
-                                    SOR("Home Box Office Ole Originals")
-                                )
+                                designation = SeriesEntryDesignation("Episode 13")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("Efetres"),
+                            SOR("Fabula"),
+                            SOR("Home Box Office Ole Originals")
                         )
                     )
                 )
@@ -600,11 +601,11 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Anuario de estadísticas vitales"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Nacimientos y defunciones"),
-                                sors = listOf(
-                                    SOR("Instituto Nacional de Estadística y Censos")
-                                )
+                                title = SeriesEntryTitle("Nacimientos y defunciones")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("Instituto Nacional de Estadística y Censos")
                         )
                     )
                 )
@@ -670,7 +671,7 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("Internationale Strassenkarte"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Europe 1:25 Mio"),
+                                title = SeriesEntryTitle("Europe 1:2.5 Mio"),
                                 otherInfo = listOf(SeriesEntryOtherInfo("mit Register"))
                             )
                         )
@@ -681,23 +682,22 @@ class SeriesTitleTest {
                         seriesTitle = SeriesTitle("International road map"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Europe, 1:25 mio"),
-                                otherInfo = listOf(SeriesEntryOtherInfo("with index")),
-                                sors = listOf(
-                                    SOR("RV Reise- und Verkehrsverlag")
-                                )
+                                title = SeriesEntryTitle("Europe, 1:2.5 mio"),
+                                otherInfo = listOf(SeriesEntryOtherInfo("with index"))
                             )
+                        ),
+                        entrySors = listOf(
+                            ParallelSOR("RV Reise- und Verkehrsverlag")
                         )
                     )
                 )
             )
         )
 
-        val result = t.parseAllSerial(marc).firstOrNull()
+        val result = t.parseSerial(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)
-        println(result)
     }
 
     @Test
@@ -897,11 +897,139 @@ class SeriesTitleTest {
                                 title = SeriesEntryTitle("Memorandum")
                             ),
                             SeriesEntry(
-                                title = SeriesEntryTitle("Hawthorn, Australia")
+                                title = SeriesEntryTitle("Australia"),
+                                designation = SeriesEntryDesignation("Hawthorn")
                             ),
                             SeriesEntry(
                                 title = SeriesEntryTitle("1966-")
                             )
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = t.parseSerial(marc)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t25() {
+        val marc = MARCField(
+            "245",
+            "|aComptes rendus de l'Académie des sciences.|nSérie II.|nFascicule B," +
+                    "|pMécanique =|bMechanics.",
+            '|'
+        )
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Comptes rendus de l'Académie des sciences"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle("Série II")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle(
+                                    title = "Mécanique"
+                                ),
+                                designation = SeriesEntryDesignation("Fascicule B")
+                            )
+                        )
+                    )
+                ),
+                parallelTitles = listOf(
+                    ParallelSeries(
+                        seriesTitle = SeriesTitle("Mechanics")
+                    )
+                )
+            )
+        )
+
+        val result = t.parseSerial(marc)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t26() {
+        val marc = MARCField(
+            "245",
+            "|aEstadística dominicana.|nSección 324,|pConstrucción.|pSituación económica, " +
+                    "construcción /|cOficina Nacional de Estadística, ONE.",
+            '|'
+        )
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Estadística dominicana"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle(
+                                    title = "Construcción"
+                                ),
+                                designation = SeriesEntryDesignation("Sección 324")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle(
+                                    title = "construcción"
+                                ),
+                                designation = SeriesEntryDesignation("Situación económica")
+                            )
+                        ),
+                        entrySors = listOf(
+                            SOR("Oficina Nacional de Estadística, ONE")
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = t.parseSerial(marc)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t27() {
+        val marc = MARCField(
+            "245",
+            "|aCatalog of maps, charts and related products.|nPart 2,|pHydrographic products." +
+                    "|nVolume 1,|pNautical charts and publications /|cDepartment of Defense, Defense " +
+                    "Logistics Agency ; National Imagery and Mapping Agency.",
+            '|'
+        )
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Series(
+                        seriesTitle = SeriesTitle(title = "Catalog of maps, charts and related products"),
+                        seriesEntry = listOf(
+                            SeriesEntry(
+                                title = SeriesEntryTitle(
+                                    title = "Hydrographic products"
+                                ),
+                                designation = SeriesEntryDesignation("Part 2")
+                            ),
+                            SeriesEntry(
+                                title = SeriesEntryTitle(
+                                    title = "Nautical charts and publications"
+                                ),
+                                designation = SeriesEntryDesignation("Volume 1")
+                            )
+                        ),
+                        entrySors = listOf(
+                            SOR("Department of Defense, Defense Logistics Agency"),
+                            SOR("National Imagery and Mapping Agency")
                         )
                     )
                 )

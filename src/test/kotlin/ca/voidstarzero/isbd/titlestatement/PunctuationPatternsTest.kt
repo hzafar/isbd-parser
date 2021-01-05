@@ -591,11 +591,11 @@ class PunctuationPatternsTest {
                         seriesTitle = SeriesTitle(title = "Common title"),
                         seriesEntry = listOf(
                             SeriesEntry(
-                                title = SeriesEntryTitle("Dependent title"),
-                                sors = listOf(
-                                    SOR("statement of responsibility")
-                                )
+                                title = SeriesEntryTitle("Dependent title")
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("statement of responsibility")
                         )
                     )
                 )
@@ -653,8 +653,8 @@ class PunctuationPatternsTest {
     fun p24() {
         /**
          * val pattern = "Common title. Dependent title : other title information" +
-         *      " / statement of responsibility = Parallel common title" +
-         *      ". Parallel dependent title : parallel other title information" +
+         *      " / statement of responsibility = Parallel common title. " +
+         *      "Parallel dependent title : parallel other title information" +
          *      " / parallel statement of responsibility"
          */
         val marc = MARCField(
@@ -676,27 +676,29 @@ class PunctuationPatternsTest {
                                 title = SeriesEntryTitle("Dependent title"),
                                 otherInfo = listOf(
                                     SeriesEntryOtherInfo("other title information")
-                                ),
-                                sors = listOf(
-                                    SOR("statement of responsibility")
                                 )
                             )
+                        ),
+                        entrySors = listOf(
+                            SOR("statement of responsibility")
                         )
                     )
                 ),
                 parallelTitles = listOf(
                     ParallelSeries(
-                        seriesTitle = SeriesTitle(title = "Parallel common title"),
+                        seriesTitle = SeriesTitle(
+                            title = "Parallel common title"
+                        ),
                         seriesEntry = listOf(
                             SeriesEntry(
                                 title = SeriesEntryTitle("Parallel dependent title"),
                                 otherInfo = listOf(
                                     SeriesEntryOtherInfo("parallel other title information")
-                                ),
-                                sors = listOf(
-                                    SOR("parallel statement of responsibility")
                                 )
                             )
+                        ),
+                        entrySors = listOf(
+                            ParallelSOR("parallel statement of responsibility")
                         )
                     )
                 )

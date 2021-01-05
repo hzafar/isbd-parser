@@ -3,6 +3,7 @@ package ca.voidstarzero.isbd.titlestatement.grammar
 import ca.voidstarzero.isbd.titlestatement.TitleParseContext
 import ca.voidstarzero.isbd.titlestatement.ast.*
 import ca.voidstarzero.marc.MARCField
+import ca.voidstarzero.marc.groupSeriesEntries
 import norswap.autumn.DSL
 import norswap.autumn.Parse
 import norswap.autumn.ParseState
@@ -116,7 +117,7 @@ abstract class TitleStatementGrammar : DSL() {
      * Pushes the matched string onto the parser's value stack.
      */
     val data: rule = char.at_least(1).sep(0, usual_whitespace)
-        .push(with_string { _, _, match -> match })
+        .push(with_string { _, _, match -> match.replace("___", "...") })
 
     /**
      * Matches a string made up of any characters except commas and those in [SPECIAL_CHARS].
@@ -124,7 +125,9 @@ abstract class TitleStatementGrammar : DSL() {
      * Pushes the matched string onto the parser's value stack.
      */
     val dataWithoutComma: rule = charWithoutComma.at_least(1).sep(0, usual_whitespace)
-        .push(with_string { _, _, match -> match })
+        .push(with_string { _, _, match ->
+            match
+        })
 
     /**
      * Matches a sequence of [equalSign] followed by a string of characters.
@@ -158,7 +161,9 @@ abstract class TitleStatementGrammar : DSL() {
      */
     fun <T : Node> otherInfoOfType(nodeConstructor: (String) -> T): rule {
         return seq(colon, data)
-            .push { items -> nodeConstructor(items[0] as String) }
+            .push { items ->
+                nodeConstructor(items[0] as String)
+            }
     }
 
     /**
@@ -168,7 +173,9 @@ abstract class TitleStatementGrammar : DSL() {
      */
     fun <T : Node> sorOfType(nodeConstructor: (String) -> T): rule {
         return seq(slash, data)
-            .push { items -> nodeConstructor(items[0] as String) }
+            .push { items ->
+                nodeConstructor(items[0] as String)
+            }
     }
 
     /**
@@ -188,7 +195,9 @@ abstract class TitleStatementGrammar : DSL() {
      * so that it can be referenced during the parse. It doesn't consume any input and always
      * "matches".
      */
-    inner class SaveMarcData(val marcData: MARCField) : AbstractPrimitive("save_marc_data", false) {
+    inner class SaveMarcData(
+        private val marcData: MARCField
+    ) : AbstractPrimitive("save_marc_data", false) {
         override fun doparse(parse: Parse?): Boolean {
             val context = store.data(parse)
             context.marcData = marcData
@@ -197,67 +206,79 @@ abstract class TitleStatementGrammar : DSL() {
         }
     }
 
-    inner class SeriesEntryDesignationFromMarc : Parser() {
+    inner class SeriesEntryFromMarc : Parser() {
         override fun children(): MutableIterable<Parser> {
             return mutableListOf()
         }
 
         override fun doparse(parse: Parse): Boolean {
             val context = store.data(parse)
-
             val marcData = context.marcData
-            val designations: List<String> = marcData?.subfields
-                ?.filter { it.first == 'n' }
-                ?.map { it.second.substringBefore(REPLACE) }
-                ?.drop(context.marcDataSubfieldNPosition)
+
+            if (marcData != null
+                && context.marcDataSeriesEntryGroup >= marcData.groupSeriesEntries().size
+            ) {
+                return false
+            }
+
+            if (parse.pos < parse.string.length && parse.string[parse.pos] == ' ') {
+                parse.pos += 1
+            }
+
+            val seriesEntryFields = marcData?.groupSeriesEntries()
+                ?.get(context.marcDataSeriesEntryGroup)
                 ?: emptyList()
 
-            var pos = parse.pos
-            while (pos < parse.string.length
-                && !parse.match(pos, ",")
-                && !parse.match(pos, REPLACE.toString())
-            ) {
-                pos += 1
+            val titleStr = seriesEntryFields.firstOrNull { it.first == 'p' }?.second
+                ?.let { removeExtraInput(it) }
+            val desigStr = seriesEntryFields.firstOrNull { it.first == 'n' }?.second
+                ?.let { removeExtraInput(it) }
+
+            val title = titleStr?.let { SeriesEntryTitle(clean(it)) }
+            val designation = desigStr?.let { SeriesEntryDesignation(clean(it)) }
+            val matchStart = (desigStr ?: titleStr)?.let { clean(it) }
+
+            if (matchStart != null && !parse.string.substring(parse.pos).startsWith(matchStart)) {
+                return false
             }
 
-            val data = parse.string.substring(parse.pos, pos)
+            parse.stack.push(title)
+            parse.stack.push(designation)
 
-            if (parse.string.substring(pos, (pos + 2).coerceAtMost(parse.string.length)) == ", ") {
-                pos += 2
+            parse.pos += (titleStr?.length ?: 0) + (desigStr?.length ?: 0)
+
+            if (titleStr != null && desigStr != null && parse.pos < parse.string.length) {
+                parse.pos += 1
             }
 
-            if (context.parallelInfo
-                && context.parsedDesignation
-                && designations.isEmpty()
-            ) {
-                parse.pos = pos
-                parse.stack.push(SeriesEntryDesignation(data))
-                return true
+            if (parse.pos >= parse.string.length) {
+                parse.pos = parse.string.length
             }
 
-            val initialSubfieldNPosition = context.marcDataSubfieldNPosition
-            val initialParsedDesignation = context.parsedDesignation
-            designations.withIndex().firstOrNull { it.value.startsWith(data) }
-                ?.let { match ->
-                    parse.pos = pos
-                    parse.stack.push(SeriesEntryDesignation(data))
-                    parse.log.apply {
-                        context.marcDataSubfieldNPosition = match.index + 1
-                        context.parsedDesignation = true
-                        return@apply Runnable {
-                            context.marcDataSubfieldNPosition = initialSubfieldNPosition
-                            context.parsedDesignation = initialParsedDesignation
-                        }
-                    }
-
-                    return true
+            val initialSeriesEntryGroup = context.marcDataSeriesEntryGroup
+            parse.log.apply {
+                context.marcDataSeriesEntryGroup += 1
+                return@apply Runnable {
+                    context.marcDataSeriesEntryGroup = initialSeriesEntryGroup
                 }
+            }
 
-            return false
+            return true
         }
 
         override fun toStringFull(): String {
-            return "designation_from_marc"
+            return "series_entries_from_marc"
+        }
+
+        private fun removeExtraInput(str: String): String {
+            return str
+                .substringBefore(" :")
+                .substringBefore(" /")
+                .substringBefore(" =")
+        }
+
+        private fun clean(str: String): String {
+            return str.trim(' ', ',', '.')
         }
     }
 

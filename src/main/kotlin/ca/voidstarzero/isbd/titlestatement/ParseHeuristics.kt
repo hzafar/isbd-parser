@@ -14,7 +14,6 @@ fun goodParse(parse: List<TitleStatement>): Boolean {
         node.titles.mapNotNull { when(it) {
             is Monograph -> it.titleProper.value
             is Series -> it.seriesTitle.title
-            else -> null
         } }
             .all { likelyTitle(it) }
     }

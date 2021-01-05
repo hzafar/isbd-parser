@@ -1,6 +1,7 @@
 package ca.voidstarzero.isbd.titlestatement
 
 import ca.voidstarzero.isbd.titlestatement.ast.*
+import ca.voidstarzero.marc.MARCField
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -260,7 +261,7 @@ class PeriodsTest {
                     )
                 ),
                 sors = listOf(
-                    SOR("Valerie Fletcher with essays by Olivier Debroise  [et al]"),
+                    SOR("Valerie Fletcher with essays by Olivier Debroise ... [et al]"),
                     SOR(
                         "[English translations by James Oles, Margaret Sayers " +
                                 "Peden, and Eliot Weinberger"
@@ -1064,6 +1065,53 @@ class PeriodsTest {
         )
 
         val result = t.parseHeuristically(title)
+
+        assertNotNull(result)
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun t33() {
+        val marc = MARCField(
+            "245",
+            "|aProceedings of the ... Meeting held in ... from ... to ... /" +
+                    "|cInternational Council of Scientific Unions, Joint Commission on " +
+                    "Radio-Meteorology = Compte rendu de la ... Réunion tenue à ... de ... " +
+                    "au ... / Conseil international des unions scientifiques, Commission " +
+                    "mixte de radio-météorologie.",
+            '|'
+        )
+
+        val expected = listOf(
+            TitleStatement(
+                titles = listOf(
+                    Monograph(
+                        titleProper = TitleProper(
+                            "Proceedings of the ... Meeting held in ... from ... to ..."
+                        )
+                    )
+                ),
+                sors = listOf(
+                    SOR(
+                        "International Council of Scientific Unions, Joint Commission " +
+                                "on Radio-Meteorology"
+                    )
+                ),
+                parallelTitles = listOf(
+                    ParallelMonograph(
+                        title = "Compte rendu de la ... Réunion tenue à ... de ... au ...",
+                        sors = listOf(
+                            ParallelSOR(
+                                "Conseil international des unions scientifiques, Commission " +
+                                        "mixte de radio-météorologie"
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = t.parse(marc)
 
         assertNotNull(result)
         assertEquals(expected, result)

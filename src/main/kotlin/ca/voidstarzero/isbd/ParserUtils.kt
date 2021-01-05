@@ -2,6 +2,7 @@ package ca.voidstarzero.isbd
 
 import ca.voidstarzero.isbd.titlestatement.ast.*
 import ca.voidstarzero.marc.MARCField
+import ca.voidstarzero.marc.fieldData
 
 fun cleanInput(input: String): String {
     val REPLACE = 0xfffd.toChar()
@@ -10,6 +11,7 @@ fun cleanInput(input: String): String {
         .replace(" : ", "$REPLACE:$REPLACE")
         .replace(" / ", "$REPLACE/$REPLACE")
         .replace(" ; ", "$REPLACE;$REPLACE")
+        .replace("...", "___")
         .removeSuffix(".")
         .trim()
 }

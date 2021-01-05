@@ -11,6 +11,5 @@ package ca.voidstarzero.isbd.titlestatement.ast
 data class SeriesEntry(
     val title: SeriesEntryTitle? = null,
     val designation: SeriesEntryDesignation? = null,
-    val otherInfo: List<SeriesEntryOtherInfo> = emptyList(),
-    val sors: List<SOR> = emptyList()
+    val otherInfo: List<SeriesEntryOtherInfo> = emptyList()
 ) : Node()

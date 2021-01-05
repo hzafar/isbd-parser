@@ -29,5 +29,6 @@ data class Monograph(
  */
 data class Series(
     val seriesTitle: SeriesTitle,
-    val seriesEntry: List<SeriesEntry> = emptyList()
+    val seriesEntry: List<SeriesEntry> = emptyList(),
+    val entrySors: List<SOR> = emptyList()
 ) : Title()

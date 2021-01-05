@@ -1,37 +1,34 @@
 package ca.voidstarzero.isbd.titlestatement.grammar
 
-import ca.voidstarzero.isbd.titlestatement.ast.NodeList
-import ca.voidstarzero.isbd.titlestatement.ast.ParallelSeries
-import ca.voidstarzero.isbd.titlestatement.ast.SeriesEntry
-import ca.voidstarzero.isbd.titlestatement.ast.SeriesTitle
+import ca.voidstarzero.isbd.titlestatement.ast.*
 import norswap.autumn.DSL.rule
 
-val TitleStatementGrammar.parallelCommonDependentTitle: rule
+val TitleStatementGrammar.parallelSeries: rule
     get() = seq(
         equalSign,
         seriesTitle,
-        hierarchicalSeriesEntryTitles.maybe(),
-        dependentTitle.maybe()
+        dependentTitleList.maybe(),
+        parallelSORList.maybe()
     ).push { items ->
-        val seriesEntries = mutableListOf<SeriesEntry>()
-            .plus((items[1] as? NodeList)?.values
-                ?.map { it as SeriesEntry } ?: emptyList())
-            .plus((items[2] as? SeriesEntry)
-                ?.let { listOf(it) } ?: emptyList()
-            )
+        val seriesEntries = (items[1] as? NodeList)?.values
+            ?.map { it as SeriesEntry }
+            ?: emptyList()
+
+        val entrySors = (items[2] as? NodeList)?.values
+            ?.map { it as ParallelSOR }
+            ?: emptyList()
+
         ParallelSeries(
             seriesTitle = items[0] as SeriesTitle,
-            seriesEntry = seriesEntries
+            seriesEntry = seriesEntries,
+            entrySors = entrySors
         )
     }
 
-val TitleStatementGrammar.parallelSeriesFull: rule
+val TitleStatementGrammar.parallelSeriesEntryTitle: rule
     get() = seq(
-        parallelCommonDependentTitle,
-        parallelSORList
+        equalSign,
+        data
     ).push { items ->
-        val entry = items[0] as ParallelSeries
-        NodeList(
-            values = listOf(entry).plus((items[1] as NodeList).values)
-        )
+        items[0] as? String
     }

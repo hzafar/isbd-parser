@@ -1,6 +1,6 @@
 package ca.voidstarzero.marc
 
-class MARCField(
+data class MARCField(
     val tag: String,
     val indicators: List<Char>,
     val subfields: List<Pair<Char, String>>
@@ -18,10 +18,4 @@ class MARCField(
                     Pair(subfield[0], subfield.substring(1))
                 }
             )
-
-    fun fieldData(): String {
-        return subfields
-            .filter { (c, _) -> c !in listOf('6', '8') }
-            .joinToString(separator = " ") { (_, d) -> d }
-    }
 }

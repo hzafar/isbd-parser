@@ -5,7 +5,7 @@ import ca.voidstarzero.marc.MARCField
 data class TitleParseContext(
     var currentState: State,
     var marcData: MARCField? = null,
-    var marcDataSubfieldNPosition: Int = 0,
+    var marcDataSeriesEntryGroup: Int = 0,
     var parsedDesignation: Boolean = false,
     var parallelInfo: Boolean = false
 ) {

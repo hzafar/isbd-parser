@@ -25,5 +25,6 @@ data class ParallelMonograph(
  */
 data class ParallelSeries(
     val seriesTitle: SeriesTitle,
-    val seriesEntry: List<SeriesEntry> = emptyList()
+    val seriesEntry: List<SeriesEntry> = emptyList(),
+    val entrySors: List<ParallelSOR> = emptyList()
 ) : ParallelTitle()
