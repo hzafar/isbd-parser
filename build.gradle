@@ -15,15 +15,14 @@ java {
 }
 
 dokka {
-    outputFormat = 'html'
+    outputFormat = 'html-as-java'
     outputDirectory = "$buildDir/dokka"
 }
 
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn dokka
-    from("$buildDir/dokka/isbd-parser")
-    from("$buildDir/dokka/style.css")
+    from("$buildDir/dokka/")
 }
 
 publishing {
@@ -95,6 +94,7 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
     api 'com.github.norswap:autumn:80abd5c207'
     testImplementation 'junit:junit:4.12'
 }

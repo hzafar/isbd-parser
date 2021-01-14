@@ -1,9 +1,18 @@
 package ca.voidstarzero.isbd.titlestatement.ast
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+
 /**
  * Base class for titles.
  */
-sealed class Title() : Node() {}
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    property = "type"
+)
+sealed class Title() : Node() {
+    val type = this::class.java.simpleName
+}
 
 /**
  * A class holding the title part of a title statement.

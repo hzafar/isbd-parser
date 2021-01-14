@@ -62,7 +62,7 @@ class TitleStatementParser : TitleStatementGrammar() {
             return result.value_stack.mapNotNull { it as TitleStatement }
         }
 
-        throw Exception(result.toString())
+        return emptyList()
     }
 
     /** Produces all possible parses of the given title statement string.
