@@ -22,7 +22,8 @@ dokka {
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
     dependsOn dokka
-    from("$buildDir/dokka/")
+    from("$buildDir/dokka/isbd-parser")
+    from("$buildDir/dokka/style.css")
 }
 
 publishing {
@@ -60,7 +61,7 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/hzafar/isbd-parser.git'
                     developerConnection = 'scm:git:ssh://github.com:hzafar/isbd-parser.git'
-                    url = 'http://github.com/hzafar/isbd-parser/tree/master/'
+                    url = 'http://github.com/hzafar/isbd-parser/tree/main/'
                 }
             }
         }
